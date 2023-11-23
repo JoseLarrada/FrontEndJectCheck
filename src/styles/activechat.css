@@ -1,0 +1,71 @@
+.main{
+    margin-left: 87px;
+    margin-top: 20px;
+    width: 60%;
+    height: 90vh;
+}
+
+.backtop{
+    width: 80% !important;
+    height: 50px;
+    margin-top: 25px !important;
+    margin-left: 50px !important;
+    margin-bottom: 400px !important;
+}
+
+.badge.text-bg-light {
+    background-color: #d9d9d9 !important;
+  }
+
+
+.backtop-move{
+    display: flex;
+    align-items:self-start;
+}
+
+.backtop-move >ion-icon{
+    width: 40px !important;
+    height: 40px !important;
+    margin-top: 1px;
+}
+
+.backtop-label{
+    font-size: large;
+    color: black !important;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+/*Estilos segundo componente del chat*/
+
+.back{
+    width: 80% !important;
+    height: 50px;
+    margin-top: 25px !important;
+    margin-left: 50px !important;
+}
+.badge.bg-secondary{
+    background-color: #d9d9d977 !important;
+    border-radius: 25px !important;
+    margin-bottom: 100%;
+}
+
+.back-text{
+    border: none !important;
+    border-radius: 25px !important;
+    width: 90% !important;
+    margin-left: 10px !important;
+    margin-top: 3px;
+}
+
+.back-move >ion-icon{
+    color: black;
+    width: 25px;
+    height: 25px;
+    margin-top: 0px;
+    margin-left: 93%;
+    position: relative;
+    bottom: 45px;
+    z-index: 1;
+
+}

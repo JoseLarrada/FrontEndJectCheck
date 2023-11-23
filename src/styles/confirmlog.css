@@ -1,0 +1,21 @@
+.confirm-log{
+    background: rgb(24,165,215);
+    background: linear-gradient(180deg, rgba(24,165,215,1) 21%, rgba(20,76,151,1) 91%);
+    width: 270px;
+    height: 220px;
+    border-radius: 15px;
+    margin-left: 40%;
+    position: relative;
+}
+
+.confirm-btn{
+    width: 70px !important;
+    margin-top: 40px !important;
+    margin-left: 40px;
+    background-color: #D9D9D9 !important;
+    color: black !important;
+}
+.confirm-label{
+    text-align: center;
+    margin-top: 50px !important;
+}

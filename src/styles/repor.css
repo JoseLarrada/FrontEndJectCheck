@@ -1,0 +1,10 @@
+.sidecontrol{
+    margin-top: 150px;
+}
+.list-group{
+    width: 70%;
+    height:70%;
+    position: relative;
+    bottom: 20em;
+    left: 15em;
+}

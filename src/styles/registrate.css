@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap');
+.Color{
+    background: white !important;
+}
+.secondColor{
+    background: rgb(16,49,102) !important;
+    background: -moz-linear-gradient(0deg, rgba(16,49,102,1) 0%, rgba(28,204,243,1) 100%) !important;
+    background: -webkit-linear-gradient(0deg, rgba(16,49,102,1) 0%, rgba(28,204,243,1) 100%) !important;
+    background: linear-gradient(0deg, rgba(16,49,102,1) 0%, rgba(28,204,243,1) 100%) !important;
+    width: 100%;
+    height: 100%;
+}
+.changecolor{
+    color: white !important;
+}
+.doublecolor{
+    color: black !important;
+}

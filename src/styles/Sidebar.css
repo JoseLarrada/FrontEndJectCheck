@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap');
+.ico >ion-icon{
+    color: black;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.ico >label{
+    font-weight: bold;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.ico{
+    margin-bottom: 30px;
+}
+
+.control{
+    margin-top: 50px;
+    width: 210vh;
+    height: 80vh;
+}
+
+.control-move{
+    margin-right: 85%;
+}

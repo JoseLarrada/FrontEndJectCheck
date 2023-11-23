@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap');
+.projectM{
+    width: 74%;
+    height: 85%;
+    border: 3px solid #4E79B0;
+    position: absolute;
+    left: 260px;
+    top: 120px;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.project-title{
+    width: 100%;
+    height: 8%;
+    background-color: #4E79B0;
+    text-align: center;
+}
+
+.decoratetext{
+    color: white;
+    position: relative;
+    top: 25%;
+}
+
+.textbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.labels{
+    display: flex;
+    justify-content: center;
+    align-items:self-start;
+    flex-direction: column;
+    position: absolute;
+    bottom: 17%;
+    gap: 49px;
+}
+.form-check-input{
+    margin-left: 25px !important;
+}
+
+.form-check-label{
+    font-weight: bold;
+    margin-left: 6px !important;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items:self-start;
+    flex-direction: column;
+    gap: 49px;
+    position: absolute;
+    bottom: 31%;
+    right: 130px;
+}
+
+.btnsearch{
+    width: 100px !important;
+    background-color: #D9D9D9 !important;
+    color: black !important;
+}
+.btnadd{
+    width: 170px !important;
+    background-color: #D9D9D9 !important;
+    color: black !important;
+}
+
+.sendject{
+    background-color: #D9D9D9 !important;
+    color: black !important;
+    position: relative;
+    left: 350px;
+    top: 30px;
+    width: 190px !important;
+}
+.buttons .search>ion-icon{
+    color:black;
+    font-size: 25px;
+    margin-right: 110px;
+    margin-top: 2px;
+}
+.buttons{
+    position: absolute;
+    bottom: 75px;
+}

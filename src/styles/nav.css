@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap');
+.header{
+    background: rgb(26,203,243);
+    background: linear-gradient(90deg, rgba(26,203,243,1) 0%, rgba(24,165,215,1) 32%, rgba(24,154,207,1) 44%, rgba(20,70,146,1) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 95%;
+    padding: 5px 10%;
+    border-radius: 32px;
+    margin-top: 10px;
+    margin-left: 34px;
+}
+.logo{
+    cursor: pointer;
+}
+.header .logo{
+    height: 70px;
+    width: auto;
+    transition: all 0.5 !important;
+}
+
+.img{
+    height: 28px;
+    width: 130px;
+    border-radius: 30px;
+    margin-top: 20px;
+    position: absolute;
+    right: 3%;
+    z-index: 1;
+}
+
+.perfil{
+    position: absolute;
+    left: 3%;
+    z-index: 1;
+}
+
+.centrar{
+    margin-left: 250px;
+}
+
+.active{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.header .logo img:hover{
+    transform: scale(1.2) !important;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    display: inline-block;
+    padding: 0 50px;
+}
+ion-icon{
+    font-size: 25px;
+    color: white;
+    margin-top: 25px;
+}
+.label{
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif !important;
+}
