@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/repor.css'
 import {useNavigate} from 'react-router-dom'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
@@ -34,7 +34,6 @@ function Report() {
   };
 
   //Informe Personalizado
-  const id_ruta=useRef();
   const GuardarPersonalizado= async () => {
     try {
       if(!verificarExpiracionToken()){
@@ -79,8 +78,8 @@ function Report() {
         const data = await response.json();
         setDatos(data);
       }else{
-        const errorData = await response.json();
-        alert(await response.text());
+        const errorData = await response.text();
+        alert(errorData);
       } 
     } catch (error) {
       alert('Error de red:', error);

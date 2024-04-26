@@ -8,6 +8,18 @@ function Registro() {
   const Username=useRef();
   const Password=useRef();
   const navigate=useNavigate();
+  function obtenerTipoUsuario() {
+    const radioProfesor = document.getElementById('flexRadioDefault1');
+    const radioEstudiante = document.getElementById('flexRadioDefault2');
+  
+    if (radioProfesor.checked) {
+      return 2;
+    } else if (radioEstudiante.checked) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   const validateUser = async () => {
     try{
@@ -26,6 +38,7 @@ function Registro() {
             navigate('/registro/continueregister')
             localStorage.setItem('username',Username.current.value);
             localStorage.setItem('password',Password.current.value);
+            localStorage.setItem('perfil',obtenerTipoUsuario());
             console.log(userData);
         } else {
             const DataError=await response.text()
@@ -44,6 +57,9 @@ function Registro() {
       event.preventDefault();
     }
   }
+
+  
+
   return (
     <div className='secondColor'>
         <section className='Register Color'>
@@ -66,6 +82,20 @@ function Registro() {
                 <label for="exampleFormControlInput2" class="form-label changecolor">Contraseña</label>
                 <input type="password" class="form-control control2" id="exampleFormControlInput2" ref={Password} required/>
             </div>
+            <section className='justchecked'>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Profesor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Estudiante
+                </label>
+              </div>
+            </section>
             <button type="button" class="btn btn-primary" onClick={()=> {validarFormulario();validateUser()}}>Registrar</button>
           </section>
     </div>

@@ -28,7 +28,7 @@ function Cards() {
             console.log(data);
           }else{
             const errorData = await response.json();
-            alert(await response.text());
+            alert(errorData);
           } 
         } catch (error) {
           alert('Error de red:', error);
@@ -40,12 +40,24 @@ function Cards() {
       const handleClick = (item) => {
         localStorage.setItem('id_ruta', item.id_ruta);
       }
+
+    function getnamestate(idestado){
+       if(idestado==5){
+        return "Pendiente"
+       }else if(idestado==1){
+        return "En proceso"
+       }else if(idestado==2){
+        return "Completado"
+       }
+    }
+
+
     return (
         <div className="container">
             <div className="row">
                 {datos.map((item, index) => (
                     <div key={index} className="col-md-4" onClick={() => {handleClick(item)}}>
-                        <Card Title={item.nombre} teacher={item.id_docente} page={"newPage"} owner={item.id_estudiante}/>
+                        <Card Title={item.nombre} teacher={item.id_docente} page={"newPage"} owner={getnamestate(item.id_estado)}/>
                     </div>
                 ))}
                 

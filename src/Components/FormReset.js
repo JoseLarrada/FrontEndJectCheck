@@ -1,41 +1,13 @@
 import React, { useRef }  from 'react'
 import '../styles/formreset.css'
+import resetPassword from '../controller/ResetPasswordController'
+
+
 function FormReset() {
     const email=useRef();
     const password=useRef();
     const confirmpassword=useRef();
     const id=useRef();
-
-    const ResetPassword= async () => {
-        try {
-          const response = await fetch('http://localhost:8080/api/v1/auth/recoverypassword', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              email: email.current.value,
-              password: password.current.value,
-              confirmPassword: confirmpassword.current.value,
-              id: id.current.value
-            })
-          });
-      
-          console.log(response);
-      
-          if (response.ok) {
-            const data = await response.text();
-            alert(data);
-          }else{
-            const errorData = await response.text();
-            alert(errorData);
-          } 
-        } catch (error) {
-          alert('Error de red:', error);
-          // Puedes mostrar un mensaje de error al usuario aquí si lo deseas
-        }
-      };
-
 
   return (
         <div className='cont'>
@@ -51,7 +23,8 @@ function FormReset() {
                     <input className="form-control reset espaciado" type="text" placeholder=" Confirme la contraseña" aria-label="default input example" ref={confirmpassword}/>
                     <input className="form-control reset espaciado" type="text" placeholder="Ingrese su cedula" aria-label="default input example" ref={id}/>
                 </div>
-                <button type="button" className="btn btn-primary btnhandler" onClick={()=> ResetPassword()}>Restablecer</button>
+                <button type="button" className="btn btn-primary btnhandler" 
+                onClick={()=> resetPassword(email.current.value,password.current.value,confirmpassword.current.value,id.current.value)}>Restablecer</button>
             </section>
         </div>
   )

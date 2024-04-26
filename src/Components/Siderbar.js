@@ -1,70 +1,86 @@
-import React, { useState} from 'react'
+import React, { useState,useEffect} from 'react'
 import '../styles/Sidebar.css'
 import {useNavigate} from 'react-router-dom';
 import ProjectManagment from '../Components/ProjectManagment'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import ShowComponent from './ShowComponent'
-function Siderbar() {
+import TeacherManagment from './TeacherManagment.js';
+import {deleteProject} from '../controller/ProjectController.js'
+
+function Siderbar({ onOptionClick }) {
   const [mostrarFormAdd, setMostrarFormAdd] = useState(false);
-  const toggleFormAdd = () => {
-        setMostrarFormAdd(!mostrarFormAdd);
-    }
   const [mostrarFormUpd, setMostrarFormUpd] = useState(false);
+  const [mostrarFormDel,setmostrarFormDel]=useState(false);
+  const toggleFormAdd = () => {
+    setMostrarFormAdd(!mostrarFormAdd);
+    setMostrarFormUpd(false);
+    setmostrarFormDel(false);
+    onOptionClick();
+  };
 
   const toggleFormUpd = () => {
-        setMostrarFormUpd(!mostrarFormUpd);
-  }
-  const [mostrarFormDel,setmostrarFormDel]=useState(false);
+    setMostrarFormUpd(!mostrarFormUpd);
+    setMostrarFormAdd(false);
+    setmostrarFormDel(false);
+    onOptionClick();
+  };
+
   const toggleFormDel = () => {
     setmostrarFormDel(!mostrarFormDel);
-  }
+    setMostrarFormAdd(false);
+    setMostrarFormUpd(false);
+    onOptionClick();
+  };
 
   //Eliminar Proyecto
   const tuToken = localStorage.getItem('token');
   const navigate = useNavigate();
-  const EliminarProyecto= async (texto) => {
-    try {
-      if(!verificarExpiracionToken()){
-        navigate('/');
-      }
-      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/DeleteRoute/${texto}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${tuToken}`
-        }
-      });
-      console.log(response);
-      if (response.ok) {
-        const data = await response.text();
-        alert(data);
-      }else{
-        const errorData = await response.text();
-        alert(errorData);
-      } 
-    } catch (error) {
-      console.log('Error de red:', error);
+  
+  const [firtsOptionText, setFirtsOptionText] = useState()
+  const [SecondOptionText, setSeconOptionText] = useState()
+
+  useEffect(() => {
+    const text = (localStorage.getItem('perfil') === '1') ? 'Crear Proyecto' : 'Aceptar Proyecto';
+    const text2 = (localStorage.getItem('perfil') === '1') ? 'Modificar Proyecto' : 'Finalizar Proyecto';
+    setFirtsOptionText(text);
+    setSeconOptionText(text2);
+  }, []);
+  
+  //Para hacer eso te creas el componente del formulario y listo aqui con un condicional lo usas 
+  function OptionFormAdd(){
+    if (mostrarFormAdd && localStorage.getItem('perfil') === '1' && firtsOptionText === 'Crear Proyecto'){
+      return <ProjectManagment NameOption={firtsOptionText} Option={'Enviar solicitud'}/>;
+    }else{
+      return <TeacherManagment title={'Aceptar Proyecto'} />;
     }
-  };
+  }
+
+  function OptionFormUpd(){
+    if (mostrarFormUpd && localStorage.getItem('perfil') === '1' && SecondOptionText === 'Modificar Proyecto'){
+      return <ProjectManagment NameOption={SecondOptionText} Option={'Actualizar'}/>;
+    }else{
+      return <TeacherManagment title={'Finalizar Proyecto'} />;
+    }
+  }
 
   return (
     <section className='control'>
          <div className="nav-link active person ico control-move">
             <ion-icon name="duplicate" onClick={toggleFormAdd}></ion-icon>
-            <label>Crear proyecto</label>
-            {mostrarFormAdd && <ProjectManagment NameOption={'Nuevo proyecto'} Option={'Enviar solicitud'}/>}
+            <label id='FirtsOption'>{firtsOptionText}</label>
+            {mostrarFormAdd &&  OptionFormAdd() }
         </div>
         <div className="nav-link active person ico control-move" to="/" >
             <ion-icon name="create" onClick={toggleFormUpd}></ion-icon>
-            <label>Modificar proyecto</label>
-            {mostrarFormUpd && <ProjectManagment NameOption={'Actualizar proyecto'} Option={'Actualizar'}/>}
+            <label>{SecondOptionText}</label>
+            {mostrarFormUpd && OptionFormUpd()}
         </div>
         <div className="nav-link active person ico control-move" to="/" >
             <ion-icon name="trash-bin" onClick={toggleFormDel}></ion-icon>
             <label>Deshabilitar proyecto</label>
             {mostrarFormDel && <ShowComponent title={'Eliminar Proyecto'} 
             descripcion={'Esto eliminará el proyecto y cualquier dato asociado a ello. Por favor ingresa tu contraseña para confirmar.'}
-            action={'Ingrese Nombre del proyecto'} cancel={toggleFormDel} accept={(value)=>{EliminarProyecto(value)}}/>}
+            action={'Ingrese Nombre del proyecto'} cancel={toggleFormDel} accept={(value)=>{deleteProject(value,tuToken,verificarExpiracionToken,navigate)}}/>}
         </div>
     </section>
   )

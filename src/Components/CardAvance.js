@@ -36,6 +36,7 @@ function CardAvance() {
       }, []);
       const handleClick = (item) => {
         localStorage.setItem('id_ruta', item.id_ruta);
+        localStorage.setItem('id_avance', item.id_avance);
       }
   return (
         <div className="container">

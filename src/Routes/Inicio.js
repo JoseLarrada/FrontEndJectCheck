@@ -9,7 +9,7 @@ import PersonProfile from '../Pages/PersonProfile'
 import Chat from '../Pages/Chat'
 import Reports from '../Pages/Reports'
 import NewPage from '../Pages/NewPage'
-import Entregas from '../Pages/Entregas';
+import Assigment from '../Pages/Assigment'
 function Inicio() {
   return (
     <BrowserRouter>
@@ -23,7 +23,7 @@ function Inicio() {
           <Route path='/messages' element={<Chat/>}/>
           <Route path='/Reports' element={<Reports/>}/>
           <Route path="/newPage/:id" element={<NewPage/>}/>
-          <Route path="/entregas/:id" element={<Entregas/>}/>
+          <Route path="/entregasPage/:fecha" element={<Assigment />} />
         </Routes> 
     </BrowserRouter>
   )

@@ -4,19 +4,22 @@ import ShowComponent from './ShowComponent'
 import {useNavigate} from 'react-router-dom';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import '../styles/Sidebar.css'
-function SlideBar({create,update,deletes}) {
+function SlideBar({create,update,deletes,onOptionClick}) {
   const [mostrarFormAdd, setMostrarFormAdd] = useState(false);
   const toggleFormAdd = () => {
         setMostrarFormAdd(!mostrarFormAdd);
+        onOptionClick();
   }
   const [mostrarFormUpd, setMostrarFormUpd] = useState(false);
 
   const toggleFormUpd = () => {
         setMostrarFormUpd(!mostrarFormUpd);
+        onOptionClick();
   }
   const [mostrarFormDel,setmostrarFormDel]=useState(false);
   const toggleFormDel = () => {
     setmostrarFormDel(!mostrarFormDel);
+    onOptionClick();
   }
 
   const tuToken = localStorage.getItem('token');
@@ -61,7 +64,7 @@ function SlideBar({create,update,deletes}) {
         <div className="nav-link active person ico control-move" to="/" >
             <ion-icon name="trash-bin" onClick={toggleFormDel}></ion-icon>
             <label>{deletes}</label>
-            {mostrarFormDel && <ShowComponent title={'Eliminar Proyecto'} 
+            {mostrarFormDel && <ShowComponent title={'Eliminar Avance'} 
             descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa tu contraseña para confirmar.'}
             action={'Ingrese titulo del avance'} cancel={toggleFormDel} accept={(value)=>{EliminarAvance(value)}}/>}
         </div>

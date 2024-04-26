@@ -1,49 +1,17 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/InicioSesion.css';
+import login from '../controller/LoginController'
+import validateText from '../Configs/FormValidation'
+
 
 function InicioSesion() {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
-    const IniciarSesion= async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: usernameRef.current.value,
-            password: passwordRef.current.value
-          })
-        });
     
-        console.log(response);
-    
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem('token', data.token);
-          console.log(data);
-          navigate('/principalview');
-        }else{
-          const errorData = await response.json();
-          alert(errorData.token);
-        } 
-      } catch (error) {
-        alert('Contraseña incorrecta', error);
-        // Puedes mostrar un mensaje de error al usuario aquí si lo deseas
-      }
-    };
-
-  //Validar que los campos esten correctos
-    const validarFormulario = (event) => {
-      var nombreUsuario = document.getElementById('exampleFormControlInput1').value;
-      var contraseña = document.getElementById('exampleFormControlInput2').value;
-      if (nombreUsuario.trim() === '' || contraseña.trim() === '') {
-        alert('Por favor, completa todos los campos.');
-        event.preventDefault();
-      }
+    const handleClick = (event) => {
+        validateText(event,'exampleFormControlInput1','exampleFormControlInput2')
     }
   return (
     <div>
@@ -62,7 +30,7 @@ function InicioSesion() {
             <Link to={"/resetpassword"}>
                 <button type="button" class="btn btn-link ">¿Olvidaste tu contraseña?</button>
             </Link>
-            <button type="button" class="btn btn-primary" onClick={() => {validarFormulario();IniciarSesion();}}>Iniciar Sesión</button>
+            <button type="button" class="btn btn-primary" onClick={() => {handleClick();login(usernameRef.current.value,passwordRef.current.value,navigate);}}>Iniciar Sesión</button>
           </section>
     </div>
 

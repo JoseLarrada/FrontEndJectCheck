@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef,useEffect } from 'react'
 import '../styles/basicdata.css'
 import ConfirmLog from '../Components/ConfirmLog'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import {useNavigate} from 'react-router-dom';
+import chargeUserDate from '../controller/ProfileController.js'
 
 function BasicData() {
     const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
+    const [datos, setDatos] = useState([]);
     //Variables de las cajas de texto
     const names = useRef();
     const id = useRef();
@@ -15,40 +17,11 @@ function BasicData() {
     const tuToken = localStorage.getItem('token');
     //Verificacion de token
     const navigate = useNavigate();
-        const chargeUserDate = async () => {
-            try{
-                if(!verificarExpiracionToken()){
-                    navigate('/');
-                }
-                const response = await fetch('http://localhost:8080/api/v1/PrincipalContent/profile', {
-                    method: 'GET',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${tuToken}`
-                    }
-                  });
-                  if (response.ok) {
-                    const userData = await response.json();
-                    // Actualiza los valores de las cajas de texto con los datos del usuario
-                    names.current.value = userData.nombres;
-                    id.current.value = userData.id;
-                    email.current.value = userData.correo;
-                    lastname.current.value = userData.apellidos;
-                    city.current.value = userData.ciudad;
-                    console.log(userData);
-                } else {
-                    // Manejar el caso en que la respuesta no sea exitosa
-                    console.error('Error al cargar los datos del usuario:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-            }
-        }
-
 
     const ConfirmAction = () => {
         window.location.href = '/';
         localStorage.removeItem('token'); 
+        localStorage.removeItem('perfil');
         setMostrarConfirmacion(false); 
 
       };
@@ -58,12 +31,18 @@ function BasicData() {
       };
 
 
+
+      useEffect(() => {
+        const datos=chargeUserDate(verificarExpiracionToken,navigate,tuToken);
+        names.current.value=datos.nombres;
+        setDatos(datos);
+      }, []);
   return (
     <div>
         <label class="user-label">Perfil</label>
         <div className='Userlogo'>
             <ion-icon name="person-circle-outline"></ion-icon>
-            <label class="name-label" onClick={() => {chargeUserDate()}}>Justine Skye</label>
+            <label class="name-label">Justine Skye</label>
         </div>
         <section class="custom-row">
             <div class="custom-column">

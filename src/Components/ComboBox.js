@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import '../styles/combo.css'
-import { Alert } from 'bootstrap';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import {useNavigate} from 'react-router-dom';
 
