@@ -1,28 +1,30 @@
-import React, { useState} from 'react';
-import comprobar from '../resources/comprobar.png'
-import "../styles/MessageDialog.css"
+import React, { useState } from 'react';
+import comprobar from '../resources/comprobar.png';
+import "../styles/MessageDialog.css";
 
-function MessageDialog() {
-    const [mostrarForm, setMostrarForm] = useState(true);
-    const toggleFormAdd = () => {
-        setMostrarForm(!mostrarForm);
+function MessageDialog({onClose,message}) {
+    const [isVisible, setIsVisible] = useState(true);
+
+    const handleClose = () => {
+        setIsVisible(false);
+        onClose();
     };
-  return (
-    <>
-        {mostrarForm && (
-            <div className='contenedorPrincipal'>
-                <section className='contenedorSecundario'>
-                    <img className='iconoConfirmacion' src={comprobar} alt="" />
-                    <p className='tituloEmergente'>¡Felicidades!</p>
-                </section>
-                <p className='mensaje'>
-                    hola este es un mensaje de prueba, aqui ira un mensaje random
-                 </p>
-                 <button type="button" className="botonAceptar" onClick={toggleFormAdd()}>Aceptar</button>
-            </div>
-        )}
-    </>
-  )
+    return (
+        <>
+            {isVisible && (
+                <div className='contenedorPrincipal'>
+                    <section className='contenedorSecundario'>
+                        <img className='iconoConfirmacion' src={comprobar} alt="" />
+                        <p className='tituloEmergente'>¡Felicidades!</p>
+                    </section>
+                    <p className='mensaje'>
+                        {message}
+                    </p>
+                    <button type="button" className="botonAceptar" onClick={handleClose}>Aceptar</button>
+                </div>
+            )}
+        </>
+    );
 }
 
-export default MessageDialog
+export default MessageDialog;
