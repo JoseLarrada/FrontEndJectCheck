@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+.contenedorPrincipal{
+    width: 400px;
+    height: 160px;
+    display: flex;
+    position: fixed; /* Posición fija en la ventana del navegador */
+    top: 50%; /* Alineado verticalmente en el centro */
+    left: 50%; /* Alineado horizontalmente en el centro */
+    transform: translate(-50%, -50%); /* Corrige el desplazamiento */
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.contenedorSecundario{
+    display: flex;
+    align-items: center;
+}
+.contenedorSecundario img{
+    margin-right: 20px;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.iconoConfirmacion{
+    width: 20px;
+}
+
+.tituloEmergente{
+    font-family: "Public Sans", sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.mensaje{
+    margin-left: 20px;
+    font-family: "Public Sans", sans-serif;
+}
+
+.botonAceptar{
+    width: 80px;
+    height: 28px;
+    font-size: 13px;
+    font-family: "Public Sans", sans-serif;
+    background-color: rgb(98, 182, 250);
+    border: none;
+    border-radius: 7px;
+    margin-left: auto;
+    margin-right: 10px;
+}

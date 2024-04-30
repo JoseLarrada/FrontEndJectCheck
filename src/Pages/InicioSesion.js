@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/InicioSesion.css';
 import login from '../controller/LoginController'
@@ -9,6 +9,7 @@ function InicioSesion() {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+     const [mostrarDialogo, setMostrarDialogo] = useState(false);
     
     const handleClick = (event) => {
         validateText(event,'exampleFormControlInput1','exampleFormControlInput2')
@@ -30,7 +31,7 @@ function InicioSesion() {
             <Link to={"/resetpassword"}>
                 <button type="button" class="btn btn-link ">¿Olvidaste tu contraseña?</button>
             </Link>
-            <button type="button" class="btn btn-primary" onClick={() => {handleClick();login(usernameRef.current.value,passwordRef.current.value,navigate);}}>Iniciar Sesión</button>
+            <button type="button" class="btn btn-primary" onClick={() => {handleClick();login(usernameRef.current.value,passwordRef.current.value,navigate,setMostrarDialogo);}}>Iniciar Sesión</button>
           </section>
     </div>
 

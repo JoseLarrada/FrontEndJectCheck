@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import '../styles/nav.css'
-import imagen from "../Image.jpg"
+import imagen from "../resources/Image.jpg"
 function Nav() {
   return (
     <header className='header'>
