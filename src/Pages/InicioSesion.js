@@ -2,7 +2,8 @@ import React, { useRef, useState  } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/InicioSesion.css';
 import login from '../controller/LoginController'
-import validateText from '../Configs/FormValidation'
+import {validateText} from '../Configs/FormValidation'
+import {customMessage, onClose} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog';
 
 function InicioSesion() {
@@ -10,24 +11,23 @@ function InicioSesion() {
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
+    const [title, setTitle] = useState('');
     const [mostrarDialogo, setMostrarDialogo] = useState(false);
 
+    const validateControlerLogin = async ()=>{
+      const result = await login(usernameRef.current.value, passwordRef.current.value);
+      customMessage(result,setTitle,setMessage,setMostrarDialogo);
+    }
+
     const handleClick = async (event) => {
-        validateText(event, 'exampleFormControlInput1', 'exampleFormControlInput2');
-        const result = await login(usernameRef.current.value, passwordRef.current.value);
-        if (result.success) {
-            localStorage.setItem('token', result.token);
-            localStorage.setItem('perfil', result.perfil);
-            setMessage('Inicio de sesion exitoso');
-            setMostrarDialogo(true); 
-        } else {
-            setMessage('Hubo un error, revise sus credenciales');
-            setMostrarDialogo(true); 
+        if(validateText(event, 'exampleFormControlInput1', 'exampleFormControlInput2')){
+          setMessage('Rellene todos los campos');
+          setTitle('¡Fallo!');
+          setMostrarDialogo(true);
+        }else{
+          validateControlerLogin();
         }
     };
-    const onClose = ()=>{
-      navigate('/principalview')
-    }
   return (
     <div>
         <div className='container'>
@@ -45,7 +45,7 @@ function InicioSesion() {
             <Link to={"/resetpassword"}>
                 <button type="button" class="btn btn-link ">¿Olvidaste tu contraseña?</button>
             </Link>
-            <button type="button" class="btn btn-primary" onClick={() => {handleClick()}}>Iniciar Sesión</button>
+            <button type="button" class="btn btn-primary" onClick={(event) => {handleClick(event)}}>Iniciar Sesión</button>
           </section>
     </div>
 
@@ -56,7 +56,8 @@ function InicioSesion() {
           <button type="button" className="btn btn-secondary">Regístrate Ahora</button>
         </Link>
     </section>
-    {mostrarDialogo && <MessageDialog onClose={onClose} message={message}/>}
+    {mostrarDialogo && <MessageDialog onClose={()=>{
+        onClose(title,setMostrarDialogo,navigate,'/principalview')}} message={message} title={title}/>}
     </div>
   )
 }

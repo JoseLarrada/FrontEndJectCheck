@@ -1,65 +1,35 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/registrate.css';
-
+import {validateText,obtenerTipoUsuario} from '../Configs/FormValidation'
+import {validateUser} from '../controller/RegisterController';
+import {customMessage,onClose} from '../Configs/MessageViews'
+import MessageDialog from '../Components/MessageDialog';
 
 function Registro() {
 
   const Username=useRef();
   const Password=useRef();
   const navigate=useNavigate();
-  function obtenerTipoUsuario() {
-    const radioProfesor = document.getElementById('flexRadioDefault1');
-    const radioEstudiante = document.getElementById('flexRadioDefault2');
+  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [mostrarDialogo, setMostrarDialogo] = useState(false);
   
-    if (radioProfesor.checked) {
-      return 2;
-    } else if (radioEstudiante.checked) {
-      return 1;
-    } else {
-      return 0;
-    }
+  //Validamos la entrada del controlador a verificar y en base a los resultados customizamos el cuadro de mensaje
+  const validateController = async () =>{
+      const result = await validateUser(Username.current.value,Password.current.value,obtenerTipoUsuario);
+      customMessage(result,setTitle,setMessage,setMostrarDialogo);
   }
 
-  const validateUser = async () => {
-    try{
-        const response = await fetch('http://localhost:8080/api/v1/auth/getUser', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              username: Username.current.value,
-              password: Password.current.value
-            })
-          });
-          if (response.ok) {
-            const userData = await response.text();
-            navigate('/registro/continueregister')
-            localStorage.setItem('username',Username.current.value);
-            localStorage.setItem('password',Password.current.value);
-            localStorage.setItem('perfil',obtenerTipoUsuario());
-            console.log(userData);
-        } else {
-            const DataError=await response.text()
-            alert(DataError);
-        }
-    } catch (error) {
-        console.error('Error de red:', error);
-    }
-}
-
-  const validarFormulario = (event) => {
-    var nombreUsuario = document.getElementById('exampleFormControlInput1').value;
-    var contraseña = document.getElementById('exampleFormControlInput2').value;
-    if (nombreUsuario.trim() === '' || contraseña.trim() === '') {
-      alert('Por favor, completa todos los campos.');
-      event.preventDefault();
+  const handleClick = (event)=>{
+    if(validateText(event,'exampleFormControlInput1','exampleFormControlInput2')){
+      setMessage('Rellene todos los campos');
+      setTitle('¡Fallo!');
+      setMostrarDialogo(true);
+    }else{
+      validateController();
     }
   }
-
-  
-
   return (
     <div className='secondColor'>
         <section className='Register Color'>
@@ -70,7 +40,7 @@ function Registro() {
           </Link>
       </section>
 
-    <div className='container'>
+      <div className='container'>
           <section className='auntentication'>
             <h4 className='text-login changecolor'>Regístrate</h4>
             <h5 className='text-account changecolor'>Crea tu cuenta</h5>
@@ -96,9 +66,11 @@ function Registro() {
                 </label>
               </div>
             </section>
-            <button type="button" class="btn btn-primary" onClick={()=> {validarFormulario();validateUser()}}>Registrar</button>
+            <button type="button" class="btn btn-primary" onClick={(event)=> {handleClick(event)}}>Registrar</button>
           </section>
-    </div>
+      </div>
+      {mostrarDialogo && <MessageDialog onClose={()=>{
+        onClose(title,setMostrarDialogo,navigate,'/registro/continueregister')}} message={message} title={title}/>}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 //Cargue y seleccion de departamentos
-  export const receivedepartment = async (setDepartamentos) => {
+export const receivedepartment = async (setDepartamentos) => {
     try {
       const response = await fetch(
         "http://localhost:8080/api/v1/auth/getdepartmen",
@@ -20,10 +20,10 @@
     } catch (error) {
       console.error("Error de red:", error);
     }
-  };
+};
 
-  //Cargue y seleccion de ciudades
-  export const receiveCities = async (namedepartment,setCiudades) => {
+//Cargue y seleccion de ciudades
+export const receiveCities = async (namedepartment,setCiudades) => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/v1/auth/getCity/${namedepartment}`,
@@ -44,9 +44,9 @@
     } catch (error) {
       console.error("Error de red:", error);
     }
-  };
-
-  export const register = async (id,name,lastnanme,email,navigate) => {
+};
+//Consumir servicio de registrar 
+export const register = async (id,name,lastnanme,email,navigate) => {
     try {
       const response = await fetch(
         "http://localhost:8080/api/v1/auth/register",
@@ -75,12 +75,41 @@
         localStorage.removeItem("password");
         localStorage.removeItem("city");
         navigate('/');
+        alert(data)
       } else {
         const errorData = await response.text();
         alert(errorData.token);
       }
     } catch (error) {
       alert("Error de red:", error);
-      // Puedes mostrar un mensaje de error al usuario aquí si lo deseas
     }
-  };
+};
+
+//Mirar si existe ya un usuario con esas credenciales
+export const validateUser = async (Username,Password,obtenerTipoUsuario) => {
+    try{
+        const response = await fetch('http://localhost:8080/api/v1/auth/getUser', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: Username,
+              password: Password
+            })
+          });
+          if (response.ok) {
+            const userData = await response.text();
+            localStorage.setItem('username',Username);
+            localStorage.setItem('password',Password);
+            localStorage.setItem('perfil',obtenerTipoUsuario());
+            return {success : true, userData}
+        } else {
+            const dataError=await response.text()
+            return {success : false, dataError}
+        }
+    } catch (error) {
+      console.log(error)
+      return { success: false, dataError: 'Error de red' };
+    }
+}
