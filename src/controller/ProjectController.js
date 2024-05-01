@@ -138,6 +138,7 @@ export const updateProject = async (
       alert(errorData);
     }
   } catch (error) {
+    console.log(error)
     alert("Error de red:", error);
   }
 };

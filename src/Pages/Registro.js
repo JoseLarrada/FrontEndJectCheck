@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/registrate.css';
 import {validateText,obtenerTipoUsuario} from '../Configs/FormValidation'
-import {validateUser} from '../controller/RegisterController';
+import {validateUser} from '../controller/RegisterController'
 import {customMessage,onClose} from '../Configs/MessageViews'
-import MessageDialog from '../Components/MessageDialog';
+import MessageDialog from '../Components/MessageDialog'
 
 function Registro() {
 
@@ -60,7 +60,7 @@ function Registro() {
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
                 <label class="form-check-label" for="flexRadioDefault1">
                   Estudiante
                 </label>

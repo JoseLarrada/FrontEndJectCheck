@@ -19,6 +19,7 @@ export const generateGeneralReport= async (verificarExpiracionToken,navigate,tuT
       } 
     } catch (error) {
       alert('Error de red:', error);
+      console.log(error)
     }
 };
 

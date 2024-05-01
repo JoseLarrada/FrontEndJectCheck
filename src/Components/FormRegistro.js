@@ -2,22 +2,40 @@ import React, { useState, useEffect, useRef } from "react";
 import "../styles/formregistro.css";
 import { useNavigate } from 'react-router-dom';
 import log from "../LogoJ.jpg";
+import {validateTextAutentication} from '../Configs/FormValidation'
 import {receivedepartment,receiveCities,register} from '../controller/RegisterController'
-
-
+import {customMessage,onClose} from '../Configs/MessageViews'
+import MessageDialog from '../Components/MessageDialog'
 
 function FormRegistro() {
-
+   //Declaracion de variables
   const [departamentos, setDepartamentos] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedCity, setselectedCity] = useState("");
   const [ciudades, setCiudades] = useState([]);
-  //Declaracion de variables
+  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const names = useRef();
   const lastname = useRef();
   const id = useRef();
   const email = useRef();
   const navigate = useNavigate();
+
+  const validateRegisterController = async ()=>{
+    const result= await register(id.current.value,names.current.value,lastname.current.value,email.current.value);
+    customMessage(result,setTitle,setMessage,setMostrarDialogo);
+  }
+
+  const handleClick = (event)=>{
+    if(validateTextAutentication(event,names.current.value,lastname.current.value,id.current.value,email.current.value)){
+      setMessage('Rellene todos los campos');
+      setTitle('¡Fallo!');
+      setMostrarDialogo(true);
+    }else{
+      validateRegisterController();
+    }
+  }
 
   const handleDepartmentChange = (event) => {
     // Obtener el valor actual seleccionado
@@ -26,7 +44,6 @@ function FormRegistro() {
     receiveCities(selectedValue,setCiudades);
   };
   const handleCityChange = (event) => {
-    // Obtener el valor actual seleccionado
     const selectedValuecity = event.target.value;
     setselectedCity(selectedValuecity);
     localStorage.setItem("city", selectedValuecity);
@@ -107,12 +124,13 @@ function FormRegistro() {
           <button
             type="button"
             class="btn btn-primary movimientos"
-            onClick={() => register(id.current.value,names.current.value,lastname.current.value,email.current.value,navigate)}
+            onClick={(event) => {handleClick(event)}}
           >
             Guardar
           </button>
         </section>
       </div>
+      {mostrarDialogo && <MessageDialog onClose={()=>{onClose(title,setMostrarDialogo,navigate,'/principalview')}} title={title} message={message}/>}
     </div>
   );
 }

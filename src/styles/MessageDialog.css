@@ -9,7 +9,6 @@
     transform: translate(-50%, -50%); /* Corrige el desplazamiento */
     flex-direction: column;
     z-index: 0 !important;
-    border: 2px solid rgb(255, 255, 255);
     border-radius: 15px;
     box-shadow: 0px 0px 5px 0px white;
     background-color: white;

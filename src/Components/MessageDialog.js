@@ -24,7 +24,7 @@ function MessageDialog({onClose,message,title}) {
     return (
         <>
             {isVisible && (
-                <div className='contenedorPrincipal'>
+                <div className='contenedorPrincipal' style={{border: `2px solid ${color}` }}>
                     <section className='contenedorSecundario'>
                         <img className='iconoConfirmacion' src={image} alt="" />
                         <p className='tituloEmergente'>{title}</p>

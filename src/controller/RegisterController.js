@@ -13,7 +13,6 @@ export const receivedepartment = async (setDepartamentos) => {
       if (response.ok) {
         const userData = await response.json();
         setDepartamentos(userData);
-        console.log(userData);
       } else {
         console.error("Error al cargar los datos:", response.statusText);
       }
@@ -37,7 +36,6 @@ export const receiveCities = async (namedepartment,setCiudades) => {
       if (response.ok) {
         const userData = await response.json();
         setCiudades(userData);
-        console.log(userData);
       } else {
         console.error("Error al cargar los datos:", response.statusText);
       }
@@ -46,7 +44,7 @@ export const receiveCities = async (namedepartment,setCiudades) => {
     }
 };
 //Consumir servicio de registrar 
-export const register = async (id,name,lastnanme,email,navigate) => {
+export const register = async (id,name,lastnanme,email) => {
     try {
       const response = await fetch(
         "http://localhost:8080/api/v1/auth/register",
@@ -69,19 +67,19 @@ export const register = async (id,name,lastnanme,email,navigate) => {
       );
 
       if (response.ok) {
-        const data = await response.text();
-        alert("Registrado Correctamente");
+        const userData = await response.json();
         localStorage.removeItem("username");
         localStorage.removeItem("password");
         localStorage.removeItem("city");
-        navigate('/');
-        alert(data)
+        localStorage.setItem('token', userData.token,);
+        localStorage.setItem('perfil', userData.perfil);
+        return{success: true, userData: 'Registro Exitoso, ya puedes acceder al sistema'}
       } else {
-        const errorData = await response.text();
-        alert(errorData.token);
+        const dataError = await response.text();
+        return{success: false, dataError}
       }
     } catch (error) {
-      alert("Error de red:", error);
+      return{success: false, error};
     }
 };
 

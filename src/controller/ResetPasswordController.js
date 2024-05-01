@@ -14,14 +14,14 @@ const resetPassword= async (email,password,confirmPassword,identification) => {
       });
   
       if (response.ok) {
-        const data = await response.text();
-        alert(data);
+        const userData = await response.text();
+        return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
+      return{success: false, error};
     }
   };
 

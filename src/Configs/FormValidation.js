@@ -18,3 +18,10 @@ export const obtenerTipoUsuario = () => {
       return 0;
     }
 }
+
+export const validateTextAutentication = (event,field1,field2,field3,field4) =>{
+    if(field1.trim() === '' || field2.trim() === '' || field3.trim() === '' || field4.trim() === ''){
+      event.preventDefault();
+      return true;
+    }
+}

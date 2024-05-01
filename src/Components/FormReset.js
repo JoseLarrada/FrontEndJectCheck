@@ -1,6 +1,9 @@
-import React, { useRef }  from 'react'
+import React, { useRef, useState }  from 'react'
 import '../styles/formreset.css'
 import resetPassword from '../controller/ResetPasswordController'
+import {validateTextAutentication} from '../Configs/FormValidation'
+import MessageDialog from '../Components/MessageDialog'
+import {customMessage, onClose} from '../Configs/MessageViews'
 
 
 function FormReset() {
@@ -8,6 +11,25 @@ function FormReset() {
     const password=useRef();
     const confirmpassword=useRef();
     const id=useRef();
+    const [message, setMessage] = useState('');
+    const [title, setTitle] = useState('');
+    const [mostrarDialogo, setMostrarDialogo] = useState(false);
+
+    const validateControllerReset = async () =>{
+        const result = await resetPassword(email.current.value,password.current.value,confirmpassword.current.value,id.current.value);
+        customMessage(result,setTitle,setMessage,setMostrarDialogo);
+    }
+
+    const handleClick = (event)=>{
+        if(validateTextAutentication(event, email.current.value, password.current.value, 
+            confirmpassword.current.value, id.current.value)){
+            setMessage('Rellene todos los campos');
+            setTitle('¡Fallo!');
+            setMostrarDialogo(true);
+        }else{
+            validateControllerReset();
+        }
+    }
 
   return (
         <div className='cont'>
@@ -24,8 +46,9 @@ function FormReset() {
                     <input className="form-control reset espaciado" type="text" placeholder="Ingrese su cedula" aria-label="default input example" ref={id}/>
                 </div>
                 <button type="button" className="btn btn-primary btnhandler" 
-                onClick={()=> resetPassword(email.current.value,password.current.value,confirmpassword.current.value,id.current.value)}>Restablecer</button>
+                onClick={(event)=> {handleClick(event)}}>Restablecer</button>
             </section>
+            {mostrarDialogo && <MessageDialog onClose={()=>{onClose(title,setMostrarDialogo)}} title={title} message={message}/>}
         </div>
   )
 }
