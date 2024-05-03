@@ -3,10 +3,10 @@
     width: 400px;
     height: 160px;
     display: flex;
-    position: fixed; /* Posición fija en la ventana del navegador */
-    top: 50%; /* Alineado verticalmente en el centro */
-    left: 50%; /* Alineado horizontalmente en el centro */
-    transform: translate(-50%, -50%); /* Corrige el desplazamiento */
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     flex-direction: column;
     z-index: 0 !important;
     border-radius: 15px;

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+.formProjects{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 57%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+.formProjects>h3{
+    font-family: "Public Sans", sans-serif;
+    margin: 10px 0 20px 0;
+    color:  rgb(26,203,243);
+}
+.principalForm{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+.principalForm>input{
+    width: 280px;
+    font-family: "Public Sans", sans-serif;
+    border: 2px solid  rgb(26,203,243);
+    border-radius: 5px;
+}
+.principalForm>textarea{
+    font-family: "Public Sans", sans-serif;
+    width: 280px;
+    border-radius: 5px;
+    border: 2px solid  rgb(26,203,243);
+}
+.findTeacher{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.findTeacher>input{
+    font-family: "Public Sans", sans-serif;
+    width: 280px;
+    height: 30px;
+    margin-left: 21px;
+    border-radius: 5px;
+    border: 2px solid  rgb(26,203,243);
+}
+.findTeacher>ion-icon{
+    position: relative;
+    left: 50px;
+    bottom: 10px;
+    cursor: pointer;
+}
+.addAditional{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+.addAditional>h6{
+    font-family: "Public Sans", sans-serif;
+    font-size: 20px;
+    color: rgb(26,203,243); 
+}
+#miCheckbox{
+    width: 15px;
+    position: relative;
+    bottom: 3.5px;
+}
+.formProjects>button{
+    font-family: "Public Sans", sans-serif;
+    width: 280px;
+    margin-top: 20px;
+    border-color: rgb(26,203,243);
+    margin-bottom: 20px;
+}
+.formProjects>button:hover{
+    border-color: rgb(26,203,243);
+    background-color: rgb(26,203,243);
+}
