@@ -20,14 +20,14 @@ export const findTeacher = async (
       }
     );
     if (response.ok) {
-      const message = await response.text();
-      alert(message);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const Badmessage = await response.text();
-      alert("Docente no encontrado");
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    console.error("Error de red:");
+    return {success: false, error}
   }
 };
 //Buscar Estudiante
@@ -52,14 +52,14 @@ export const findStudent = async (
       }
     );
     if (response.ok) {
-      const message = await response.text();
-      alert(message);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const Badmessage = await response.text();
-      alert("Estudiante no encontrado");
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    console.error("Error de red:");
+    return {success: false, error}
   }
 };
 
@@ -91,14 +91,14 @@ export const addProject = async (
       }
     );
     if (response.ok) {
-      const data = await response.text();
-      alert(data);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const errorData = await response.text();
-      alert(errorData);
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    alert("Error de red:", error);
+    return {success: false, error}
   }
 };
 
@@ -131,15 +131,14 @@ export const updateProject = async (
       }
     );
     if (response.ok) {
-      const data = await response.text();
-      alert(data);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const errorData = await response.text();
-      alert(errorData);
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    console.log(error)
-    alert("Error de red:", error);
+    return {success: false, error}
   }
 };
 
@@ -165,14 +164,14 @@ export const deleteProject = async (
       }
     );
     if (response.ok) {
-      const data = await response.text();
-      alert(data);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const errorData = await response.text();
-      alert(errorData);
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    console.log("Error de red:", error);
+    return {success: false, error}
   }
 };
 
@@ -198,13 +197,13 @@ export const charguedProject = async (
       }
     );
     if (response.ok) {
-      const data = await response.json();
-      setDatos(data);
+      const userData = await response.json();
+      setDatos(userData);
     } else {
-      const errorData = await response.json();
-      alert(errorData);
+      const dataError = await response.text();
+      alert(dataError)
     }
   } catch (error) {
-    alert("Error de red:", error);
+    return {success: false, error}
   }
 };

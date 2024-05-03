@@ -10,7 +10,7 @@ import Chat from '../Pages/Chat'
 import Reports from '../Pages/Reports'
 import NewPage from '../Pages/NewPage'
 import Assigment from '../Pages/Assigment'
-import MessageDialog from '../Components/MessageDialog'
+import Projects from '../Pages/Projects'
 function Inicio() {
   return (
     <BrowserRouter>
@@ -25,7 +25,7 @@ function Inicio() {
           <Route path='/Reports' element={<Reports/>}/>
           <Route path="/newPage/:id" element={<NewPage/>}/>
           <Route path="/entregasPage/:fecha" element={<Assigment />} />
-          <Route path='/pruebas' element={<MessageDialog/>}/>
+          <Route path='/Projects' element={<Projects/>}/>
         </Routes> 
     </BrowserRouter>
   )

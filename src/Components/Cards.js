@@ -40,7 +40,7 @@ function Cards() {
           >
             <Card
               Title={item.nombre}
-              teacher={item.id_docente}
+              teacher={item.descripcion}
               page={"newPage"}
               owner={getnamestate(item.id_estado)}
             />

@@ -13,8 +13,6 @@ function PrincipalView() {
   return (
     <div>
         <Nav/>
-        <Sidebar onOptionClick={handleSidebarOptionClick}/>
-        {showCards && <div className="back-c"><Cards/></div>}
     </div>
   )
 }

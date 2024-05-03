@@ -32,6 +32,12 @@ function Nav() {
                     <label className='label'>Informes</label>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink className="nav-link active" to="/Projects" >
+                    <ion-icon name="duplicate"></ion-icon>
+                    <label className='label'>Proyectos</label>
+                  </NavLink>
+                </li>
               </div>
             </ul>
         </nav>
