@@ -1,12 +1,9 @@
 import React, { useState, useRef } from "react";
 import "../styles/combo.css";
 import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
-import {
-  updatePassword,
-  accountUpdate,
-  accountDelete,
-} from "../controller/ProfileController.js";
+import {updatePassword,accountUpdate,accountDelete} from "../controller/ProfileController.js";
 import { useNavigate } from "react-router-dom";
+import ShowComponent from '../Components/ShowComponent'
 
 function ComboBox() {
   const [mostrarDropdown, setMostrarDropdown] = useState(false);
@@ -75,11 +72,10 @@ function ComboBox() {
     setMostrarModificarCuenta(false);
     setMostrarDropdown(true);
   };
-  const handleConfirmarEliminarCuenta = () => {
-    // Lógica para eliminar la cuenta...
-    console.log("Cuenta eliminada");
+  const handleConfirmarEliminarCuenta = (inputValue) => {
     setMostrarEliminarCuenta(false);
     setMostrarDropdown(true);
+    accountDelete(verificarExpiracionToken, navigate, tuToken, inputValue); // Pasa el valor del input como argumento
   };
 
   const tuToken = localStorage.getItem("token");
@@ -229,46 +225,9 @@ function ComboBox() {
           </button>
         </div>
       )}
-      {mostrarEliminarCuenta && (
-        <div className="show-option">
-          <div className="combo-pass">
-            <h2 className="text-chang">Eliminar Cuenta</h2>
-            <h3 className="text-large">
-              Esto eliminará el acceso a tu cuenta y cualquier dato asociado a
-              ella. Por favor ingresa tu contraseña para confirmar.
-            </h3>
-            <label className="comb-word">Contraseña Actual:</label>
-            <input
-              type="password"
-              ref={contraseña}
-              className="box-combo"
-              id="eliminarCuentaContraseña"
-            />
-          </div>
-          <button
-            type="button"
-            className="btn btn-confirm"
-            onClick={handleCancel}
-          >
-            Cancelar
-          </button>
-          <button
-            type="button"
-            className="btn btn-cancel"
-            onClick={() => {
-              handleConfirmarEliminarCuenta();
-              accountDelete(
-                verificarExpiracionToken,
-                navigate,
-                tuToken,
-                contraseña.current.value
-              );
-            }}
-          >
-            Confirmar
-          </button>
-        </div>
-      )}
+      {mostrarEliminarCuenta && <ShowComponent title={'Eliminar Cuenta'} descripcion={
+              "Esto eliminará el acceso a tu cuenta y cualquier dato asociado a ella Por favor ingresa tu contraseña para confirmar"}
+              action={'Contraseña Actual:' } cancel={handleCancel} accept={handleConfirmarEliminarCuenta}/>}
     </section>
   );
 }

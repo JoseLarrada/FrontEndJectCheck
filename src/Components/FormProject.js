@@ -1,11 +1,11 @@
 import {React, useState} from 'react'
 import '../styles/FormProject.css'
 
-function FormProject() {
+function FormProject({title,textBotom}) {
   const [Ischecked,setIschecked]=useState(false)
   return (
     <div className="formProjects">
-        <h3>Crear Proyectos</h3>
+        <h3>{title}</h3>
         <section className="principalForm">
             <input type="text" placeholder='Titulo del proyecto' required/>
             <textarea name="Decription" id="" cols="30" rows="5" placeholder='Descripcion'></textarea>
@@ -33,7 +33,7 @@ function FormProject() {
             </div>
           )}
         </section>
-        <button type="button" class="btn btn-outline-secondary">Guardar Proyecto</button>
+        <button type="button" class="btn btn-outline-secondary">{textBotom}</button>
     </div>
   )
 }

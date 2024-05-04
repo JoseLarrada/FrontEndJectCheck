@@ -5,13 +5,14 @@ import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
 import { charguedProject } from "../controller/ProjectController.js";
 import { useNavigate } from "react-router-dom";
 
-function Cards() {
+function Cards({optionCard}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
+  const state=0;
   const [datos, setDatos] = useState([]);
-
+  
   useEffect(() => {
-    charguedProject(verificarExpiracionToken, navigate, tuToken, setDatos);
+    optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,state);
   }, []);
   const handleClick = (item) => {
     localStorage.setItem("id_ruta", item.id_ruta);

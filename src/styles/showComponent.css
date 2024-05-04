@@ -1,0 +1,69 @@
+.showOption {
+    background: #1567AA;
+    width: 658px;
+    height: 400px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10%;
+    font-family: 'Inter', sans-serif !important;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.comboPass{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.textChang {
+    margin: 15px 5px 20px 20px !important;
+    font-weight: bold;
+}
+.textLarge{
+    margin: 40px 30px 30px 30px!important;
+    font-size: 18px !important;
+    padding: 20px 20px !important;
+}
+.comboPass>span{
+    display: flex;
+    flex-direction: column;
+}
+.combWord{
+    font-size: 16px !important;
+    font-weight: bold;
+    margin: -6px 5px !important;
+}
+.boxCombo{
+    padding: 10px !important;
+    width: 325px;
+    height: 40px;
+    background-color: #2292d2 !important;
+    border-bottom: 2px solid #144692 !important;
+    border: none;
+    margin-top: 4%;
+}
+.btnsConfirm{
+    display: flex;
+    flex-direction: row;
+}
+.btnConfirm{
+    font-size: 16px !important;
+    width: 200px !important;
+    background-color: #1ACBF3 !important;
+    border: #0f2259 !important;
+    margin-left: 50px !important;
+    font-weight: bold;
+}
+.btnCancel {
+    font-size: 16px !important;
+    width: 200px !important;
+    background-color: #1ACBF3 !important;
+    border: #0f2259 !important;
+    margin-left: 50px !important;
+    font-weight: bold;
+}

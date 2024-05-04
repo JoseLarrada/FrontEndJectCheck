@@ -27,7 +27,7 @@
     align-items: center;
 }
 .principalForm>input{
-    width: 280px;
+    width: 280px !important;
     font-family: "Public Sans", sans-serif;
     border: 2px solid  rgb(26,203,243);
     border-radius: 5px;
@@ -45,7 +45,7 @@
 }
 .findTeacher>input{
     font-family: "Public Sans", sans-serif;
-    width: 280px;
+    width: 280px !important;
     height: 30px;
     margin-left: 21px;
     border-radius: 5px;
