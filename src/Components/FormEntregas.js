@@ -17,7 +17,8 @@ function FormEntregas({tittle,action}) {
           <input class="controls" type="file" ref={file} placeholder="Añadir Archivo"/>
           <input class="controls" type="text" ref={annexes} placeholder="Añadir Anexos"/>
           <input class="controls" type="text" ref={comment} placeholder="Comentario"/>
-          <button type="submit" class="botons" onClick={()=>{uploadFile(verificarExpiracionToken,navigate,file.current.files[0],tuToken)}}>
+          <button type="submit" class="botons" onClick={()=>{uploadFile(verificarExpiracionToken,navigate,file.current.files[0],tuToken);
+            saveAssignment(verificarExpiracionToken,navigate,tuToken,annexes.current.value,file.current.value,comment.current.value)}}>
             {action}
           </button>
       </section>

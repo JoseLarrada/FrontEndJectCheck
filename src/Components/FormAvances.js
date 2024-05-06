@@ -19,12 +19,10 @@ function FormAvances({ tittle, action }) {
         ref={title}
         placeholder="Ingrese el titulo"
       />
-      <input
-        class="controls"
+      <textarea name="description" id="" class="controls"
         type="text"
         ref={descripcion}
-        placeholder="Ingrese la descripcion"
-      />
+        placeholder="Ingrese la descripcion"></textarea>
       <input
         class="controls"
         type="text"

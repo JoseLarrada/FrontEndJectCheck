@@ -112,3 +112,27 @@ export const updateadvance = async (
     alert("Error de red:", error);
   }
 };
+//Eliminar Avances
+export const deleteAdvance= async (texto,tuToken,verificarExpiracionToken,navigate) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/deleteadvance/${texto}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      if (response.ok) {
+        const userData = await response.text();
+         return {success: true, userData}
+      }else{
+        const dataError = await response.text();
+        return {success: false, dataError}
+      } 
+    } catch (error) {
+      return {success: false, error}
+    }
+  };

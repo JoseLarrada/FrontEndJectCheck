@@ -14,7 +14,7 @@ function NewPage() {
   return (
     <div>
         <Nav/>
-        <SiderBarOption nameFunction={dataNavAvances}/>
+        <SiderBarOption nameFunction={dataNavAvances} onOptionClick={handleSidebarOptionClick}/>
         {showCards && <div className="back-c"><CardAvance/></div>}
     </div>
   )

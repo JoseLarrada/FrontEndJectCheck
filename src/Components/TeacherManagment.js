@@ -13,7 +13,7 @@ const CargarPersonalizado= async (id_state) => {
       if(!verificarExpiracionToken()){
         navigate('/');
       }
-      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/FilterProject/${id_state}`, {
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/filterroutes/${id_state}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const CargarPersonalizado= async (id_state) => {
           </button>
           {datos.map((item, index) => (
           <button key={index} type="button" class="list-group-item list-group-item-action" onClick={()=>{handleClick(item);setOption(title)}}>
-            {item.id_ruta}
+            {item.nombre}
           </button>
         ))}
     </div>

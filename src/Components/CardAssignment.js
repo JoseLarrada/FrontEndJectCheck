@@ -1,32 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Card from "../Components/Card";
+import Card from "../Components/CardWithoutLink.js";
 import "../styles/Card.css";
 import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
 import { useNavigate } from "react-router-dom";
+import {charguedAssignment} from '../controller/AssignmentController'
 
-function Cards({optionCard}) {
+function CardAssignment() {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
-  var state;
   const [datos, setDatos] = useState([]);
   
   useEffect(() => {
-    optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,state);
+    charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos,localStorage.getItem('id_avance'));
   }, []);
   const handleClick = (item) => {
-    localStorage.setItem("id_ruta", item.id_ruta);
+    localStorage.setItem("id_Entrega", item.id_entrega);
   };
-
-  function getnamestate(idestado) {
-    if (idestado == 5) {
-      return "Pendiente";
-    } else if (idestado == 1) {
-      return "En proceso";
-    } else if (idestado == 2) {
-      return "Completado";
-    }
-  }
-
   return (
     <div className="container">
       <div className="row">
@@ -39,16 +28,15 @@ function Cards({optionCard}) {
             }}
           >
             <Card
-              Title={item.nombre}
-              teacher={item.descripcion}
-              page={"newPage"}
-              owner={getnamestate(item.id_estado)}
+              Title={item.comentario}
+              teacher={item.calificacion}
+              owner={item.id_entrega}
             />
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default Cards;
+export default CardAssignment

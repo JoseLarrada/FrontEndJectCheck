@@ -9,18 +9,21 @@ function Dropdowns({onOptionClick}) {
     setMostrarFormAdd(!mostrarFormAdd);
     setMostrarFormUpd(false);
     setmostrarFormDel(false);
+    onOptionClick()
   };
 
   const toggleFormUpd = () => {
     setMostrarFormUpd(!mostrarFormUpd);
     setMostrarFormAdd(false);
     setmostrarFormDel(false);
+    onOptionClick()
   };
 
   const toggleFormDel = () => {
     setmostrarFormDel(!mostrarFormDel);
     setMostrarFormAdd(false);
     setMostrarFormUpd(false);
+    onOptionClick()
   };
   return (
     <div>

@@ -34,3 +34,9 @@
 .col-md-4{
     padding: 4px 4px 4px 4px;
 }
+.cardLinkMove{
+    position: absolute;
+    top: 50%;
+    left: 72%;
+    transform: translate(-50%,-50%);
+}
