@@ -1,29 +1,37 @@
 import {React,useState} from 'react'
 import logo from '../resources/Icon.ico'
+import {useNavigate} from 'react-router-dom';
 import '../styles/sidebarOptions.css'
 import FormProject from '../Components/FormProject'
 import ShowComponent from '../Components/ShowComponent'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import {deleteProject,filterProjects} from '../controller/ProjectController.js'
 import Cards from "../Components/Cards.js";
+import FormAvances from '../Components/FormAvances'
 
 function SideBarOption({nameFunction}) {
   const [isHover, setIsHover]= useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+  const tuToken = localStorage.getItem('token')
+  const navigate=useNavigate()
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
-  var navigate='';
-  var tuToken='';
+  const handleConfirmarEliminarCuenta =async(inputValue) => {
+     const hola= await deleteProject(inputValue,tuToken,verificarExpiracionToken,navigate);
+     return hola;
+  }; 
   const renderForm = () => {
     switch(selectedOption){
-      case 'Crear': return <FormProject title={'Crear Proyecto'} textBotom={'Crear'}/>;
-      case 'Modificar': return <FormProject title={'Modificar Proyecto'} textBotom={'Modificar'}/>;
-      case 'Eliminar': return <ShowComponent title={'Eliminar Proyecto'} 
-            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a ello. Por favor ingresa tu contraseña para confirmar.'}
-            action={'Ingrese Nombre del proyecto'} cancel={()=>{}} accept={(value)=>{deleteProject(value,tuToken,verificarExpiracionToken,navigate)}}/>;
+      case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'}/>;
+      case 'Modificar': return <FormProject titleForm={'Modificar Proyecto'} textBotom={'Modificar'}/>;
+      case 'Eliminar': return <ShowComponent titleComponent={'Eliminar Proyecto'} 
+            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a el. Por favor ingresa tu contraseña para confirmar.'}
+            action={'Ingrese Nombre del proyecto'} cancel={()=>{}} accept={handleConfirmarEliminarCuenta}/>;
       case 'Pendientes': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)}/>
       case 'Aceptados': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)}/>
+      case 'Rechazados': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)}/>
+      case 'Crear Avance': return <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"}/>
     }
   };
   return (

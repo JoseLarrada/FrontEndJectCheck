@@ -224,12 +224,12 @@ span >ion-icon{
 }
 .footer{
   position: relative;
-  bottom: 50px;
+  top: 10px;
 }
 .footer-text{
     font-family: "Public Sans", sans-serif;
     position: relative;
-    top: 26px;
+    top: 20px;
     color: black;
 }
 .formSidebar{

@@ -18,3 +18,10 @@ export const onClose = (title,setMostrarDialogo,navigate,path)=>{
     setMostrarDialogo(false);
   }
 }
+export const onCloseWithOutNavigate = (title,setMostrarDialogo)=>{
+  if(title==='¡Felicidades!'){
+    setMostrarDialogo(false);
+  }else{
+    setMostrarDialogo(false);
+  }
+}

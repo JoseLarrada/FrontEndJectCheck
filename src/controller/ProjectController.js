@@ -70,9 +70,14 @@ export const addProject = async (
   member2,
   member1,
   descripcion,
-  tuToken
+  tuToken,
+  verificarExpiracionToken,
+  navigate
 ) => {
   try {
+    if (!verificarExpiracionToken()) {
+      navigate("/");
+    }
     const response = await fetch(
       "http://localhost:8080/api/v1/PrincipalContent/CreateRoute",
       {
@@ -109,9 +114,14 @@ export const updateProject = async (
   member2,
   member1,
   description,
-  tuToken
+  tuToken,
+  verificarExpiracionToken,
+  navigate
 ) => {
   try {
+    if (!verificarExpiracionToken()) {
+      navigate("/");
+    }
     const response = await fetch(
       "http://localhost:8080/api/v1/PrincipalContent/UpdateRoute",
       {
@@ -171,7 +181,9 @@ export const deleteProject = async (
       return {success: false, dataError}
     }
   } catch (error) {
+    console.log(error)
     return {success: false, error}
+    
   }
 };
 

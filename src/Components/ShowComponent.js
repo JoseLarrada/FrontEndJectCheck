@@ -1,16 +1,23 @@
-import React,{useRef} from 'react'
+import React,{useRef,useState} from 'react'
 import '../styles/showComponent.css'
+import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
+import MessageDialog from '../Components/MessageDialog'
 
-function ShowComponent({title,descripcion,action,cancel,accept}) {
+function ShowComponent({titleComponent,descripcion,action,cancel,accept}) {
+  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const texto=useRef();
-   const handleAccept = () => {
+  const handleAccept =  async() => {
     const inputValue = texto.current.value;
-    accept(inputValue);
-  };
+    const result = await accept(inputValue);
+    console.log(result)
+    customMessage(result, setTitle, setMessage, setMostrarDialogo);
+};
   return (
     <div className='showOption'>
           <section className='comboPass'>
-            <h2 className='textChang'>{title}</h2>
+            <h2 className='textChang'>{titleComponent}</h2>
             <h3 className='textLarge'>{descripcion}</h3>
             <span>
               <label className="combWord">{action}</label>
@@ -21,6 +28,7 @@ function ShowComponent({title,descripcion,action,cancel,accept}) {
             <button type="button" className="btn btnConfirm" onClick={cancel}>Cancelar</button>
             <button type="button" className="btn btnCancel" onClick={handleAccept}>Confirmar</button>
           </section>
+          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo)}} title={title} message={message}/>}
     </div>
   )
 }

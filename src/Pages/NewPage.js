@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import Nav from '../Components/Nav'
 import SlideBar from '../Components/SlideBar'
 import CardAvance from '../Components/CardAvance'
+import SiderBarOption from '../Components/SideBarOption'
+import {dataNavAvances} from '../Configs/data'
 function NewPage() {
   const [showCards, setShowCards] = useState(true);
 
@@ -12,7 +14,7 @@ function NewPage() {
   return (
     <div>
         <Nav/>
-        <SlideBar create={"Crear Avance"} update={"Actualizar Avance"} deletes={"Eliminar Avances"} onOptionClick={handleSidebarOptionClick}/>
+        <SiderBarOption nameFunction={dataNavAvances}/>
         {showCards && <div className="back-c"><CardAvance/></div>}
     </div>
   )

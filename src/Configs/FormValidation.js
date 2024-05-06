@@ -25,3 +25,17 @@ export const validateTextAutentication = (event,field1,field2,field3,field4) =>{
       return true;
     }
 }
+
+export const validateTextProjects = (event,field1,field2,field3) =>{
+  if(field1.trim() === '' || field2.trim() === '' || field3.trim() === ''){
+    event.preventDefault();
+    return true;
+  }
+}
+
+export const validateTextfield = (event,field1) =>{
+  if(field1.trim() === ''){
+    event.preventDefault();
+    return true;
+  }
+}

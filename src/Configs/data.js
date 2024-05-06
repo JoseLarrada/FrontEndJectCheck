@@ -59,3 +59,20 @@ export const dataNavTeacher=[
             "position": 5
         }
 ]
+export const dataNavAvances=[
+    {
+        "title" : 'Crear Avance',
+        "img" : <ion-icon name="add-circle-outline"></ion-icon>,
+        "position": 1
+    },
+    {
+        "title" : 'Modificar Avance',
+        "img" : <ion-icon name="close-circle-outline"></ion-icon>,
+        "position": 2
+    },
+    {
+        "title" : 'Eliminar Avance',
+        "img" : <ion-icon name="help-circle-outline"></ion-icon>,
+        "position": 3
+    }
+]
