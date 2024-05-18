@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import Nav from '../Components/Nav'
 import Dropdowns from '../Components/Dropdowns'
-import CardAssignment from '../Components/CardAssignment'
 import Cards from '../Components/Cards'
 import "../styles/dropdowns.css"
+import {charguedAssignment} from '../controller/AssignmentController'
+import {handleClickAssingment} from '../Configs/cardsOptionConfig.js'
 
 function Assigment() {
   const [showCards, setShowCards] = useState(true);
@@ -21,7 +22,9 @@ function Assigment() {
         <div>
             <Nav/>
             {chargueContent()}
-            {showCards && <CardAssignment/>}
+            {showCards && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                  charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos, localStorage.getItem('id_avance'))} 
+                  handleClick={handleClickAssingment}/>}
         </div>
     )
 }

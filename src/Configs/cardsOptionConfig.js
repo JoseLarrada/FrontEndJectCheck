@@ -16,13 +16,13 @@ export function getnamestate(idestado) {
     }
 }
 
-const handleClickAssingment = (item) => {
+export const handleClickAssingment = (item) => {
     localStorage.setItem("id_Entrega", item.id_entrega);
 };
-const handleClickProjects = (item) => {
+export const handleClickProjects = (item) => {
     localStorage.setItem("id_ruta", item.id_ruta);
 };
-const handleClickAdvances = (item) => {
+export const handleClickAdvances = (item) => {
     localStorage.setItem("id_ruta", item.id_ruta);
     localStorage.setItem("id_avance", item.id_avance);
 };
@@ -36,11 +36,11 @@ export const rendercard=(item,page)=>{
               owner={item.id_entrega}
             />
     }else{
-        <Card
+        return <Card
               Title={item.titulo}
               teacher={item.descripcion}
               page={page}
               owner={getnamestate(item.idEstado)}
             />
     }
-  }
+}

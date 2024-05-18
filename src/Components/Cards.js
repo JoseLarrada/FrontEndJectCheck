@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Card from "../Components/Card";
 import "../styles/Card.css";
 import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
-import {getnamestate} from '../Configs/cardsOptionConfig.js'
 import { useNavigate } from "react-router-dom";
+import {rendercard} from '../Configs/cardsOptionConfig.js'
 
-function Cards({optionCard,page}) {
+function Cards({optionCard,page,handleClick}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
   var state;
@@ -14,10 +13,6 @@ function Cards({optionCard,page}) {
   useEffect(() => {
     optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,state);
   }, []);
-  const handleClick = (item) => {
-    localStorage.setItem("id_ruta", item.id_ruta);
-  };
-
   return (
     <div className="container">
       <div className="row">
@@ -29,12 +24,7 @@ function Cards({optionCard,page}) {
               handleClick(item);
             }}
           >
-            <Card
-              Title={item.titulo}
-              teacher={item.descripcion}
-              page={page}
-              owner={getnamestate(item.idEstado)}
-            />
+            {rendercard(item,page)}
           </div>
         ))}
       </div>

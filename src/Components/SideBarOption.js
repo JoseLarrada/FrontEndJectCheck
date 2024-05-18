@@ -5,9 +5,10 @@ import '../styles/sidebarOptions.css'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
 import {deleteProject,filterProjects} from '../controller/ProjectController.js'
 import {deleteAdvance} from '../controller/AdvanceController.js'
-import Cards from "../Components/Cards.js";
+import Cards from '../Components/Cards'
 import TeacherManagment from './TeacherManagment.js';
 import {handleOption,handleFormAvances,handleFormProjects} from '../Configs/sidebarOptionsConfigs.js'
+import {handleClickProjects} from '../Configs/cardsOptionConfig.js'
 
 
 function SideBarOption({nameFunction,onOptionClick}) {
@@ -67,21 +68,24 @@ function SideBarOption({nameFunction,onOptionClick}) {
         return (
             <div className='MoveOptionsCards'>
                   {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                  filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)} page={"newPage"}/>}  
+                  filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)} 
+                  page={"newPage"} handleClick={handleClickProjects}/>}  
             </div>
         );
       case 'Aceptados': 
         return (
             <div className='MoveOptionsCards'>
                 {acceptCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)} page={"newPage"}/>}
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)} 
+                page={"newPage"} handleClick={handleClickProjects}/>}
             </div>
         );
       case 'Rechazados': 
         return (
             <div className='MoveOptionsCards'>
                  {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} page={"newPage"}/>}
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} 
+                page={"newPage"} handleClick={handleClickProjects}/>}
             </div>
         );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
