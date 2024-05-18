@@ -18,12 +18,17 @@ function Cards({optionCard}) {
   };
 
   function getnamestate(idestado) {
-    if (idestado == 5) {
-      return "Pendiente";
-    } else if (idestado == 1) {
-      return "En proceso";
-    } else if (idestado == 2) {
-      return "Completado";
+    switch(idestado){
+      case 1: 
+        return "En proceso";
+      case 2: 
+        return "Completado";
+      case 3:
+        return "Calificado";
+      case 4:
+        return "No completado";
+      case 5:
+        return "Pendiente";
     }
   }
 
@@ -42,7 +47,7 @@ function Cards({optionCard}) {
               Title={item.nombre}
               teacher={item.descripcion}
               page={"newPage"}
-              owner={getnamestate(item.id_estado)}
+              owner={getnamestate(item.idEstado)}
             />
           </div>
         ))}

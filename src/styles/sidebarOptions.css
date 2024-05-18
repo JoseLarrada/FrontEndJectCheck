@@ -27,7 +27,7 @@
     height: 100%;
     padding: 1rem 1.25rem;
     clip-path: inset(0 75% 0 0);
-    transition: clip-path 1.25s ease-in;
+    transition: clip-path 1s ease-in;
   }
 
   & .top__wrapper {
@@ -235,4 +235,10 @@ span >ion-icon{
 .formSidebar{
   display: flex;
   flex-direction: row;
+}
+
+/*Opcion Para mover Cartas*/
+.MoveOptionsCards{
+  margin-top: 45px;
+  margin-left: 70px;
 }

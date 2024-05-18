@@ -24,7 +24,7 @@ function Inicio() {
           <Route path='/profile' element={<PersonProfile/>}/>
           <Route path='/messages' element={<Chat/>}/>
           <Route path='/Reports' element={<Reports/>}/>
-          <Route path="/newPage/:id" element={<NewPage/>}/>
+          <Route path="/newPage/:idEstado" element={<NewPage/>}/>
           <Route path="/entregasPage/:fecha" element={<Assigment />} />
           <Route path='/Projects' element={<Projects/>}/>
           <Route path='/pruebas' element={<FormProject/>}/>

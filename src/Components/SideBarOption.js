@@ -65,22 +65,22 @@ function SideBarOption({nameFunction,onOptionClick}) {
       case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
       case 'Pendientes':
         return (
-            <div>
+            <div className='MoveOptionsCards'>
                   {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)}/>}  
             </div>
         );
       case 'Aceptados': 
         return (
-            <div>
+            <div className='MoveOptionsCards'>
                 {acceptCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                 filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)}/>}
             </div>
         );
       case 'Rechazados': 
         return (
-            <div>
-                {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+            <div className='MoveOptionsCards'>
+                 {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                 filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)}/>}
             </div>
         );
