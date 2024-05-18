@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import logo from '../resources/Icon.ico'
 import {useNavigate} from 'react-router-dom';
 import '../styles/sidebarOptions.css'
@@ -20,7 +20,21 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const [pendingCard, setPendingCard] = useState(false);
   const tuToken = localStorage.getItem('token')
   const navigate=useNavigate()
-  
+  const toogleAcceptCard = () =>{
+    setAcceptCard(true);
+    setDeclineCard(false);
+    setPendingCard(false);
+  }
+  const toogleDeclineCard = () =>{
+    setAcceptCard(false);
+    setDeclineCard(true);
+    setPendingCard(false);
+  }
+  const tooglePendingCard = () =>{
+    setAcceptCard(false);
+    setDeclineCard(false);
+    setPendingCard(true);
+  }
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     handleOption(option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick);
@@ -32,16 +46,44 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const handleConfirmarEliminarAvance =async(inputValue) => {
      const result= await deleteAdvance(inputValue,tuToken,verificarExpiracionToken,navigate);
      return result;
-  }; 
-
+  };
+  useEffect(() => {
+    if (selectedOption === 'Pendientes') {
+      tooglePendingCard();
+    }
+    if (selectedOption === 'Aceptados') {
+      toogleAcceptCard();
+    }
+    if (selectedOption === 'Rechazados') {
+      toogleDeclineCard();
+    }
+  }, [selectedOption, tooglePendingCard,toogleAcceptCard,toogleDeclineCard]);
   const renderForm = () => {
     switch(selectedOption){
       case 'Crear': return handleFormProjects('Crear',cancelOption,handleConfirmarEliminarProyecto);
       case 'Modificar': return handleFormProjects('Modificar',cancelOption,handleConfirmarEliminarProyecto);
       case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
-      case 'Pendientes': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)}/>
-      case 'Aceptados': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)}/>
-      case 'Rechazados': return <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)}/>
+      case 'Pendientes':
+        return (
+            <div>
+                  {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                  filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)}/>}  
+            </div>
+        );
+      case 'Aceptados': 
+        return (
+            <div>
+                {acceptCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)}/>}
+            </div>
+        );
+      case 'Rechazados': 
+        return (
+            <div>
+                {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)}/>}
+            </div>
+        );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
       case 'Modificar Avance':return handleFormAvances('Modificar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
       case 'Eliminar Avance':return handleFormAvances('Eliminar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
