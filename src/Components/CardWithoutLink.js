@@ -13,7 +13,7 @@ function CardWithoutLink({Title,teacher,owner}) {
         return list[randomItem]
     }
     return (
-            <div className="card cardLinkMove">
+            <div className="card cardLinkMove" onClick={()=>{alert('Si muestro alguna info')}}>
                 <img src={randomImage()} alt="Imagen Tarjetas" />
                 <div className="card-body">
                     <h4  className="card-title">{Title}</h4>

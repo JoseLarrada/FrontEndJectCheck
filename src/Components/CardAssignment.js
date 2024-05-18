@@ -4,18 +4,17 @@ import "../styles/Card.css";
 import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
 import { useNavigate } from "react-router-dom";
 import {charguedAssignment} from '../controller/AssignmentController'
+import {rendercard} from '../Configs/cardsOptionConfig.js'
 
-function CardAssignment() {
+function CardAssignment({optionCard,page,handleClick}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const [datos, setDatos] = useState([]);
   
   useEffect(() => {
-    charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos,localStorage.getItem('id_avance'));
+    optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,localStorage.getItem('id_avance'));
   }, []);
-  const handleClick = (item) => {
-    localStorage.setItem("id_Entrega", item.id_entrega);
-  };
+  
   return (
     <div className="container">
       <div className="row">
@@ -27,11 +26,7 @@ function CardAssignment() {
               handleClick(item);
             }}
           >
-            <Card
-              Title={item.comentario}
-              teacher={item.calificacion}
-              owner={item.id_entrega}
-            />
+            {rendercard(item,page)}
           </div>
         ))}
       </div>

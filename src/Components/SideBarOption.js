@@ -67,21 +67,21 @@ function SideBarOption({nameFunction,onOptionClick}) {
         return (
             <div className='MoveOptionsCards'>
                   {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                  filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)}/>}  
+                  filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)} page={"newPage"}/>}  
             </div>
         );
       case 'Aceptados': 
         return (
             <div className='MoveOptionsCards'>
                 {acceptCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)}/>}
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 1)} page={"newPage"}/>}
             </div>
         );
       case 'Rechazados': 
         return (
             <div className='MoveOptionsCards'>
                  {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)}/>}
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} page={"newPage"}/>}
             </div>
         );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);

@@ -14,7 +14,7 @@ function PrincipalView() {
   return (
     <div>
         <Nav/>
-        <Cards optionCard={charguedProject}/>
+        <Cards optionCard={charguedProject} page={"newPage"}/>
     </div>
   )
 }

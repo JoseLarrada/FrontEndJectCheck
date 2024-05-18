@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Card from "../Components/Card";
 import "../styles/Card.css";
 import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
+import {getnamestate} from '../Configs/cardsOptionConfig.js'
 import { useNavigate } from "react-router-dom";
 
-function Cards({optionCard}) {
+function Cards({optionCard,page}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
   var state;
@@ -16,21 +17,6 @@ function Cards({optionCard}) {
   const handleClick = (item) => {
     localStorage.setItem("id_ruta", item.id_ruta);
   };
-
-  function getnamestate(idestado) {
-    switch(idestado){
-      case 1: 
-        return "En proceso";
-      case 2: 
-        return "Completado";
-      case 3:
-        return "Calificado";
-      case 4:
-        return "No completado";
-      case 5:
-        return "Pendiente";
-    }
-  }
 
   return (
     <div className="container">
@@ -44,9 +30,9 @@ function Cards({optionCard}) {
             }}
           >
             <Card
-              Title={item.nombre}
+              Title={item.titulo}
               teacher={item.descripcion}
-              page={"newPage"}
+              page={page}
               owner={getnamestate(item.idEstado)}
             />
           </div>

@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import Nav from '../Components/Nav'
 import Dropdowns from '../Components/Dropdowns'
 import CardAssignment from '../Components/CardAssignment'
+import Cards from '../Components/Cards'
 import "../styles/dropdowns.css"
 
 function Assigment() {
