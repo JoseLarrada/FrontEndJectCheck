@@ -1,5 +1,5 @@
-import CardNoLink from "../Components/CardWithoutLink.js";
-import Card from "../Components/Card";
+import Card from '../Components/Card.js'
+import { Link } from 'react-router-dom';
 
 export function getnamestate(idestado) {
     switch(idestado){
@@ -30,17 +30,22 @@ export const handleClickAdvances = (item) => {
 export const rendercard=(item,page)=>{
     //Verificar si las tarjetas son para entregas o proyectos y avances
     if(item.id_entrega!=null){
-        return <CardNoLink
+        return <Card
               Title={item.comentario}
               teacher={item.calificacion}
               owner={item.id_entrega}
+              clickEvent={()=>alert('Hola')}
             />
     }else{
-        return <Card
+      return (
+        <Link to={`/${page}/${getnamestate(item.idEstado)}`}>
+            <Card
               Title={item.titulo}
               teacher={item.descripcion}
-              page={page}
+              clickEvent={()=>{}}
               owner={getnamestate(item.idEstado)}
-            />
+          />
+        </Link>
+      )
     }
-}
+  }
