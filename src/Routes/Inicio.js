@@ -11,7 +11,7 @@ import Reports from '../Pages/Reports'
 import NewPage from '../Pages/NewPage'
 import Assigment from '../Pages/Assigment'
 import Projects from '../Pages/Projects'
-import FormProject from '../Components/viewInfoProject'
+import FormProject from '../Components/RateAssignment'
 function Inicio() {
   return (
     <BrowserRouter>
