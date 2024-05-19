@@ -1,0 +1,22 @@
+.tarjet{
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    width: 60%;
+    height: 80%;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: aqua;
+    background: white;
+    display: flex
+}
+.titulo{
+    margin: 10px 50px 10px 50px;
+    padding: 3em 2.3em;
+    display: inline-table;
+}
+
+.titulolog{
+    padding: 20%;
+    
+}
