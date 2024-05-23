@@ -1,4 +1,4 @@
-import {React, useState,useRef} from 'react'
+import {React, useState,useRef,useEffect} from 'react'
 import '../styles/FormProject.css'
 import {useNavigate} from 'react-router-dom';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
@@ -6,12 +6,17 @@ import {validateTextProjects,validateTextfield} from '../Configs/FormValidation'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog'
 import {findTeacher,findStudent,addProject,updateProject} from '../controller/ProjectController'
+import {receiveFacultly,receiveAreas} from '../controller/investigationController.js'
 
 function FormProject({titleForm,textBotom}) {
   const [Ischecked,setIschecked]=useState(false)
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('');
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
+  const [facultly, setFacultly] = useState([]);
+  const [selectedFacultly, setSelectedFacultly] = useState("");
+  const [selectedAreas, setselectedAreas] = useState("");
+  const [areas, setAreas] = useState([]);
   const navigate=useNavigate();
   const titulo = useRef();
   const descripcion = useRef();
@@ -68,7 +73,7 @@ function FormProject({titleForm,textBotom}) {
       setTitle('¡Fallo!');
       setMostrarDialogo(true);
     }else{
-      if(titleForm=='Crear Proyecto'){
+      if(titleForm === 'Crear Proyecto'){
         validatePersitence(addProject);
       }else{
         validatePersitence(updateProject);
@@ -76,7 +81,20 @@ function FormProject({titleForm,textBotom}) {
       
     }
   }
-
+  const handleFacultlyChange = (event) => {
+    // Obtener el valor actual seleccionado
+    const selectedValue = event.target.value;
+    setSelectedFacultly(selectedValue);
+    receiveAreas(setAreas,selectedValue,verificarExpiracionToken,navigate,token);
+  };
+  const handleAreasChange = (event) => {
+    const selectedValue = event.target.value;
+    setselectedAreas(selectedValue);
+  };
+  useEffect(() => {
+    receiveFacultly(setFacultly,verificarExpiracionToken,navigate,token);
+    receiveAreas(setAreas,"",verificarExpiracionToken,navigate,token);
+  }, [navigate,token]);
 
   return (
     <div className="formProjects">
@@ -84,6 +102,23 @@ function FormProject({titleForm,textBotom}) {
         <section className="principalForm">
             <input type="text" placeholder='Titulo del proyecto' ref={titulo} required/>
             <textarea name="Decription" id="" ref={descripcion} cols="30" rows="5" placeholder='Descripcion'></textarea>
+            {/**Combobox para facultades */}
+            <select name="facultly" id="" value={selectedFacultly} onChange={handleFacultlyChange}>
+              <option selected disabled value="">
+                Facultad...
+              </option>
+              {facultly.map((facultly,index)=>(
+                <option key={index}>{facultly.nombre}</option>
+              ))}
+            </select>
+            <select name="areas" id="" value={selectedAreas} onChange={handleAreasChange}>
+              <option selected disabled value="">
+                Areas...
+              </option>
+              {areas.map((areas,index)=>(
+                <option key={index}>{areas.nombre}</option>
+              ))}
+            </select>
             <span className="findTeacher">
                 <input type="text" placeholder='Nombre del docente' ref={docente} required/>
                 <a className="iconSearch" onClick={(event)=>{handleClickTeacher(event)}}><ion-icon name="search-outline"></ion-icon></a>
