@@ -71,6 +71,8 @@ export const addProject = async (
   member2,
   member1,
   descripcion,
+  idFacultly,
+  idArea,
   tuToken,
   verificarExpiracionToken,
   navigate
@@ -93,6 +95,8 @@ export const addProject = async (
           id_Member2: member2,
           id_Member: member1,
           description: descripcion,
+          idFacultly: idFacultly,
+          idArea: idArea
         }),
       }
     );
