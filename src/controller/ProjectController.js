@@ -1,9 +1,10 @@
 //Buscar Profesor
 export const findTeacher = async (
   profesor,
+  setDatos,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -20,14 +21,14 @@ export const findTeacher = async (
       }
     );
     if (response.ok) {
-      const userData = await response.text();
-      return {success: true, userData}
+      const userData = await response.json();
+      setDatos(userData);
     } else {
       const dataError = await response.text();
-      return {success: false, dataError}
+      console.log(dataError)
     }
   } catch (error) {
-    return {success: false, error}
+    console.log(error)
   }
 };
 //Buscar Estudiante
