@@ -35,16 +35,20 @@ function FormProject({titleForm,textBotom}) {
 
   const validatePersitence= async (functioProject)=>{
       if (estudiante2.current === undefined && estudiante1.current === undefined) {
-          const result = await functioProject(titulo.current.value, docente.current.value, null, null, descripcion.current.value, token, verificarExpiracionToken, navigate);
+          const result = await functioProject(titulo.current.value, docente.current.value, null, null, 
+            descripcion.current.value, token, verificarExpiracionToken, navigate,selectedFacultly,selectedAreas);
           customMessage(result, setTitle, setMessage, setMostrarDialogo);
       }else if(estudiante2.current === undefined){
-          const result = await functioProject(titulo.current.value, docente.current.value,null,estudiante1.current.value, descripcion.current.value, token, verificarExpiracionToken, navigate);
+          const result = await functioProject(titulo.current.value, docente.current.value,null,estudiante1.current.value, 
+            descripcion.current.value, token, verificarExpiracionToken, navigate,selectedFacultly,selectedAreas);
           customMessage(result, setTitle, setMessage, setMostrarDialogo);
       }else if(estudiante1.current === undefined){
-          const result = await functioProject(titulo.current.value, docente.current.value,estudiante2.current.value,null, descripcion.current.value, token, verificarExpiracionToken, navigate);
+          const result = await functioProject(titulo.current.value, docente.current.value,estudiante2.current.value,null, 
+            descripcion.current.value, token, verificarExpiracionToken, navigate,selectedFacultly,selectedAreas);
           customMessage(result, setTitle, setMessage, setMostrarDialogo);
       }else{
-        const result = await functioProject(titulo.current.value, docente.current.value,estudiante2.current.value,estudiante1.current.value, descripcion.current.value, token, verificarExpiracionToken, navigate);
+        const result = await functioProject(titulo.current.value, docente.current.value,estudiante2.current.value,
+          estudiante1.current.value, descripcion.current.value, token, verificarExpiracionToken, navigate,selectedFacultly,selectedAreas);
         customMessage(result, setTitle, setMessage, setMostrarDialogo);
       }
   }

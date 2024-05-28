@@ -71,11 +71,11 @@ export const addProject = async (
   member2,
   member1,
   descripcion,
-  idFacultly,
-  idArea,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
+  idFacultly,
+  idArea
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -121,7 +121,9 @@ export const updateProject = async (
   description,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
+  idFacultly,
+  idArea
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -142,6 +144,8 @@ export const updateProject = async (
           id_Member2: member2,
           id_Member: member1,
           description: description,
+          idFacultly: idFacultly,
+          idArea: idArea
         }),
       }
     );
