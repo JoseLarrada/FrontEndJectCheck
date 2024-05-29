@@ -1,7 +1,11 @@
-import React from 'react'
+import {React,useState,useEffect} from 'react'
 import '../styles/inforProject.css'
+import {getProjectById} from '../controller/ProjectController'
 
-function viewInfoProject() {
+function ViewInfoProject() {
+    const [response,SetResponse] = useState([]);
+    const [members,setMembers] = useState([]);
+
   return (
     <div className='viewInfo'>
         <h1 className='principal_title'>Informacion del proyecto</h1>
@@ -42,4 +46,4 @@ function viewInfoProject() {
   )
 }
 
-export default viewInfoProject
+export default ViewInfoProject

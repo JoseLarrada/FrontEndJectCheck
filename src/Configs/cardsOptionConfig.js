@@ -1,5 +1,6 @@
 import Card from '../Components/Card.js'
 import { Link } from 'react-router-dom';
+import viewInfoProject from '../Components/ViewInfoProject.js' 
 
 export function getnamestate(idestado) {
     switch(idestado){
@@ -36,6 +37,14 @@ export const rendercard=(item,page)=>{
               owner={item.id_entrega}
               clickEvent={()=>alert('Hola')}
             />
+    }else if(item.idEstado===5){
+      return <Card
+              Title={item.titulo}
+              teacher={item.descripcion}
+              clickEvent={()=>{alert('Hola')}}
+              owner={getnamestate(item.idEstado)}
+          />
+
     }else{
       return (
         <Link to={`/${page}/${getnamestate(item.idEstado)}`}>
