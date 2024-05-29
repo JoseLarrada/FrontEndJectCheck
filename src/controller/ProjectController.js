@@ -34,6 +34,7 @@ export const findTeacher = async (
 //Buscar Estudiante
 export const findStudent = async (
   estudiante,
+  setDatos,
   tuToken,
   verificarExpiracionToken,
   navigate
@@ -53,14 +54,15 @@ export const findStudent = async (
       }
     );
     if (response.ok) {
-      const userData = await response.text();
-      return {success: true, userData}
+      const userData = await response.json();
+      setDatos(userData);
+      alert(userData)
     } else {
       const dataError = await response.text();
-      return {success: false, dataError}
+      alert(dataError)
     }
   } catch (error) {
-    return {success: false, error}
+    alert(error)
   }
 };
 
@@ -268,15 +270,14 @@ export const getProjectById = async (
   verificarExpiracionToken,
   navigate,
   tuToken,
-  setDatos,
-  state
+  SetResponse
 ) => {
   try {
     if (!verificarExpiracionToken()) {
       navigate("/");
     }
     const response = await fetch(
-      `http://localhost:8080/api/v1/PrincipalContent/getProject/${state}`,
+      `http://localhost:8080/api/v1/PrincipalContent/getProject/${localStorage.getItem('id_ruta')}`,
       {
         method: "GET",
         headers: {
@@ -287,7 +288,7 @@ export const getProjectById = async (
     );
     if (response.ok) {
       const userData = await response.json();
-      setDatos(userData);
+      SetResponse(userData);
     } else {
       const dataError = await response.text();
       alert(dataError)

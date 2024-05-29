@@ -12,6 +12,9 @@
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
+.bodyInfo{
+    width: 100%;
+}
 .principal_title{
     font-size: 25px;
     font-weight: bold;
@@ -21,17 +24,20 @@
     display: flex;
     flex-direction: row;
     gap: 50px;
+    width: 100%;
 }
 .info_position{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    margin-left: 15px;
 }
 .info_position>label{
     font-weight: bold;
 }
 .input_desing{
-    width: 300px;
+    width: 90%;
     height: 30px;
     background-color: #D9D9D9 ;
     border: none;
@@ -40,10 +46,10 @@
 }
 .inp_desc{
     width: 400px;
+    height: 10vh;
 }
 .inp_sta{
-    width: 150px;
-    margin-left: 50px;
+    width: 168px;
 }
 .third_information{
     display: flex;
@@ -51,6 +57,7 @@
     margin-top: 15px;
     gap: 10px;
     font-weight: bold;
+    margin-left: 15px;
 }
 .third_information>span{
     display: flex;

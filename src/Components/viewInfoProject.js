@@ -1,11 +1,19 @@
 import {React,useState,useEffect} from 'react'
 import '../styles/inforProject.css'
 import {getProjectById} from '../controller/ProjectController'
+import {useNavigate} from 'react-router-dom';
+import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
+import {getnamestate} from '../Configs/cardsOptionConfig'
+import {recievedMembers} from '../Configs/infoProjectConfig'
 
 function ViewInfoProject() {
     const [response,SetResponse] = useState([]);
-    const [members,setMembers] = useState([]);
-
+    const navigate=useNavigate();
+    const tuToken=localStorage.getItem('token');
+    useEffect(() => {
+        getProjectById(verificarExpiracionToken,navigate,tuToken,SetResponse)
+    }, [navigate,tuToken]);
+    const members=[response.firstsMember,response.secondMember,response.thirdMember]
   return (
     <div className='viewInfo'>
         <h1 className='principal_title'>Informacion del proyecto</h1>
@@ -13,28 +21,29 @@ function ViewInfoProject() {
             <section className='principal_information'>
                 <span className='info_position'>
                     <label htmlFor="">Titulo de proyecto</label>
-                    <input type="text" className='input_desing'/>
+                    <input type="text" className='input_desing' value={response.title} disabled/>
                 </span>
                 <span className='info_position'>
                     <label htmlFor="">Categoria</label>
-                    <input type="text" className='input_desing'/>
+                    <input type="text" className='input_desing' value={response.area} disabled/>
                 </span>
             </section>
             <section className='principal_information'>
                 <span className='info_position'>
                     <label htmlFor="">Descripcion</label>
-                    <textarea name="" id="" className='input_desing inp_desc'></textarea>
+                    <textarea name="" id="" className='input_desing inp_desc' value={response.description} disabled></textarea>
                 </span>
                 <span className='info_position'>
                     <label htmlFor="" className='inp_sta'>Estado</label>
-                    <input type="text" className='input_desing inp_sta'/>
+                    <input type="text" className='input_desing inp_sta' value={getnamestate(response.state)} disabled/>
                 </span>
             </section>
             <section className='third_information'>
                 <label htmlFor="">Integrantes</label>
                 <span>
-                    <input className='redondedInput' type="text" value={'JL'} disabled/>
-                    <input className='redondedInput' type="text" value={'LB'} disabled/>
+                    {recievedMembers(response).map((item,index)=>(
+                        <input key={index} className='redondedInput' type="text" value={item} disabled/>
+                    ))}
                 </span>
             </section>
         </div>
