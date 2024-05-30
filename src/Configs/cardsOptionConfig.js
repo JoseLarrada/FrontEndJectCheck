@@ -2,6 +2,7 @@ import Card from '../Components/Card.js'
 import { Link } from 'react-router-dom';
 import ViewInfoProject from '../Components/ViewInfoProject'
 
+
 export function getnamestate(idestado) {
     switch(idestado){
       case 1: 
@@ -22,9 +23,17 @@ export const handleClickAssingment = (item) => {
 };
 export const handleClickProjects = (item,setViewInfo,setViewCar) => {
     localStorage.setItem("id_ruta", item.id_ruta);
-    setViewInfo(true);
-    setViewCar(false);
+    statesViews(setViewInfo,setViewCar,true,false);
 };
+
+export const handleCloseViews = (setViewInfo,setViewCar) =>{
+  statesViews(setViewInfo,setViewCar,false,true);
+}
+
+const statesViews = (setViewInfo,setViewCar,value1,value2)=>{
+  setViewInfo(value1);
+  setViewCar(value2);
+}
 export const handleClickAdvances = (item,setViewCar) => {
     localStorage.setItem("id_ruta", item.id_ruta);
     localStorage.setItem("id_avance", item.id_avance);

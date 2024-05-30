@@ -1,7 +1,7 @@
 import FormAvances from '../Components/FormAvances'
 import ShowComponent from '../Components/ShowComponent'
 import FormProject from '../Components/FormProject'
-
+import ViewInfoProject from '../Components/ViewInfoProject'
 export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick) => {
     switch(option){
         case 'Crear Avance':
@@ -56,4 +56,8 @@ export const handleFormProjects = (option,cancelOption,handleConfirmarEliminarPr
           </div>
         );
     }
+}
+
+export const handleViewInfoProject = (toggleFind)=>{
+   return <ViewInfoProject closeForm={toggleFind}/>
 }

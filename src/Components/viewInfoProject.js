@@ -4,9 +4,9 @@ import {getProjectById} from '../controller/ProjectController'
 import {useNavigate} from 'react-router-dom';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
 import {getnamestate} from '../Configs/cardsOptionConfig'
-import {recievedMembers,renderOption} from '../Configs/infoProjectConfig'
+import {recievedMembers,renderOption,renderButtons} from '../Configs/infoProjectConfig'
 
-function ViewInfoProject() {
+function ViewInfoProject({closeForm}) {
     const [response,SetResponse] = useState([]);
     const [closeView, setCloseView] = useState(true);
     const [openConfirmLog, setOpenConfirmLog] = useState(false);
@@ -16,14 +16,14 @@ function ViewInfoProject() {
     useEffect(() => {
         getProjectById(verificarExpiracionToken,navigate,tuToken,SetResponse)
     }, [navigate,tuToken]);
-    const toogleButton=(option)=>{
-        setText(option);
-        setOpenConfirmLog(!openConfirmLog);
-    }
+    
   return (
     <>
         {closeView && <div className='viewInfo'>
-        <h1 className='principal_title'>Informacion del proyecto</h1>
+            <span className='headerInfoProject'>
+                <h1 className='principal_title'>Informacion del proyecto</h1>
+                <ion-icon name="close-circle-outline" onClick={closeForm}></ion-icon>
+            </span>
             <div className="bodyInfo">
                 <section className='principal_information'>
                     <span className='info_position'>
@@ -54,10 +54,7 @@ function ViewInfoProject() {
                     </span>
                 </section>
             </div>
-            <span className='buttons'>
-                <button className='buttons_desing accept' onClick={()=>{toogleButton('Aceptar')}}>Aceptar</button>
-                <button className='buttons_desing reject' onClick={()=>{toogleButton('Rechazar')}}>Rechazar</button>
-            </span>
+            {renderButtons(setOpenConfirmLog,openConfirmLog,setText,closeForm)}
         </div>}
         {openConfirmLog && renderOption(text,verificarExpiracionToken,navigate,tuToken)}
     </>

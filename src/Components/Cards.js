@@ -11,6 +11,10 @@ function Cards({optionCard,page,handleClick,renderComponent}) {
   const [datos, setDatos] = useState([]);
   const [viewInfo,setViewInfo] = useState(false)
   const [viewCard,setViewCar] = useState(true)
+  const toggleFind = () => {
+    setViewInfo(!viewInfo);
+    setViewCar(!viewCard)
+  };
   useEffect(() => {
     optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,state);
   }, []);
@@ -29,7 +33,7 @@ function Cards({optionCard,page,handleClick,renderComponent}) {
           </div>
         ))}
       </div>}
-        {viewInfo && renderComponent}
+        {viewInfo && renderComponent(toggleFind)}
     </div>
   );
 }

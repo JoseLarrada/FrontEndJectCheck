@@ -13,6 +13,19 @@
     transform: translate(-50%, -50%); 
     background-color: white;
 }
+.headerInfoProject{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.headerInfoProject>ion-icon{
+    color: #144C97;
+    font-size: 40px;
+    cursor: pointer;
+}
 .bodyInfo{
     width: 100%;
     
@@ -91,6 +104,9 @@
 .accept{
     background-color: #144C97;
     border-bottom-left-radius: 10px;
+}
+.acceptStudent{
+    width: 100% !important;
 }
 .reject{
     background-color: #1ACBF3;

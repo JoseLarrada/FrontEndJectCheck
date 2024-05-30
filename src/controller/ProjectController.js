@@ -322,3 +322,53 @@ export  const acceptProject= async (verificarExpiracionToken,navigate,tuToken) =
       alert('Error de red:', error);
     }
 };
+//Finalizar Proyecto
+const finishProject= async (verificarExpiracionToken,navigate,tuToken) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/FinishProject/${localStorage.getItem('id_ruta')}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.text();
+        alert(data)
+      }else{
+        const errorData = await response.text();
+        alert(errorData);
+      } 
+    } catch (error) {
+      alert('Error de red:', error);
+    }
+};
+//Finalizar Proyecto
+const rejectProject= async (verificarExpiracionToken,navigate,tuToken) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/FinishProject/${localStorage.getItem('id_ruta')}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.text();
+        alert(data)
+      }else{
+        const errorData = await response.text();
+        alert(errorData);
+      } 
+    } catch (error) {
+      alert('Error de red:', error);
+    }
+};
