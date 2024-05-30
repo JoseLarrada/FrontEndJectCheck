@@ -9,7 +9,7 @@ import Cards from '../Components/Cards'
 import TeacherManagment from './TeacherManagment.js';
 import {handleOption,handleFormAvances,handleFormProjects} from '../Configs/sidebarOptionsConfigs.js'
 import {handleClickProjects} from '../Configs/cardsOptionConfig.js'
-
+import ViewInfoProject from '../Components/ViewInfoProject'
 
 function SideBarOption({nameFunction,onOptionClick}) {
   const [isHover, setIsHover]= useState(false);
@@ -69,7 +69,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
             <div className='MoveOptionsCards'>
                   {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)} 
-                  page={"newPage"} handleClick={handleClickProjects}/>}  
+                  page={"newPage"} handleClick={handleClickProjects} renderComponent={<ViewInfoProject/>}/>}  
             </div>
         );
       case 'Aceptados': 

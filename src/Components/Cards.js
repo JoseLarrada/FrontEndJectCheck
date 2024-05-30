@@ -4,30 +4,32 @@ import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
 import { useNavigate } from "react-router-dom";
 import {rendercard} from '../Configs/cardsOptionConfig.js'
 
-function Cards({optionCard,page,handleClick}) {
+function Cards({optionCard,page,handleClick,renderComponent}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
   var state;
   const [datos, setDatos] = useState([]);
-  
+  const [viewInfo,setViewInfo] = useState(false)
+  const [viewCard,setViewCar] = useState(true)
   useEffect(() => {
     optionCard(verificarExpiracionToken, navigate, tuToken, setDatos,state);
   }, []);
   return (
     <div className="container">
-      <div className="row">
+      {viewCard&&<div className="row">
         {datos.map((item, index) => (
           <div
             key={index}
             className="col-md-4"
             onClick={() => {
-              handleClick(item);
+              handleClick(item,setViewInfo,setViewCar);
             }}
           >
             {rendercard(item,page)}
           </div>
         ))}
-      </div>
+      </div>}
+        {viewInfo && renderComponent}
     </div>
   );
 }

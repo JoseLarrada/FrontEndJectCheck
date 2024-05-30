@@ -7,13 +7,15 @@
     border-bottom: none;
     border-radius: 10px;
     width: 50%;
-    position: absolute;
+    position: fixed;
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
+    background-color: white;
 }
 .bodyInfo{
     width: 100%;
+    
 }
 .principal_title{
     font-size: 25px;

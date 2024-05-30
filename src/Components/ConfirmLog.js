@@ -6,12 +6,12 @@ function ConfirmLog({ texto, onConfirm, onCancel }) {
 
     const ChoiceConfirm = () => {
         onConfirm(); 
-        setMostrarAviso(false); 
+        setMostrarAviso(!mostrarAviso); 
   };
 
   const ChoiceCancel = () => {
         onCancel();
-        setMostrarAviso(false);
+        setMostrarAviso(!mostrarAviso);
   };
   return (
     <div>

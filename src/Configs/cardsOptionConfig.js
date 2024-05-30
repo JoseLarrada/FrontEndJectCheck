@@ -1,6 +1,6 @@
 import Card from '../Components/Card.js'
 import { Link } from 'react-router-dom';
-import viewInfoProject from '../Components/ViewInfoProject.js' 
+import ViewInfoProject from '../Components/ViewInfoProject'
 
 export function getnamestate(idestado) {
     switch(idestado){
@@ -20,12 +20,15 @@ export function getnamestate(idestado) {
 export const handleClickAssingment = (item) => {
     localStorage.setItem("id_Entrega", item.id_entrega);
 };
-export const handleClickProjects = (item) => {
+export const handleClickProjects = (item,setViewInfo,setViewCar) => {
     localStorage.setItem("id_ruta", item.id_ruta);
+    setViewInfo(true);
+    setViewCar(false);
 };
-export const handleClickAdvances = (item) => {
+export const handleClickAdvances = (item,setViewCar) => {
     localStorage.setItem("id_ruta", item.id_ruta);
     localStorage.setItem("id_avance", item.id_avance);
+    setViewCar(false)
 };
 
 export const rendercard=(item,page)=>{
@@ -35,14 +38,13 @@ export const rendercard=(item,page)=>{
               Title={item.comentario}
               teacher={item.calificacion}
               owner={item.id_entrega}
-              clickEvent={()=>alert('Hola')}
             />
     }else if(item.idEstado===5){
       return <Card
               Title={item.titulo}
               teacher={item.descripcion}
-              clickEvent={()=>{alert('Hola')}}
               owner={getnamestate(item.idEstado)}
+              renderComponent={<ViewInfoProject/>}
           />
 
     }else{
@@ -51,7 +53,6 @@ export const rendercard=(item,page)=>{
             <Card
               Title={item.titulo}
               teacher={item.descripcion}
-              clickEvent={()=>{}}
               owner={getnamestate(item.idEstado)}
           />
         </Link>
