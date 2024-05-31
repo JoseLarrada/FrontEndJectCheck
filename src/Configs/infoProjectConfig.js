@@ -1,5 +1,7 @@
 import ConfirmLog from '../Components/ConfirmLog'
-import {acceptProject} from '../controller/ProjectController'
+import {acceptProject,rejectProject} from '../controller/ProjectController'
+import {customMessage} from '../Configs/MessageViews'
+
 import '../styles/inforProject.css'
 export const recievedMembers=(item)=>{
     const members=[];
@@ -15,13 +17,19 @@ export const recievedMembers=(item)=>{
     return members;
 }
 
-export const renderOption = (text,verificarExpiracionToken,navigate,tuToken) =>{
+const customResponse= async (functionTeacher,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)=>{
+    var result = await functionTeacher(verificarExpiracionToken,navigate,tuToken);
+    customMessage(result,setTitle,setMessage,setMostrarDialogo);
+}
+
+
+export const renderOption = (text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo) =>{
     if(text==='Aceptar'){
        return <ConfirmLog texto={'¿Está Seguro de que desea aceptar el proyecto?'} 
-       onConfirm={()=>{acceptProject(verificarExpiracionToken,navigate,tuToken)}} onCancel={()=>{}}/>
+       onConfirm={()=>{customResponse(acceptProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}} onCancel={()=>{}}/>
     }else{
         return <ConfirmLog texto={'¿Está Seguro de que desea rechazar el proyecto?'} 
-       onConfirm={()=>{alert('se esta activando antes')}} onCancel={()=>{}}/>
+       onConfirm={()=>{customResponse(rejectProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}} onCancel={()=>{}}/>
     }
 }
 const toogleButton=(option,setOpenConfirmLog,openConfirmLog,setText)=>{
@@ -29,8 +37,8 @@ const toogleButton=(option,setOpenConfirmLog,openConfirmLog,setText)=>{
         setOpenConfirmLog(!openConfirmLog);
         console.log(openConfirmLog)
 }
-export const renderButtons = (setOpenConfirmLog,openConfirmLog,setText,closeForm) =>{
-    if(localStorage.getItem("perfil")==1){
+export const renderButtons = (setOpenConfirmLog,openConfirmLog,setText,closeForm,state) =>{
+    if(localStorage.getItem("perfil")==1 || state==6){
         return <span className='buttons'>
              <button className='buttons_desing accept acceptStudent' onClick={()=>{closeForm()}}>Aceptar</button>
         </span>

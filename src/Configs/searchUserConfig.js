@@ -9,6 +9,13 @@ export const setTextItem =(item,setText,closeForm,setMessage,setTitle,setMostrar
     }
 }
 
+export const setItem =(item,setDatosProject,setView)=>{
+    if(item!=undefined || item!=null){
+        setDatosProject(item);
+        setView(true);
+    }
+}
+
 export const validateForm =(nombre,setMessage,setTitle,setMostrarDialogo)=>{
     if(!nombre){
         setMessage('Rellene el campo');

@@ -140,7 +140,7 @@ export const updateProject = async (
           Authorization: `Bearer ${tuToken}`,
         },
         body: JSON.stringify({
-          id: localStorage.getItem("id_ruta"),
+          id: localStorage.getItem('id_ruta'),
           nameRoute: title,
           teacher: teacher,
           id_Member2: member2,
@@ -312,18 +312,18 @@ export  const acceptProject= async (verificarExpiracionToken,navigate,tuToken) =
       });
       console.log(response);
       if (response.ok) {
-        const data = await response.text();
-        alert(data)
+        const userData = await response.text();
+       return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
+      return {success: false, error}
     }
 };
 //Finalizar Proyecto
-const finishProject= async (verificarExpiracionToken,navigate,tuToken) => {
+export const finishProject= async (verificarExpiracionToken,navigate,tuToken) => {
     try {
       if(!verificarExpiracionToken()){
         navigate('/');
@@ -337,23 +337,23 @@ const finishProject= async (verificarExpiracionToken,navigate,tuToken) => {
       });
       console.log(response);
       if (response.ok) {
-        const data = await response.text();
-        alert(data)
+        const userData = await response.text();
+        return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
+      return {success: false, error}
     }
 };
 //Finalizar Proyecto
-const rejectProject= async (verificarExpiracionToken,navigate,tuToken) => {
+export const rejectProject= async (verificarExpiracionToken,navigate,tuToken) => {
     try {
       if(!verificarExpiracionToken()){
         navigate('/');
       }
-      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/FinishProject/${localStorage.getItem('id_ruta')}`, {
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/RejectProject/${localStorage.getItem('id_ruta')}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -362,13 +362,13 @@ const rejectProject= async (verificarExpiracionToken,navigate,tuToken) => {
       });
       console.log(response);
       if (response.ok) {
-        const data = await response.text();
-        alert(data)
+        const userData = await response.text();
+        return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
+      return {success: false, error}
     }
 };

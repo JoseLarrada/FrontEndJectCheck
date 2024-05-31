@@ -14,15 +14,17 @@ function ConfirmLog({ texto, onConfirm, onCancel }) {
         setMostrarAviso(!mostrarAviso);
   };
   return (
-    <div>
+    <>
     {mostrarAviso && (
       <div className='confirm-log'>
-        <label htmlFor="exampleFormControlInput1" className="form-label confirm-label">{texto}</label>
-        <button type="button" className="btn btn-primary confirm-btn" onClick={ChoiceConfirm}>Si</button>
-        <button type="button" className="btn btn-primary confirm-btn" onClick={ChoiceCancel}>No</button>
+        <p className="confirmLabel">{texto}</p>
+        <span className='buttonsConfirms'>
+          <button type="button" className="btn btn-primary confirmBtn BtnDesingConfirm" onClick={ChoiceConfirm}>Si</button>
+          <button type="button" className="btn btn-primary CancelBtn BtnDesingConfirm" onClick={ChoiceCancel}>No</button>
+        </span>
       </div>
     )}
-  </div>
+  </>
   )
 }
 

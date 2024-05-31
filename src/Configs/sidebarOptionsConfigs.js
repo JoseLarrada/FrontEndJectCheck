@@ -2,6 +2,7 @@ import FormAvances from '../Components/FormAvances'
 import ShowComponent from '../Components/ShowComponent'
 import FormProject from '../Components/FormProject'
 import ViewInfoProject from '../Components/ViewInfoProject'
+import SearchProject from '../Components/searchproject'
 export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick) => {
     switch(option){
         case 'Crear Avance':
@@ -46,8 +47,7 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
 
 export const handleFormProjects = (option,cancelOption,handleConfirmarEliminarProyecto,handleOptionClick) =>{
     switch(option){
-        case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'}/>;
-        case 'Modificar': return <FormProject titleForm={'Modificar Proyecto'} textBotom={'Modificar'}/>;
+        case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'} datosProject={[]} closeForm={()=>{}}/>;
         case 'Eliminar': return (
           <div>
             {cancelOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 

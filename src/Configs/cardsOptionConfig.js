@@ -15,6 +15,8 @@ export function getnamestate(idestado) {
         return "No completado";
       case 5:
         return "Pendiente";
+      case 6:
+        return "Rechazado";
     }
 }
 
@@ -48,7 +50,7 @@ export const rendercard=(item,page)=>{
               teacher={item.calificacion}
               owner={item.id_entrega}
             />
-    }else if(item.idEstado===5){
+    }else if(item.idEstado===5 || item.idEstado===6){
       return <Card
               Title={item.titulo}
               teacher={item.descripcion}

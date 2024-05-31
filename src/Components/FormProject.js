@@ -9,7 +9,7 @@ import {addProject,updateProject} from '../controller/ProjectController'
 import {toogleFindTeache,renderToogle} from '../Configs/optionSearchConfig.js'
 import {receiveFacultly,receiveAreas} from '../controller/investigationController.js'
 
-function FormProject({titleForm,textBotom}) {
+function FormProject({titleForm,textBotom,datosProject,closeForm}) {
   const [Ischecked,setIschecked]=useState(false)
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('');
@@ -24,6 +24,8 @@ function FormProject({titleForm,textBotom}) {
   const [textStudent2, setTextStudent2] = useState("");
   const [role, setRole] = useState("");
   const [viewSearch, setViewSearch] = useState(false);
+  const [importTittle, setImportTittle] = useState(datosProject.titulo);
+  const [importDescripcion, setImportDescripcion] = useState(datosProject.descripcion);
 
   const navigate=useNavigate();
   const titulo = useRef();
@@ -81,6 +83,14 @@ function FormProject({titleForm,textBotom}) {
     setViewSearch(!viewSearch);
   };
 
+  const handleTituloChange = (event) => {
+    setImportTittle(event.target.value);
+  };
+
+  const handleDescripcionChange = (event) => {
+    setImportDescripcion(event.target.value);
+  };
+
   useEffect(() => {
     receiveFacultly(setFacultly,verificarExpiracionToken,navigate,token);
     receiveAreas(setAreas,"",verificarExpiracionToken,navigate,token);
@@ -91,8 +101,9 @@ function FormProject({titleForm,textBotom}) {
       {viewForm && <div className="formProjects">
           <h3>{titleForm}</h3>
           <section className="principalForm">
-              <input type="text" placeholder='Titulo del proyecto' ref={titulo} required/>
-              <textarea name="Decription" id="" ref={descripcion} cols="30" rows="5" placeholder='Descripcion'></textarea>
+              <input type="text" placeholder='Titulo del proyecto' ref={titulo} value={importTittle} onChange={handleTituloChange}required/>
+              <textarea name="Decription" id="" ref={descripcion} cols="30" rows="5" placeholder='Descripcion' 
+              value={importDescripcion} onChange={handleDescripcionChange}></textarea>
               {/**Combobox para facultades */}
               <select name="facultly" id="" value={selectedFacultly} onChange={handleFacultlyChange}>
                 <option selected disabled value="">
@@ -135,7 +146,7 @@ function FormProject({titleForm,textBotom}) {
             )}
           </section>
           <button type="button" class="btn btn-outline-secondary" onClick={(event)=>{handleClickSave(event)}}>{textBotom}</button>
-          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo)}} title={title} message={message}/>}
+          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo,closeForm)}} title={title} message={message}/>}
       </div>}
       {viewSearch&&renderToogle(toggleFind,viewSearch,token,verificarExpiracionToken,navigate,setText,setTextStudent,setTextStudent2,role)}
     </>

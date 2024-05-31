@@ -5,12 +5,17 @@ import {useNavigate} from 'react-router-dom';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
 import {getnamestate} from '../Configs/cardsOptionConfig'
 import {recievedMembers,renderOption,renderButtons} from '../Configs/infoProjectConfig'
+import MessageDialog from '../Components/MessageDialog'
+import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 
 function ViewInfoProject({closeForm}) {
     const [response,SetResponse] = useState([]);
     const [closeView, setCloseView] = useState(true);
     const [openConfirmLog, setOpenConfirmLog] = useState(false);
+    const [message, setMessage] = useState('');
+    const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [mostrarDialogo, setMostrarDialogo] = useState(false)
     const navigate=useNavigate();
     const tuToken=localStorage.getItem('token');
     useEffect(() => {
@@ -54,9 +59,10 @@ function ViewInfoProject({closeForm}) {
                     </span>
                 </section>
             </div>
-            {renderButtons(setOpenConfirmLog,openConfirmLog,setText,closeForm)}
+            {renderButtons(setOpenConfirmLog,openConfirmLog,setText,closeForm,response.state)}
+            {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo)}} title={title} message={message}/>}
         </div>}
-        {openConfirmLog && renderOption(text,verificarExpiracionToken,navigate,tuToken)}
+        {openConfirmLog && renderOption(text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}
     </>
   )
 }

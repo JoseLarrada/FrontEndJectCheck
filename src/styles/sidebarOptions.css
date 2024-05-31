@@ -12,7 +12,7 @@
   --border-radius: 0.75rem;
 }
 .sidebar {
-  height: 100dvh;
+  height: 95dvh;
   width: 75px;
   background-color: var(--color-white);
   color: var(--color-black);
@@ -224,7 +224,6 @@ span >ion-icon{
 }
 .footer{
   position: relative;
-  top: 10px;
 }
 .footer-text{
     font-family: "Public Sans", sans-serif;

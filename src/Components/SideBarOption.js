@@ -9,6 +9,7 @@ import Cards from '../Components/Cards'
 import TeacherManagment from './TeacherManagment.js';
 import {handleOption,handleFormAvances,handleFormProjects,handleViewInfoProject} from '../Configs/sidebarOptionsConfigs.js'
 import {handleClickProjects} from '../Configs/cardsOptionConfig.js'
+import SearchProject from '../Components/searchproject'
 
 
 function SideBarOption({nameFunction,onOptionClick}) {
@@ -19,6 +20,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const [acceptCard, setAcceptCard] = useState(false);
   const [declineCard, setDeclineCard] = useState(false);
   const [pendingCard, setPendingCard] = useState(false);
+  const [search, setSearch] = useState(false);
   const tuToken = localStorage.getItem('token')
   const navigate=useNavigate()
   const toogleAcceptCard = () =>{
@@ -35,6 +37,10 @@ function SideBarOption({nameFunction,onOptionClick}) {
     setAcceptCard(false);
     setDeclineCard(false);
     setPendingCard(true);
+  }
+  const toogleSearch = () =>{
+    setSearch(!search);
+    setSelectedOption('')
   }
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -58,11 +64,19 @@ function SideBarOption({nameFunction,onOptionClick}) {
     if (selectedOption === 'Rechazados') {
       toogleDeclineCard();
     }
+    if (selectedOption === 'Modificar') {
+      setSearch(true);
+    }
   }, [selectedOption, tooglePendingCard,toogleAcceptCard,toogleDeclineCard]);
   const renderForm = () => {
     switch(selectedOption){
       case 'Crear': return handleFormProjects('Crear',cancelOption,handleConfirmarEliminarProyecto);
-      case 'Modificar': return handleFormProjects('Modificar',cancelOption,handleConfirmarEliminarProyecto);
+      case 'Modificar': return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los proyectos que tienes asociado, selecciona uno y podras modificar sus datos'}/>}
+        </div>
+      )
       case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
       case 'Pendientes':
         return (
@@ -84,8 +98,8 @@ function SideBarOption({nameFunction,onOptionClick}) {
         return (
             <div className='MoveOptionsCards'>
                  {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
-                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} 
-                page={"newPage"} handleClick={handleClickProjects}/>}
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 6)} 
+                page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}
             </div>
         );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);

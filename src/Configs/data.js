@@ -34,16 +34,6 @@ export const dataNav=[
 
 export const dataNavTeacher=[
         {
-            "title" : 'Aceptar',
-            "img" : <ion-icon name="add-circle-outline"></ion-icon>,
-            "position": 1
-        },
-        {
-            "title" : 'Finalizar',
-            "img" : <ion-icon name="close-circle-outline"></ion-icon>,
-            "position": 2
-        },
-        {
             "title" : 'Pendientes',
             "img" : <ion-icon name="help-circle-outline"></ion-icon>,
             "position": 3

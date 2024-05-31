@@ -11,7 +11,7 @@ import Reports from '../Pages/Reports'
 import NewPage from '../Pages/NewPage'
 import Assigment from '../Pages/Assigment'
 import Projects from '../Pages/Projects'
-import FormProject from '../Components/ViewInfoProject'
+import FormProject from '../Components/searchproject'
 function Inicio() {
   return (
     <BrowserRouter>
@@ -27,7 +27,7 @@ function Inicio() {
           <Route path="/newPage/:idEstado" element={<NewPage/>}/>
           <Route path="/entregasPage/:fecha" element={<Assigment />} />
           <Route path='/Projects' element={<Projects/>}/>
-          <Route path='/pruebas' element={<FormProject/>}/>
+          <Route path='/pruebas' element={<FormProject texto={'Desea eliminar el proyecto? y todo lo que esta con ello'}/>}/>
         </Routes> 
     </BrowserRouter>
   )

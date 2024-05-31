@@ -25,6 +25,12 @@ export const validateTextAutentication = (event,field1,field2,field3,field4) =>{
       return true;
     }
 }
+export const validateTextCreateProject = (event,field1,field2,field3,field4,field5) =>{
+    if(field1.trim() === '' || field2.trim() === '' || field3.trim() === '' || field4.trim() === ''|| field5.trim() === ''){
+      event.preventDefault();
+      return true;
+    }
+}
 
 export const validateTextProjects = (event,field1,field2,field3) =>{
   if(field1.trim() === '' || field2.trim() === '' || field3.trim() === ''){
