@@ -20,6 +20,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const [acceptCard, setAcceptCard] = useState(false);
   const [declineCard, setDeclineCard] = useState(false);
   const [pendingCard, setPendingCard] = useState(false);
+  const [finishCard, setFinishCard] = useState(false);
   const [search, setSearch] = useState(false);
   const tuToken = localStorage.getItem('token')
   const navigate=useNavigate()
@@ -27,16 +28,25 @@ function SideBarOption({nameFunction,onOptionClick}) {
     setAcceptCard(true);
     setDeclineCard(false);
     setPendingCard(false);
+    setFinishCard(false)
   }
   const toogleDeclineCard = () =>{
     setAcceptCard(false);
     setDeclineCard(true);
     setPendingCard(false);
+    setFinishCard(false)
   }
   const tooglePendingCard = () =>{
     setAcceptCard(false);
     setDeclineCard(false);
     setPendingCard(true);
+    setFinishCard(false)
+  }
+  const toogleFinishCard = () =>{
+    setAcceptCard(false);
+    setDeclineCard(false);
+    setPendingCard(false);
+    setFinishCard(true)
   }
   const toogleSearch = () =>{
     setSearch(!search);
@@ -63,6 +73,9 @@ function SideBarOption({nameFunction,onOptionClick}) {
     }
     if (selectedOption === 'Rechazados') {
       toogleDeclineCard();
+    }
+    if (selectedOption === 'Finalizados') {
+      toogleFinishCard();
     }
     if (selectedOption === 'Modificar') {
       setSearch(true);
@@ -102,11 +115,17 @@ function SideBarOption({nameFunction,onOptionClick}) {
                 page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}
             </div>
         );
+      case 'Finalizados': 
+        return (
+            <div className='MoveOptionsCards'>
+                 {finishCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} 
+                page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}
+            </div>
+        );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
       case 'Modificar Avance':return handleFormAvances('Modificar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
       case 'Eliminar Avance':return handleFormAvances('Eliminar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
-      case 'Aceptar': return <TeacherManagment title={'Aceptar Proyecto'} />;
-      case 'Finalizar': return <TeacherManagment title={'Finalizar Proyecto'}/>;
     }
   };
   return (

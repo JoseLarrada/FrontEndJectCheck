@@ -17,6 +17,8 @@ export function getnamestate(idestado) {
         return "Pendiente";
       case 6:
         return "Rechazado";
+      case 7:
+        return "Entrega Pendiente";
     }
 }
 
@@ -37,7 +39,6 @@ const statesViews = (setViewInfo,setViewCar,value1,value2)=>{
   setViewCar(value2);
 }
 export const handleClickAdvances = (item,setViewCar) => {
-    localStorage.setItem("id_ruta", item.id_ruta);
     localStorage.setItem("id_avance", item.id_avance);
     setViewCar(false)
 };

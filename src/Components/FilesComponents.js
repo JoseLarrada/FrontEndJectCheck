@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/fileComponents.css'
-import {uploadFile,deleteFile} from '../controller/FilesUploadController'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
 
 
-function FilesComponents() {
+function FilesComponents({uploadFunction,deleteFunction,setList}) {
   const file = useRef();
   const navigate = useNavigate();
   const tuToken = localStorage.getItem("token");
@@ -23,6 +22,10 @@ function FilesComponents() {
   const onChooseFile = () => {
     file.current.click();
   };
+  const onCloseForm = () => {
+    setCloseView(!closeView)
+    setList(fileList)
+  };
   const clearFileInput = () => {
     file.current.value = "";
     setSelectedFile(null);
@@ -34,7 +37,7 @@ function FilesComponents() {
       {closeView && <div className="filesHead">
         <span className="tittle_head">
           <h1>Archivos</h1>
-          <ion-icon name="close-outline" onClick={()=>{setCloseView(!closeView)}}></ion-icon>
+          <ion-icon name="close-outline" onClick={()=>{onCloseForm()}}></ion-icon>
         </span>
         
         <section className='header_files'>
@@ -98,13 +101,13 @@ function FilesComponents() {
           {fileList.map((item, index) => (
             <span className="filename_upload" key={index}>
               <input type="text" disabled value={item.fileName} />
-              <ion-icon name="trash-outline" onClick={()=>{deleteFile(verificarExpiracionToken,navigate,
+              <ion-icon name="trash-outline" onClick={()=>{deleteFunction(verificarExpiracionToken,navigate,
                   item.key,tuToken,setFileList,index
               )}}></ion-icon>
             </span>
           ))}
         </section>
-        <button className="upload-btn" onClick={()=>{uploadFile(verificarExpiracionToken,navigate,selectedFile,tuToken,
+        <button className="upload-btn" onClick={()=>{uploadFunction(verificarExpiracionToken,navigate,selectedFile,tuToken,
             setProgress,setUploadStatus,uploadStatus,clearFileInput,setFileList)}}>
             {uploadStatus === "select" || uploadStatus === 'uploading' ? "Upload" : "Done"}
         </button>

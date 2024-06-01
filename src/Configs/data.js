@@ -47,6 +47,11 @@ export const dataNavTeacher=[
             "title" : 'Rechazados',
             "img" : <ion-icon name="arrow-down-circle-outline"></ion-icon>,
             "position": 5
+        },
+        {
+            "title" : 'Finalizados',
+            "img" : <ion-icon name="caret-up-circle-outline"></ion-icon>,
+            "position": 6
         }
 ]
 export const dataNavAvances=[
