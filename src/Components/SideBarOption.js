@@ -10,6 +10,8 @@ import TeacherManagment from './TeacherManagment.js';
 import {handleOption,handleFormAvances,handleFormProjects,handleViewInfoProject} from '../Configs/sidebarOptionsConfigs.js'
 import {handleClickProjects} from '../Configs/cardsOptionConfig.js'
 import SearchProject from '../Components/searchproject'
+import {charguedProject} from '../controller/ProjectController'
+import {chargueAdvances} from '../controller/AdvanceController.js'
 
 
 function SideBarOption({nameFunction,onOptionClick}) {
@@ -77,7 +79,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
     if (selectedOption === 'Finalizados') {
       toogleFinishCard();
     }
-    if (selectedOption === 'Modificar') {
+    if (selectedOption === 'Modificar' || selectedOption==='Modificar Avance') {
       setSearch(true);
     }
   }, [selectedOption, tooglePendingCard,toogleAcceptCard,toogleDeclineCard]);
@@ -87,7 +89,8 @@ function SideBarOption({nameFunction,onOptionClick}) {
       case 'Modificar': return (
         <div>
             {search&&<SearchProject closeForm={toogleSearch} 
-            paragraph={'Lista de todos los proyectos que tienes asociado, selecciona uno y podras modificar sus datos'}/>}
+            paragraph={'Lista de todos los proyectos que tienes asociado, selecciona uno y podras modificar sus datos'}
+            charguedItem={charguedProject} title={'Listar Proyectos'}/>}
         </div>
       )
       case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
@@ -124,7 +127,13 @@ function SideBarOption({nameFunction,onOptionClick}) {
             </div>
         );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
-      case 'Modificar Avance':return handleFormAvances('Modificar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
+      case 'Modificar Avance':return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los avances que tienes asociado, selecciona uno y podras modificar sus datos'}
+            charguedItem={chargueAdvances} title={'Listar Avances'}/>}
+        </div>
+      )
       case 'Eliminar Avance':return handleFormAvances('Eliminar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
     }
   };

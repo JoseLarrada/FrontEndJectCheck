@@ -134,3 +134,28 @@ export const deleteRubric = async (verificarExpiracionToken, navigate, key, tuTo
     console.log(error);
   }
 };
+export const getrubrics = async (verificarExpiracionToken,navigate,tuToken,setListRubricId)=>{
+  try {
+    if (!verificarExpiracionToken()) {
+      navigate("/");
+      return;
+    }
+  
+    const response = await axios.get(`http://localhost:8080/api/v1/rubrics/getRubrics/${localStorage.getItem('id_avance')}`,
+    {
+      headers: {
+        Authorization: `Bearer ${tuToken}`,
+      },
+    });
+    if (response.status === 200) {
+        const responseData = response.data;
+        setListRubricId(responseData)
+    } else {
+        const errorData = response.data;
+        console.log(errorData)
+    }
+  } catch (error) {
+    alert("Error de red:", error);
+    console.log(error);
+  }
+}

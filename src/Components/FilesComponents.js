@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/fileComponents.css'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
 
 
-function FilesComponents({uploadFunction,deleteFunction,setList}) {
+function FilesComponents({uploadFunction,deleteFunction,setList,listInitial}) {
   const file = useRef();
   const navigate = useNavigate();
   const tuToken = localStorage.getItem("token");
@@ -32,6 +32,10 @@ function FilesComponents({uploadFunction,deleteFunction,setList}) {
     setProgress(0);
     setUploadStatus("select");
   };
+   useEffect(() => {
+      setFileList(listInitial);
+  }, []);
+
   return (
     <>
       {closeView && <div className="filesHead">

@@ -3,59 +3,63 @@ import verificarExpiracionToken from "../Configs/verificarExpiracionToken .js";
 import "../styles/advances.css";
 import { saveAdvance, updateadvance } from "../controller/AdvanceController.js";
 import { useNavigate } from "react-router-dom";
-import {uploadRubrics,deleteRubric} from '../controller/FilesUploadController'
+import {uploadRubrics,deleteRubric,getrubrics} from '../controller/FilesUploadController'
 import FilesComponents from '../Components/FilesComponents.js'
-function FormAvances({ tittle, action }) {
+import MessageDialog from '../Components/MessageDialog.js'
+import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
+
+function FormAvances({ tittle, action, advancesData, closeForm}) {
   const title = useRef();
   const descripcion = useRef();
   const navigate = useNavigate();
   const tuToken = localStorage.getItem("token");
   const [viewFormUpload,setViewFormUpload] = useState(false)
+  const [titleDialog, setTitleDialog] = useState('');
+  const [message, setMessage] = useState('');
+  const [viewFormAvances,setViewFormAvances] = useState(true)
   const [rubrics,setRubrics] = useState([])
+  const [listRubricId,setListRubricId] = useState([])
+  const [importTittle, setImportTittle] = useState(advancesData.titulo);
+  const [importDescripcion, setImportDescripcion] = useState(advancesData.descripcion);
+  const [mostrarDialogo,setMostrarDialogo] = useState(false)
+  
+  const toogleOptionUser= async ()=>{
+    console.log(rubrics)
+    if(action==='Guardar Avance'){
+        const result= await saveAdvance(verificarExpiracionToken,navigate,tuToken,title.current.value,descripcion.current.value,rubrics)
+        customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+    }else{
+        const result= await updateadvance(verificarExpiracionToken,navigate,tuToken,title.current.value,descripcion.current.value,rubrics)
+        console.log(rubrics)
+        customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+    }
+  }
+  const handleTituloChange = (event) => {
+    setImportTittle(event.target.value);
+  };
 
+  const handleDescripcionChange = (event) => {
+    setImportDescripcion(event.target.value);
+  };
+
+  const clidkFormAddRubric = async () =>{
+    await getrubrics(verificarExpiracionToken,navigate,tuToken,setListRubricId)
+    setViewFormUpload(!viewFormUpload)
+  }
 
   return (
     <>
-      <section class="form-register">
-        <h4>{tittle}</h4>
-        <input
-          class="controls"
-          type="text"
-          ref={title}
-          placeholder="Ingrese el titulo"
-        />
-        <textarea name="description" id="" class="controls"
-          type="text"
-          ref={descripcion}
-          placeholder="Ingrese la descripcion"></textarea>
-        <button class="controls controlsbuttom" onClick={()=>{setViewFormUpload(!viewFormUpload)}}>Añadir Rubrica</button>
-        <button
-          type="submit"
-          class="botons"
-          onClick={() => {
-            console.log(rubrics);
-            action === "Guardar Avance"
-              ? saveAdvance(
-                  verificarExpiracionToken,
-                  navigate,
-                  tuToken,
-                  title.current.value,
-                  descripcion.current.value,
-                  rubrics
-                )
-              : updateadvance(
-                  verificarExpiracionToken,
-                  navigate,
-                  tuToken,
-                  title.current.value,
-                  descripcion.current.value
-                );
-          }}
-        >
-          {action}
-        </button>
-      </section>
-      {viewFormUpload&&<FilesComponents uploadFunction={uploadRubrics} deleteFunction={deleteRubric} setList={setRubrics}/>}
+      {viewFormAvances && <section class="form-register">
+          <h4>{tittle}</h4>
+          <input class="controls" type="text" ref={title} placeholder="Ingrese el titulo" value={importTittle} onChange={handleTituloChange}/>
+          <textarea name="description" id="" class="controls" type="text" ref={descripcion} 
+          placeholder="Ingrese la descripcion" value={importDescripcion} onChange={handleDescripcionChange}></textarea>
+          <button class="controls controlsbuttom" onClick={clidkFormAddRubric}>Añadir Rubrica</button>
+          <button type="submit" class="botons" onClick={toogleOptionUser}>{action}</button>
+          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(titleDialog,setMostrarDialogo,closeForm)}} title={titleDialog} message={message}/>}
+        </section>
+      }    
+      {viewFormUpload&&<FilesComponents uploadFunction={uploadRubrics} deleteFunction={deleteRubric} setList={setRubrics} listInitial={listRubricId}/>}
     </>
   );
 }

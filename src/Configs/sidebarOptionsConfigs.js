@@ -25,9 +25,11 @@ export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption
 
 export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAvance,handleOptionClick) => {
     switch(option){
-        case 'Crear Avance': return (
+        case 'Crear Avance': 
+        localStorage.removeItem('id_avance')
+        return (
           <div>
-            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"}/>}
+            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"} advancesData={[]} closeForm={()=>{}}/>}
           </div>
         );
         case 'Modificar Avance': return (
