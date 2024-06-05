@@ -5,6 +5,7 @@ import Cards from '../Components/Cards'
 import "../styles/dropdowns.css"
 import {charguedAssignment} from '../controller/AssignmentController'
 import {handleClickAssingment} from '../Configs/cardsOptionConfig.js'
+import PrimaryOption from '../Components/PrimaryOptionAssignment'
 
 function Assigment() {
   const [showCards, setShowCards] = useState(true);
@@ -21,7 +22,7 @@ function Assigment() {
     return (
         <div>
             <Nav/>
-            {chargueContent()}
+            <PrimaryOption onOptionClick={handleSidebarOptionClick}/>
             {showCards && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos, localStorage.getItem('id_avance'))} 
                   handleClick={handleClickAssingment}/>}

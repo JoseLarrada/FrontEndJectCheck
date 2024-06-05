@@ -50,7 +50,10 @@ function FormAvances({ tittle, action, advancesData, closeForm}) {
   return (
     <>
       {viewFormAvances && <section class="form-register">
-          <h4>{tittle}</h4>
+          <span className='header-form-assingment'>
+            <h4>{tittle}</h4>
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </span>
           <input class="controls" type="text" ref={title} placeholder="Ingrese el titulo" value={importTittle} onChange={handleTituloChange}/>
           <textarea name="description" id="" class="controls" type="text" ref={descripcion} 
           placeholder="Ingrese la descripcion" value={importDescripcion} onChange={handleDescripcionChange}></textarea>

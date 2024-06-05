@@ -22,14 +22,25 @@
     top: 3%;
   }
   
-  .form-register> h4 {
+  .header-form-assingment{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .header-form-assingment> h4 {
     font-size: 29px;
     margin-bottom: 20px;
     text-align: center;
     font-family: "Public Sans", sans-serif;
     color: #1567AA;
   }
-  
+  .header-form-assingment>ion-icon{
+      margin-top: 5px;
+      color: #1567AA;
+      cursor: pointer;
+      position: relative;
+      left: 20%;
+  }
   .controls {
     width: 100%;
     padding: 10px;
