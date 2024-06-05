@@ -17,13 +17,15 @@ export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption
             setAvanceOption(!avanceOption)
             onOptionClick();
             break;
-        case 'Eliminar':
-            setCancelOption(!cancelOption)
+        case 'Eliminar Proyecto':
+            setAvanceOption(!avanceOption)
+            onOptionClick();
             break;
+        
     }
 };
 
-export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAvance,handleOptionClick) => {
+export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAvance,handleOptionClick,handleConfirmarEliminarProyecto) => {
     switch(option){
         case 'Crear Avance': 
         localStorage.removeItem('id_avance')
@@ -44,19 +46,19 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
             action={'Ingrese titulo del avance'} cancel={()=>{handleOptionClick('Eliminar Avance')}} accept={handleConfirmarEliminarAvance}/>}
           </div>
         );
+         case 'Eliminar Proyecto': return (
+          <div>
+            {avanceOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 
+            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a el. Por favor ingresa tu contraseña para confirmar.'}
+            action={'Ingrese Nombre del proyecto'} cancel={()=>{handleOptionClick('Eliminar Proyecto')}} accept={handleConfirmarEliminarProyecto}/>}
+          </div>
+        );
     }
 };
 
 export const handleFormProjects = (option,cancelOption,handleConfirmarEliminarProyecto,handleOptionClick) =>{
     switch(option){
         case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'} datosProject={[]} closeForm={()=>{}}/>;
-        case 'Eliminar': return (
-          <div>
-            {cancelOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 
-            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a el. Por favor ingresa tu contraseña para confirmar.'}
-            action={'Ingrese Nombre del proyecto'} cancel={()=>{handleOptionClick('Eliminar')}} accept={handleConfirmarEliminarProyecto}/>}
-          </div>
-        );
     }
 }
 

@@ -10,8 +10,8 @@ export const dataNav=[
             "position": 2
         },
         {
-            "title" : 'Eliminar',
-            "img" : <ion-icon name="close-circle-outline"></ion-icon>,
+            "title" : 'Finalizados',
+            "img" : <ion-icon name="caret-up-circle-outline"></ion-icon>,
             "position": 3
         },
         {
@@ -69,5 +69,17 @@ export const dataNavAvances=[
         "title" : 'Eliminar Avance',
         "img" : <ion-icon name="help-circle-outline"></ion-icon>,
         "position": 3
+    }
+]
+export const dataNavProjectsConfig=[
+    {
+        "title" : 'Eliminar Proyecto',
+        "img" : <ion-icon name="close-circle-outline"></ion-icon>,
+        "position": 1
+    },
+    {
+        "title" : 'Ver Proyecto',
+        "img" : <ion-icon name="cloud-circle-outline"></ion-icon>,
+        "position": 2
     }
 ]

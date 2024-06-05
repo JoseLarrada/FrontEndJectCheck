@@ -93,7 +93,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
             charguedItem={charguedProject} title={'Listar Proyectos'}/>}
         </div>
       )
-      case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
+      case 'Eliminar Proyecto': return handleFormAvances('Eliminar Proyecto',avanceOption,handleConfirmarEliminarAvance,handleOptionClick,handleConfirmarEliminarProyecto);
       case 'Pendientes':
         return (
             <div className='MoveOptionsCards'>
