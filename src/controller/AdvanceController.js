@@ -118,7 +118,7 @@ export const deleteAdvance= async (texto,tuToken,verificarExpiracionToken,naviga
       if(!verificarExpiracionToken()){
         navigate('/');
       }
-      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/deleteadvance/${texto}`, {
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/deleteadvance/${texto}/${localStorage.getItem('id_avance')}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

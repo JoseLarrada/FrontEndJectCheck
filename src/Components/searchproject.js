@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {renderFuntion,toogleOpenForms} from '../Configs/searchProjectConfig'
 import {setItem} from '../Configs/searchUserConfig'
 
-function Searchproject({closeForm,paragraph,charguedItem,title}) {
+function Searchproject({closeForm,paragraph,charguedItem,title,fuctionDelete}) {
   const [closeView, setCloseView] = useState(true);
   const [datosProject, setDatosProject] = useState([]);
   const [view, setView] = useState(false);
@@ -34,13 +34,13 @@ function Searchproject({closeForm,paragraph,charguedItem,title}) {
                     <span className='result_search' key={index}>
                         <input type="text" disabled className='rendonded_result' value={item.idEstado}/>
                         <input type="text" disabled className='name_result'value={item.titulo}/>
-                        <ion-icon name="person-add-outline" onClick={()=>{toogleOpenForms(item,title,setItem,setCloseView,setDatosProject,setView,closeView)}}></ion-icon>
+                        <ion-icon name="add-circle-outline" onClick={()=>{toogleOpenForms(item,title,setItem,setCloseView,setDatosProject,setView,closeView)}}></ion-icon>
                     </span>
                 ))}
                 <h4 className='cancel_search' onClick={()=>{closeForm()}}>Cancelar</h4>
             </section>
         </div>}
-        {view && renderFuntion(title,datosProject,toogleCloseForms,view)}        
+        {view && renderFuntion(title,datosProject,toogleCloseForms,view,fuctionDelete)}        
     </>
   )
 }

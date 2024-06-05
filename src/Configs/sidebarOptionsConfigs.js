@@ -2,7 +2,6 @@ import FormAvances from '../Components/FormAvances'
 import ShowComponent from '../Components/ShowComponent'
 import FormProject from '../Components/FormProject'
 import ViewInfoProject from '../Components/ViewInfoProject'
-import SearchProject from '../Components/searchproject'
 export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick) => {
     switch(option){
         case 'Crear Avance':
@@ -21,7 +20,10 @@ export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption
             setAvanceOption(!avanceOption)
             onOptionClick();
             break;
-        
+        case 'Ver Proyecto':
+            setAvanceOption(!avanceOption)
+            onOptionClick();
+            break;
     }
 };
 
@@ -34,11 +36,6 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
             {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"} advancesData={[]} closeForm={()=>{}}/>}
           </div>
         );
-        case 'Modificar Avance': return (
-          <div>
-            {avanceOption && <FormAvances tittle={"Modificar Avance"} action={"modificar Avance"}/>}
-          </div>
-        );
         case 'Eliminar Avance': return (
           <div>
             {avanceOption && <ShowComponent titleComponent={'Eliminar Avance'} 
@@ -46,13 +43,11 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
             action={'Ingrese titulo del avance'} cancel={()=>{handleOptionClick('Eliminar Avance')}} accept={handleConfirmarEliminarAvance}/>}
           </div>
         );
-         case 'Eliminar Proyecto': return (
+        case 'Ver Proyecto': return (
           <div>
-            {avanceOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 
-            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a el. Por favor ingresa tu contraseña para confirmar.'}
-            action={'Ingrese Nombre del proyecto'} cancel={()=>{handleOptionClick('Eliminar Proyecto')}} accept={handleConfirmarEliminarProyecto}/>}
+            {avanceOption && handleViewInfoProject()}
           </div>
-        );
+        )
     }
 };
 

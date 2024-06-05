@@ -175,7 +175,7 @@ export const deleteProject = async (
       navigate("/");
     }
     const response = await fetch(
-      `http://localhost:8080/api/v1/PrincipalContent/DeleteRoute/${texto}`,
+      `http://localhost:8080/api/v1/PrincipalContent/DeleteRoute/${texto}/${localStorage.getItem('id_ruta')}`,
       {
         method: "DELETE",
         headers: {

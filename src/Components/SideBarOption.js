@@ -18,6 +18,7 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const [isHover, setIsHover]= useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const [avanceOption, setAvanceOption] = useState(false);
+  const [viewOption, setviewOption] = useState(false);
   const [cancelOption, setCancelOption] = useState(true);
   const [acceptCard, setAcceptCard] = useState(false);
   const [declineCard, setDeclineCard] = useState(false);
@@ -53,6 +54,12 @@ function SideBarOption({nameFunction,onOptionClick}) {
   const toogleSearch = () =>{
     setSearch(!search);
     setSelectedOption('')
+    onOptionClick()
+  }
+  const toogleFind = () =>{
+    setviewOption(!viewOption);
+    onOptionClick()
+    setSelectedOption('')
   }
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -79,7 +86,10 @@ function SideBarOption({nameFunction,onOptionClick}) {
     if (selectedOption === 'Finalizados') {
       toogleFinishCard();
     }
-    if (selectedOption === 'Modificar' || selectedOption==='Modificar Avance') {
+    if (selectedOption === 'Ver Proyecto') {
+      setviewOption(true);
+    }
+    if (selectedOption === 'Modificar' || selectedOption==='Modificar Avance' ||'Eliminar Avance') {
       setSearch(true);
     }
   }, [selectedOption, tooglePendingCard,toogleAcceptCard,toogleDeclineCard]);
@@ -134,7 +144,18 @@ function SideBarOption({nameFunction,onOptionClick}) {
             charguedItem={chargueAdvances} title={'Listar Avances'}/>}
         </div>
       )
-      case 'Eliminar Avance':return handleFormAvances('Eliminar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
+      case 'Eliminar Avance':return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los avances que tienes asociado, selecciona uno y podras eliminar el avance'}
+            charguedItem={chargueAdvances} title={'Eliminar Avances'} fuctionDelete={handleConfirmarEliminarAvance}/>}
+        </div>
+      )
+      case 'Ver Proyecto': return (
+          <div>
+            {viewOption && handleViewInfoProject(toogleFind)}
+          </div>
+        )
     }
   };
   return (
