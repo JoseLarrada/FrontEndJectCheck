@@ -6,6 +6,7 @@ import "../styles/dropdowns.css"
 import {charguedAssignment} from '../controller/AssignmentController'
 import {handleClickAssingment} from '../Configs/cardsOptionConfig.js'
 import PrimaryOption from '../Components/PrimaryOptionAssignment'
+import ViewInfoAssignment from '../Components/ViewInfoAssignment'
 
 function Assigment() {
   const [showCards, setShowCards] = useState(true);
@@ -13,10 +14,9 @@ function Assigment() {
   const handleSidebarOptionClick = () => {
     setShowCards(!showCards);
   };
-  const chargueContent=()=>{
-    if(localStorage.getItem('perfil')==1){
-      return <Dropdowns onOptionClick={handleSidebarOptionClick}/>
-    }
+  
+  const chargueContent=(toggleFind)=>{
+    return <ViewInfoAssignment closeForm={toggleFind}/>
   }
   
     return (
@@ -25,7 +25,7 @@ function Assigment() {
             <PrimaryOption onOptionClick={handleSidebarOptionClick}/>
             {showCards && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos, localStorage.getItem('id_avance'))} 
-                  handleClick={handleClickAssingment}/>}
+                  handleClick={handleClickAssingment} renderComponent={chargueContent}/>}
         </div>
     )
 }

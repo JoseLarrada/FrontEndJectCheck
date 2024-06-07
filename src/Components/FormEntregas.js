@@ -8,7 +8,6 @@ import MessageDialog from '../Components/MessageDialog.js'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import {handleCommentChange} from '../Configs/assingmentConfig.js'
 function FormEntregas({tittle,action,onOptionClick,assinngmentData}) {
-  const file=useRef();
   const comment=useRef();
   const navigate=useNavigate();
   const tuToken = localStorage.getItem('token');

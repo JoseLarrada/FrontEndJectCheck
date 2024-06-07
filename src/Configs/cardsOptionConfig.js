@@ -22,8 +22,9 @@ export function getnamestate(idestado) {
     }
 }
 
-export const handleClickAssingment = (item) => {
+export const handleClickAssingment = (item,setViewInfo,setViewCar) => {
     localStorage.setItem("id_Entrega", item.id_entrega);
+    statesViews(setViewInfo,setViewCar,true,false);
 };
 export const handleClickProjects = (item,setViewInfo,setViewCar) => {
     localStorage.setItem("id_ruta", item.id_ruta);
@@ -56,7 +57,7 @@ export const rendercard=(item,page)=>{
               Title={item.titulo}
               teacher={item.descripcion}
               owner={getnamestate(item.idEstado)}
-              renderComponent={<ViewInfoProject/>}
+              //renderComponent={<ViewInfoProject/>}
           />
 
     }else{

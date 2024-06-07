@@ -6,6 +6,7 @@ function PrimaryOptionAssignment({onOptionClick}) {
   const [mostrarFormAdd, setMostrarFormAdd] = useState(false);
   const toggleFormAdd = () => {
     setMostrarFormAdd(!mostrarFormAdd);
+    localStorage.removeItem('id_Entrega')
     onOptionClick()
   };
   return (

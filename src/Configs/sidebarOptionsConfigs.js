@@ -39,7 +39,7 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
         case 'Eliminar Avance': return (
           <div>
             {avanceOption && <ShowComponent titleComponent={'Eliminar Avance'} 
-            descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa tu contraseña para confirmar.'}
+            descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa el titulo del avance para confirmar.'}
             action={'Ingrese titulo del avance'} cancel={()=>{handleOptionClick('Eliminar Avance')}} accept={handleConfirmarEliminarAvance}/>}
           </div>
         );
