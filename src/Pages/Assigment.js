@@ -18,11 +18,16 @@ function Assigment() {
   const chargueContent=(toggleFind)=>{
     return <ViewInfoAssignment closeForm={toggleFind}/>
   }
+  const renderOption=()=>{
+    if(localStorage.getItem('perfil')==1){
+      return <PrimaryOption onOptionClick={handleSidebarOptionClick}/>
+    }
+  }
   
     return (
         <div>
             <Nav/>
-            <PrimaryOption onOptionClick={handleSidebarOptionClick}/>
+            {renderOption()}
             {showCards && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   charguedAssignment(verificarExpiracionToken, navigate, tuToken, setDatos, localStorage.getItem('id_avance'))} 
                   handleClick={handleClickAssingment} renderComponent={chargueContent}/>}

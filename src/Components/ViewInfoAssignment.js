@@ -4,6 +4,7 @@ import {renderOptionsButtos,isRate,HandleClickComponents,handleButtonClick,close
 import {useNavigate} from 'react-router-dom'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
 import {getInfoAssignment,deleteAssignment} from '../controller/AssignmentController'
+import {charguedRate} from '../controller/RateController'
 import FormEntregas from '../Components/FormEntregas'
 import RateAssignment from '../Components/RateAssignment'
 import ShowComponent from '../Components/ShowComponent'
@@ -12,19 +13,23 @@ function ViewInfoAdvances({closeForm}) {
   const [closeView, setCloseView] = useState(true);
   const [datos,setDatos] = useState([])
   const [urlLinks,setUrlLinks] = useState([])
+  const [dataRate,setDataRate] = useState([])
   const [rate,setRate] = useState(false)
   const [componentAssign,setComponentAssign] = useState(false)
   const [componentDel,setComponentDel] = useState(false)
   const [componentRate,setComponentRate] = useState(false)
+  const [componentUpdate,setComponentUpdate] = useState(false)
+  const [refreshView, setRefreshView] = useState(false);
   const navigate=useNavigate();
   const tuToken=localStorage.getItem('token')
   var option;
    useEffect(() => {
     const fetchData = async () => {
       const data = await getInfoAssignment(verificarExpiracionToken, navigate, tuToken, setDatos);
+      const dataRate = await charguedRate(verificarExpiracionToken,navigate,tuToken,setDataRate);
     };
     fetchData();
-  }, [navigate, tuToken]);
+  }, [navigate, tuToken,refreshView]);
 
   useEffect(() => {
     if (datos.filesUpload) {
@@ -37,7 +42,7 @@ function ViewInfoAdvances({closeForm}) {
 
   const handleClickOption=(event)=>{
     option =handleButtonClick(event);
-    HandleClickComponents(option,setComponentAssign,setComponentDel,setComponentRate,setCloseView,closeForm)
+    HandleClickComponents(option,setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,closeForm)
   }
   const handleDeleteAssignment=async ()=>{
       const result= await deleteAssignment(verificarExpiracionToken,navigate,tuToken);
@@ -80,7 +85,8 @@ function ViewInfoAdvances({closeForm}) {
       {componentDel && <ShowComponent titleComponent={'Eliminar Entrega'} 
             descripcion={'Esto eliminará la entrega y cualquier dato asociado a ello. Por favor ingresa tu nombre de usuario para confirmar.'}
             action={'Ingrese la palabra aceptar y presione confirmar'} cancel={()=>{closeComponent(setComponentDel,setCloseView,componentDel,closeView)}} accept={handleDeleteAssignment}/>}
-      {componentRate && <RateAssignment/>}
+      {componentRate && <RateAssignment action={'Crear Calificacion'} onClose={()=>{closeComponent(setComponentRate,setCloseView,componentRate,closeView);setRefreshView(prev => !prev);}} rateData={[]}/>}
+      {componentUpdate && <RateAssignment action={'Modificar Calificacion'} onClose={()=>{closeComponent(setComponentUpdate,setCloseView,componentUpdate,closeView);setRefreshView(prev => !prev);}} rateData={dataRate}/>}  
     </>
   )
 }

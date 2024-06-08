@@ -49,6 +49,7 @@
     max-width: 100%;
     position: relative;
     bottom: 15px;
+    text-align: center;
 }
 .comment_box{
     width: 400px;

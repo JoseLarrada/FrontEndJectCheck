@@ -22,28 +22,32 @@ export const renderOptionsButtos=(state,showAction)=>{
 export const isRate=(state)=>{
     return state==='Calificado';
 }
-export const HandleClickComponents=(option,setComponentAssign,setComponentDel,setComponentRate,setCloseView,closeForm)=>{
+export const HandleClickComponents=(option,setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,closeForm)=>{
     switch(option){
         case 'Modificar Entrega':
-            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,true,false,false,false)
+            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,true,false,false,false,false)
             break
         case 'Eliminar Entrega' :
-            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,false,true,false,false)
+            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,false,true,false,false,false)
             break
         case 'Calificar Entrega':
-            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,false,false,true,false)
+            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,false,false,true,false,false)
             break
         case 'Aceptar':
-            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,false,false,false,true)
+            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,false,false,false,true,false)
             closeForm()
+            break
+        case 'Cambiar Calificacion':
+            toogleComponent(setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,false,false,false,false,true)
             break
     }
 }
-const toogleComponent = (setComponentAssign,setComponentDel,setComponentRate,setCloseView,value1,value2,value3,value4) =>{
+const toogleComponent = (setComponentAssign,setComponentDel,setComponentRate,setCloseView,setComponentUpdate,value1,value2,value3,value4,value5) =>{
     setComponentAssign(value1);
     setComponentDel(value2);
     setComponentRate(value3);
-    setCloseView(value4)
+    setCloseView(value4);
+    setComponentUpdate(value5)
 }
 export const closeComponent = (setComponent,setCloseView,value1,value2) =>{
     setComponent(!value1);
