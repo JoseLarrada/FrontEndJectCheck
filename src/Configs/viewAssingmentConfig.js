@@ -44,7 +44,11 @@ const toogleComponent = (setComponentAssign,setComponentDel,setComponentRate,set
     setComponentDel(value2);
     setComponentRate(value3);
     setCloseView(value4)
-  }
+}
+export const closeComponent = (setComponent,setCloseView,value1,value2) =>{
+    setComponent(!value1);
+    setCloseView(!value2);
+}
 export const handleButtonClick = (event) => {
   const buttonValue = event.target.getAttribute('data-value');
   return buttonValue;

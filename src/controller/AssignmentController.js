@@ -40,7 +40,7 @@ export const UpdateAssignment = async (verificarExpiracionToken,navigate,tuToken
     const response = await fetch(
       "http://localhost:8080/api/v1/PrincipalContent/UpdateAssignment",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${tuToken}`,
@@ -62,7 +62,7 @@ export const UpdateAssignment = async (verificarExpiracionToken,navigate,tuToken
       return {success: false, dataError}
     }
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     return {success: false, error}
   }
 };
@@ -128,6 +128,37 @@ export const getInfoAssignment = async (
     } else {
       const dataError = await response.text();
       alert(dataError)
+    }
+  } catch (error) {
+    return {success: false, error}
+  }
+};
+//Eliminar Entrega
+export const deleteAssignment = async (
+  verificarExpiracionToken,
+  navigate,
+  tuToken
+) => {
+  try {
+    if (!verificarExpiracionToken()) {
+      navigate("/");
+    }
+    const response = await fetch(
+      `http://localhost:8080/api/v1/PrincipalContent/DeleteAssignment/${localStorage.getItem('id_Entrega')}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tuToken}`,
+        },
+      }
+    );
+    if (response.ok) {
+      const userData = await response.text();
+      return {success: true, userData}
+    } else {
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
     return {success: false, error}

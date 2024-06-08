@@ -11,7 +11,7 @@ function FormEntregas({tittle,action,onOptionClick,assinngmentData}) {
   const comment=useRef();
   const navigate=useNavigate();
   const tuToken = localStorage.getItem('token');
-  const [importComment, setImportComment] = useState(assinngmentData.comentario);
+  const [importComment, setImportComment] = useState(assinngmentData);
   const [viewFormEntregas,setViewFormEntregas] = useState(true)  
   const [listFilesId,setListFilesId] = useState([])
   const [files,setFiles] = useState([])

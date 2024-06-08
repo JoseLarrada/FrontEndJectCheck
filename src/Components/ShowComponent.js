@@ -3,7 +3,7 @@ import '../styles/showComponent.css'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog'
 
-function ShowComponent({titleComponent,descripcion,action,cancel,accept}) {
+function ShowComponent({titleComponent,descripcion,action,cancel,accept,setClose}) {
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('');
   const [mostrarDialogo, setMostrarDialogo] = useState(false);

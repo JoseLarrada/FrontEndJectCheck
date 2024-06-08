@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import '../styles/viewInfoAssignment.css'
-import {renderOptionsButtos,isRate,HandleClickComponents,handleButtonClick} from '../Configs/viewAssingmentConfig'
+import {renderOptionsButtos,isRate,HandleClickComponents,handleButtonClick,closeComponent} from '../Configs/viewAssingmentConfig'
 import {useNavigate} from 'react-router-dom'
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken '
-import {getInfoAssignment} from '../controller/AssignmentController'
+import {getInfoAssignment,deleteAssignment} from '../controller/AssignmentController'
 import FormEntregas from '../Components/FormEntregas'
 import RateAssignment from '../Components/RateAssignment'
 import ShowComponent from '../Components/ShowComponent'
@@ -19,19 +19,29 @@ function ViewInfoAdvances({closeForm}) {
   const navigate=useNavigate();
   const tuToken=localStorage.getItem('token')
   var option;
+   useEffect(() => {
+    const fetchData = async () => {
+      const data = await getInfoAssignment(verificarExpiracionToken, navigate, tuToken, setDatos);
+    };
+    fetchData();
+  }, [navigate, tuToken]);
+
   useEffect(() => {
-    getInfoAssignment(verificarExpiracionToken, navigate, tuToken, setDatos);
     if (datos.filesUpload) {
       setUrlLinks(datos.filesUpload);
     }
     if (datos.valueRate) {
       setRate(isRate(datos.state));
     }
-  }, [navigate,tuToken,datos]);
+  }, [datos]);
 
   const handleClickOption=(event)=>{
     option =handleButtonClick(event);
     HandleClickComponents(option,setComponentAssign,setComponentDel,setComponentRate,setCloseView,closeForm)
+  }
+  const handleDeleteAssignment=async ()=>{
+      const result= await deleteAssignment(verificarExpiracionToken,navigate,tuToken);
+     return result;
   }
 
   return (
@@ -66,10 +76,10 @@ function ViewInfoAdvances({closeForm}) {
             {renderOptionsButtos(datos.state,handleClickOption)}
         </section>
       </div>}
-      {componentAssign && <FormEntregas tittle={'Modificar Entrega'} action={'Modificar'} onOptionClick={closeForm} assinngmentData={()=>{}}/>}
+      {componentAssign && <FormEntregas tittle={'Modificar Entrega'} action={'Modificar'} onOptionClick={()=>{closeComponent(setComponentAssign,setCloseView,componentAssign,closeView)}} assinngmentData={datos.comment}/>}
       {componentDel && <ShowComponent titleComponent={'Eliminar Entrega'} 
             descripcion={'Esto eliminará la entrega y cualquier dato asociado a ello. Por favor ingresa tu nombre de usuario para confirmar.'}
-            action={'Ingrese nombre de usuario'} cancel={closeForm} accept={()=>{}}/>}
+            action={'Ingrese la palabra aceptar y presione confirmar'} cancel={()=>{closeComponent(setComponentDel,setCloseView,componentDel,closeView)}} accept={handleDeleteAssignment}/>}
       {componentRate && <RateAssignment/>}
     </>
   )
