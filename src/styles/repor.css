@@ -1,10 +1,56 @@
-.sidecontrol{
-    margin-top: 150px;
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+.componentReport{
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    font-family: "Public Sans", sans-serif;
+    gap: 110px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 55%; 
+    left: 50%;
+    transform: translate(-50%, -50%);  
 }
-.list-group{
-    width: 70%;
-    height:70%;
-    position: relative;
-    bottom: 20em;
-    left: 15em;
+.textAndButton{
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.textReport,.OptionsReport{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.textReport>h1{
+    font-weight: bold;
+    font-size: 60px;
+}
+.desingBtnReport{
+    width: 50%;
+    border: none;
+}
+.generalReportDesing{
+    background-color: #2934A0;
+    color: white;
+    height: 39px;
+    border-radius: 20px;
+}
+.personReportDesing{
+    background-color: transparent;
+    font-weight: bold;
+    text-decoration:underline;
+    color: #2934A0;
+}
+
+.image_Report{
+    width: 60%;
+    margin-top: 50px;
 }
