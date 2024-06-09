@@ -83,3 +83,13 @@ export const dataNavProjectsConfig=[
         "position": 2
     }
 ]
+
+export const handleChange = (text,maxLength,setMessage,setTitle,setMostrarDialogo) => {
+        const newValue = text.current.value;
+        if (newValue.length > maxLength) {
+            setMessage('Esta a punto de exceder el valor minimo');
+            setTitle('¡Fallo!');
+            setMostrarDialogo(true);
+            text.current.value = newValue.slice(0, maxLength);
+        }
+};

@@ -5,6 +5,7 @@ import login from '../controller/LoginController'
 import {validateText} from '../Configs/FormValidation'
 import {customMessage, onClose} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog';
+import {handleChange} from '../Configs/data'
 
 function InicioSesion() {
     const usernameRef = useRef();
@@ -36,11 +37,11 @@ function InicioSesion() {
             <h5 className='text-account'>Inicia sesión con tu cuenta</h5>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" ref={usernameRef} required/>
+                <input onChange={()=>{handleChange(usernameRef,15,setMessage,setTitle,setMostrarDialogo)}} type="text" class="form-control" id="exampleFormControlInput1" ref={usernameRef} required/>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput2" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="exampleFormControlInput2" ref={passwordRef} required/>
+                <input onChange={()=>{handleChange(passwordRef,20,setMessage,setTitle,setMostrarDialogo)}} type="password" class="form-control" id="exampleFormControlInput2" ref={passwordRef} required/>
             </div>
             <Link to={"/resetpassword"}>
                 <button type="button" class="btn btn-link ">¿Olvidaste tu contraseña?</button>

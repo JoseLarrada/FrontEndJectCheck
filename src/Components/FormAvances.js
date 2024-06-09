@@ -7,6 +7,7 @@ import {uploadRubrics,deleteRubric,getrubrics} from '../controller/FilesUploadCo
 import FilesComponents from '../Components/FilesComponents.js'
 import MessageDialog from '../Components/MessageDialog.js'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
+import {handleChange} from '../Configs/data.js'
 
 function FormAvances({ tittle, action, advancesData, closeForm}) {
   const title = useRef();
