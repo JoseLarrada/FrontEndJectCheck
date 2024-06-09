@@ -61,14 +61,14 @@ export const saveAdvance = async (
       }
     );
     if (response.ok) {
-      const data = await response.text();
-      alert(data);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const errorData = await response.text();
-      alert(errorData.token);
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    alert("Error de red:", error);
+    return {success: false, error}
   }
 };
 
@@ -97,19 +97,19 @@ export const updateadvance = async (
           description: descripcion,
           rubric: rubric,
           routeId: localStorage.getItem("id_ruta"),
-          advanceId: localStorage.getItem("id_advance"),
+          advanceId: localStorage.getItem("id_avance"),
         }),
       }
     );
     if (response.ok) {
-      const data = await response.json();
-      alert(data);
+      const userData = await response.text();
+      return {success: true, userData}
     } else {
-      const errorData = await response.json();
-      alert(errorData.token);
+      const dataError = await response.text();
+      return {success: false, dataError}
     }
   } catch (error) {
-    alert("Error de red:", error);
+    return {success: false, error}
   }
 };
 //Eliminar Avances
@@ -118,7 +118,7 @@ export const deleteAdvance= async (texto,tuToken,verificarExpiracionToken,naviga
       if(!verificarExpiracionToken()){
         navigate('/');
       }
-      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/deleteadvance/${texto}`, {
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/deleteadvance/${texto}/${localStorage.getItem('id_avance')}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -130,9 +130,11 @@ export const deleteAdvance= async (texto,tuToken,verificarExpiracionToken,naviga
          return {success: true, userData}
       }else{
         const dataError = await response.text();
+        console.log(dataError)
         return {success: false, dataError}
       } 
     } catch (error) {
+      console.log(error)      
       return {success: false, error}
     }
   };

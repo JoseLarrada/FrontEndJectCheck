@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+.head_form{
+    width: 45%;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+.body_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    border: 2.5px solid #1ACBF3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: none;
+    text-align: center;
+}
+.body_form>h3{
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form_rate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    color: #656D7A;
+    background-color: #E2E8F0;
+}
+.form_rate>p{
+    margin-top: 30px;
+}
+.box_desing{
+    background-color: #EDF2F7;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+}
+.rate_box{
+    width: 60px;
+    height: 30px;
+    max-width: 100%;
+    position: relative;
+    bottom: 15px;
+    text-align: center;
+}
+.comment_box{
+    width: 400px;
+    max-width: 100%;
+    padding-left: 10px; 
+    padding-top: 10px;
+}
+.comment_box::placeholder{
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+}
+.btn_calificar{
+    width: 400px;
+    height: 40px;
+    max-width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: #1ACBF3;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+.btnCancelar{
+    width: 100%;
+    height: 55px;
+    max-width: 100%;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #144C97;
+    color: white;
+    font-size: 20px;
+}

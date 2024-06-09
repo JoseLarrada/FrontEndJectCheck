@@ -1,9 +1,10 @@
 //Buscar Profesor
 export const findTeacher = async (
   profesor,
+  setDatos,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -20,19 +21,20 @@ export const findTeacher = async (
       }
     );
     if (response.ok) {
-      const userData = await response.text();
-      return {success: true, userData}
+      const userData = await response.json();
+      setDatos(userData);
     } else {
       const dataError = await response.text();
-      return {success: false, dataError}
+      console.log(dataError)
     }
   } catch (error) {
-    return {success: false, error}
+    console.log(error)
   }
 };
 //Buscar Estudiante
 export const findStudent = async (
   estudiante,
+  setDatos,
   tuToken,
   verificarExpiracionToken,
   navigate
@@ -52,14 +54,15 @@ export const findStudent = async (
       }
     );
     if (response.ok) {
-      const userData = await response.text();
-      return {success: true, userData}
+      const userData = await response.json();
+      setDatos(userData);
+      alert(userData)
     } else {
       const dataError = await response.text();
-      return {success: false, dataError}
+      alert(dataError)
     }
   } catch (error) {
-    return {success: false, error}
+    alert(error)
   }
 };
 
@@ -72,7 +75,9 @@ export const addProject = async (
   descripcion,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
+  idFacultly,
+  idArea
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -92,6 +97,8 @@ export const addProject = async (
           id_Member2: member2,
           id_Member: member1,
           description: descripcion,
+          idFacultly: idFacultly,
+          idArea: idArea
         }),
       }
     );
@@ -116,7 +123,9 @@ export const updateProject = async (
   description,
   tuToken,
   verificarExpiracionToken,
-  navigate
+  navigate,
+  idFacultly,
+  idArea
 ) => {
   try {
     if (!verificarExpiracionToken()) {
@@ -131,12 +140,14 @@ export const updateProject = async (
           Authorization: `Bearer ${tuToken}`,
         },
         body: JSON.stringify({
-          id: localStorage.getItem("id_ruta"),
+          id: localStorage.getItem('id_ruta'),
           nameRoute: title,
           teacher: teacher,
           id_Member2: member2,
           id_Member: member1,
           description: description,
+          idFacultly: idFacultly,
+          idArea: idArea
         }),
       }
     );
@@ -164,7 +175,7 @@ export const deleteProject = async (
       navigate("/");
     }
     const response = await fetch(
-      `http://localhost:8080/api/v1/PrincipalContent/DeleteRoute/${texto}`,
+      `http://localhost:8080/api/v1/PrincipalContent/DeleteRoute/${texto}/${localStorage.getItem('id_ruta')}`,
       {
         method: "DELETE",
         headers: {
@@ -252,4 +263,112 @@ export const filterProjects = async (
   } catch (error) {
     return {success: false, error}
   }
+};
+
+//Buscar proyectos por id
+export const getProjectById = async (
+  verificarExpiracionToken,
+  navigate,
+  tuToken,
+  SetResponse
+) => {
+  try {
+    if (!verificarExpiracionToken()) {
+      navigate("/");
+    }
+    const response = await fetch(
+      `http://localhost:8080/api/v1/PrincipalContent/getProject/${localStorage.getItem('id_ruta')}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tuToken}`,
+        },
+      }
+    );
+    if (response.ok) {
+      const userData = await response.json();
+      SetResponse(userData);
+    } else {
+      const dataError = await response.text();
+      alert(dataError)
+    }
+  } catch (error) {
+    return {success: false, error}
+  }
+};
+  //Funciones de profesores
+export  const acceptProject= async (verificarExpiracionToken,navigate,tuToken) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/AcceptProject/${localStorage.getItem('id_ruta')}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      console.log(response);
+      if (response.ok) {
+        const userData = await response.text();
+       return {success: true, userData}
+      }else{
+        const dataError = await response.text();
+        return {success: false, dataError}
+      } 
+    } catch (error) {
+      return {success: false, error}
+    }
+};
+//Finalizar Proyecto
+export const finishProject= async (verificarExpiracionToken,navigate,tuToken) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/FinishProject/${localStorage.getItem('id_ruta')}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      console.log(response);
+      if (response.ok) {
+        const userData = await response.text();
+        return {success: true, userData}
+      }else{
+        const dataError = await response.text();
+        return {success: false, dataError}
+      } 
+    } catch (error) {
+      return {success: false, error}
+    }
+};
+//Finalizar Proyecto
+export const rejectProject= async (verificarExpiracionToken,navigate,tuToken) => {
+    try {
+      if(!verificarExpiracionToken()){
+        navigate('/');
+      }
+      const response = await fetch(`http://localhost:8080/api/v1/PrincipalContent/RejectProject/${localStorage.getItem('id_ruta')}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tuToken}`
+        }
+      });
+      console.log(response);
+      if (response.ok) {
+        const userData = await response.text();
+        return {success: true, userData}
+      }else{
+        const dataError = await response.text();
+        return {success: false, dataError}
+      } 
+    } catch (error) {
+      return {success: false, error}
+    }
 };

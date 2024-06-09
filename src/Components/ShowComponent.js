@@ -3,7 +3,7 @@ import '../styles/showComponent.css'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog'
 
-function ShowComponent({titleComponent,descripcion,action,cancel,accept}) {
+function ShowComponent({titleComponent,descripcion,action,cancel,accept,setClose}) {
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('');
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
@@ -28,7 +28,7 @@ function ShowComponent({titleComponent,descripcion,action,cancel,accept}) {
             <button type="button" className="btn btnConfirm" onClick={cancel}>Cancelar</button>
             <button type="button" className="btn btnCancel" onClick={handleAccept}>Confirmar</button>
           </section>
-          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo)}} title={title} message={message}/>}
+          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo,cancel)}} title={title} message={message}/>}
     </div>
   )
 }

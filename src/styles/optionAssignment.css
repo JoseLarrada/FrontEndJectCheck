@@ -1,0 +1,11 @@
+.principalOption{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2.5%;
+}
+.principalOption>ion-icon{
+    color: black;
+    cursor: pointer;
+    font-size: 35px;
+    margin-left: 2.5%;
+}

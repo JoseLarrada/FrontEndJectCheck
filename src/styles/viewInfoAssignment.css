@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+.bodyInfo_Assign{
+    border: 3px solid #144D97;
+    border-radius: 10px;
+    border-bottom: none;
+    max-height: 500px;
+    overflow-y: auto;
+    width: 50%;
+    background-color: #E2E8F0;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    color: #144D97;
+    gap: 30px;
+    position: fixed;
+    top: 53%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+.bodyInfo_Assign>h3{
+    text-align: center;
+    margin-top: 5px;
+}
+.positionFlex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.commentsBox{
+    width: 60%;
+    height: 120px;
+    border: none;
+    border-radius: 15px;
+}
+.fileAssign{
+    margin-top: 15px;
+}
+.positionFlex>textarea:disabled,
+.valueRate>input:disabled {
+    background-color: white;
+    border: none;
+}
+.positionFlex>textarea:disabled{
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.valueRate>input{
+    border-radius: 10px;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+}
+
+.btnRateAssign{
+    width: 100%;
+    height: 7vh;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color:  #144D97;
+    color: white;
+}
+.btn_Option{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.btnUpdateAssign,.btnDeleteAssign{
+    width: 50%;
+    border: none;
+    height: 7vh;
+    color: white;
+}
+.btnUpdateAssign{
+    background-color:  #144D97;
+    border-bottom-left-radius: 10px;
+}
+.btnDeleteAssign{
+    background-color: #1ACBF3;
+    border-bottom-right-radius: 10px;
+}

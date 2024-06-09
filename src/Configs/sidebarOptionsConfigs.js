@@ -1,7 +1,7 @@
 import FormAvances from '../Components/FormAvances'
 import ShowComponent from '../Components/ShowComponent'
 import FormProject from '../Components/FormProject'
-
+import ViewInfoProject from '../Components/ViewInfoProject'
 export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick) => {
     switch(option){
         case 'Crear Avance':
@@ -16,44 +16,47 @@ export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption
             setAvanceOption(!avanceOption)
             onOptionClick();
             break;
-        case 'Eliminar':
-            setCancelOption(!cancelOption)
+        case 'Eliminar Proyecto':
+            setAvanceOption(!avanceOption)
+            onOptionClick();
+            break;
+        case 'Ver Proyecto':
+            setAvanceOption(!avanceOption)
+            onOptionClick();
             break;
     }
 };
 
-export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAvance,handleOptionClick) => {
+export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAvance,handleOptionClick,handleConfirmarEliminarProyecto) => {
     switch(option){
-        case 'Crear Avance': return (
+        case 'Crear Avance': 
+        localStorage.removeItem('id_avance')
+        return (
           <div>
-            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"}/>}
-          </div>
-        );
-        case 'Modificar Avance': return (
-          <div>
-            {avanceOption && <FormAvances tittle={"Modificar Avance"} action={"modificar Avance"}/>}
+            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"} advancesData={[]} closeForm={()=>{}}/>}
           </div>
         );
         case 'Eliminar Avance': return (
           <div>
             {avanceOption && <ShowComponent titleComponent={'Eliminar Avance'} 
-            descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa tu contraseña para confirmar.'}
+            descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa el titulo del avance para confirmar.'}
             action={'Ingrese titulo del avance'} cancel={()=>{handleOptionClick('Eliminar Avance')}} accept={handleConfirmarEliminarAvance}/>}
           </div>
         );
+        case 'Ver Proyecto': return (
+          <div>
+            {avanceOption && handleViewInfoProject()}
+          </div>
+        )
     }
 };
 
 export const handleFormProjects = (option,cancelOption,handleConfirmarEliminarProyecto,handleOptionClick) =>{
     switch(option){
-        case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'}/>;
-        case 'Modificar': return <FormProject titleForm={'Modificar Proyecto'} textBotom={'Modificar'}/>;
-        case 'Eliminar': return (
-          <div>
-            {cancelOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 
-            descripcion={'Esto eliminará el proyecto y cualquier dato asociado a el. Por favor ingresa tu contraseña para confirmar.'}
-            action={'Ingrese Nombre del proyecto'} cancel={()=>{handleOptionClick('Eliminar')}} accept={handleConfirmarEliminarProyecto}/>}
-          </div>
-        );
+        case 'Crear': return <FormProject titleForm={'Crear Proyecto'} textBotom={'Crear'} datosProject={[]} closeForm={()=>{}}/>;
     }
+}
+
+export const handleViewInfoProject = (toggleFind)=>{
+   return <ViewInfoProject closeForm={toggleFind}/>
 }

@@ -7,34 +7,59 @@ import {deleteProject,filterProjects} from '../controller/ProjectController.js'
 import {deleteAdvance} from '../controller/AdvanceController.js'
 import Cards from '../Components/Cards'
 import TeacherManagment from './TeacherManagment.js';
-import {handleOption,handleFormAvances,handleFormProjects} from '../Configs/sidebarOptionsConfigs.js'
+import {handleOption,handleFormAvances,handleFormProjects,handleViewInfoProject} from '../Configs/sidebarOptionsConfigs.js'
 import {handleClickProjects} from '../Configs/cardsOptionConfig.js'
+import SearchProject from '../Components/searchproject'
+import {charguedProject} from '../controller/ProjectController'
+import {chargueAdvances} from '../controller/AdvanceController.js'
 
 
 function SideBarOption({nameFunction,onOptionClick}) {
   const [isHover, setIsHover]= useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const [avanceOption, setAvanceOption] = useState(false);
+  const [viewOption, setviewOption] = useState(false);
   const [cancelOption, setCancelOption] = useState(true);
   const [acceptCard, setAcceptCard] = useState(false);
   const [declineCard, setDeclineCard] = useState(false);
   const [pendingCard, setPendingCard] = useState(false);
+  const [finishCard, setFinishCard] = useState(false);
+  const [search, setSearch] = useState(false);
   const tuToken = localStorage.getItem('token')
   const navigate=useNavigate()
   const toogleAcceptCard = () =>{
     setAcceptCard(true);
     setDeclineCard(false);
     setPendingCard(false);
+    setFinishCard(false)
   }
   const toogleDeclineCard = () =>{
     setAcceptCard(false);
     setDeclineCard(true);
     setPendingCard(false);
+    setFinishCard(false)
   }
   const tooglePendingCard = () =>{
     setAcceptCard(false);
     setDeclineCard(false);
     setPendingCard(true);
+    setFinishCard(false)
+  }
+  const toogleFinishCard = () =>{
+    setAcceptCard(false);
+    setDeclineCard(false);
+    setPendingCard(false);
+    setFinishCard(true)
+  }
+  const toogleSearch = () =>{
+    setSearch(!search);
+    setSelectedOption('')
+    onOptionClick()
+  }
+  const toogleFind = () =>{
+    setviewOption(!viewOption);
+    onOptionClick()
+    setSelectedOption('')
   }
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -58,18 +83,33 @@ function SideBarOption({nameFunction,onOptionClick}) {
     if (selectedOption === 'Rechazados') {
       toogleDeclineCard();
     }
+    if (selectedOption === 'Finalizados') {
+      toogleFinishCard();
+    }
+    if (selectedOption === 'Ver Proyecto') {
+      setviewOption(true);
+    }
+    if (selectedOption === 'Modificar' || selectedOption==='Modificar Avance' ||'Eliminar Avance') {
+      setSearch(true);
+    }
   }, [selectedOption, tooglePendingCard,toogleAcceptCard,toogleDeclineCard]);
   const renderForm = () => {
     switch(selectedOption){
       case 'Crear': return handleFormProjects('Crear',cancelOption,handleConfirmarEliminarProyecto);
-      case 'Modificar': return handleFormProjects('Modificar',cancelOption,handleConfirmarEliminarProyecto);
-      case 'Eliminar': return handleFormProjects('Eliminar',cancelOption,handleConfirmarEliminarProyecto,handleOptionClick);
+      case 'Modificar': return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los proyectos que tienes asociado, selecciona uno y podras modificar sus datos'}
+            charguedItem={charguedProject} title={'Listar Proyectos'}/>}
+        </div>
+      )
+      case 'Eliminar Proyecto': return handleFormAvances('Eliminar Proyecto',avanceOption,handleConfirmarEliminarAvance,handleOptionClick,handleConfirmarEliminarProyecto);
       case 'Pendientes':
         return (
             <div className='MoveOptionsCards'>
                   {pendingCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                   filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 5)} 
-                  page={"newPage"} handleClick={handleClickProjects}/>}  
+                  page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}  
             </div>
         );
       case 'Aceptados': 
@@ -84,15 +124,38 @@ function SideBarOption({nameFunction,onOptionClick}) {
         return (
             <div className='MoveOptionsCards'>
                  {declineCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
+                filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 6)} 
+                page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}
+            </div>
+        );
+      case 'Finalizados': 
+        return (
+            <div className='MoveOptionsCards'>
+                 {finishCard && <Cards optionCard={(verificarExpiracionToken, navigate, tuToken, setDatos) => 
                 filterProjects(verificarExpiracionToken, navigate, tuToken, setDatos, 2)} 
-                page={"newPage"} handleClick={handleClickProjects}/>}
+                page={"newPage"} handleClick={handleClickProjects} renderComponent={handleViewInfoProject}/>}
             </div>
         );
       case 'Crear Avance':return handleFormAvances('Crear Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
-      case 'Modificar Avance':return handleFormAvances('Modificar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
-      case 'Eliminar Avance':return handleFormAvances('Eliminar Avance',avanceOption,handleConfirmarEliminarAvance,handleOptionClick);
-      case 'Aceptar': return <TeacherManagment title={'Aceptar Proyecto'} />;
-      case 'Finalizar': return <TeacherManagment title={'Finalizar Proyecto'}/>;
+      case 'Modificar Avance':return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los avances que tienes asociado, selecciona uno y podras modificar sus datos'}
+            charguedItem={chargueAdvances} title={'Listar Avances'}/>}
+        </div>
+      )
+      case 'Eliminar Avance':return (
+        <div>
+            {search&&<SearchProject closeForm={toogleSearch} 
+            paragraph={'Lista de todos los avances que tienes asociado, selecciona uno y podras eliminar el avance'}
+            charguedItem={chargueAdvances} title={'Eliminar Avances'} fuctionDelete={handleConfirmarEliminarAvance}/>}
+        </div>
+      )
+      case 'Ver Proyecto': return (
+          <div>
+            {viewOption && handleViewInfoProject(toogleFind)}
+          </div>
+        )
     }
   };
   return (

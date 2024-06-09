@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+.head_search{
+    width: 40%;
+    max-height: 75vh;
+    overflow-y: auto;
+    border: 3px solid #144D97;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    background-color: white;
+}
+.header_search{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.search_info>p{
+    color: #656D7A;
+}
+.icon_close>ion-icon{
+    color: black;
+    cursor: pointer;
+}
+.body_search{
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: #E2E8F0;
+}
+.search_bar{
+    background-color: #EDF2F7;
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #1ACBF3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.search_bar>input{
+    border: none;
+    width: 80%;
+    background-color: transparent;
+}
+.search_bar>input:focus{
+    outline: none;
+    border-color: none;
+}
+.search_bar>ion-icon{
+    margin-top: 1px;
+    margin-left: 15px;
+    color: #1ACBF3;
+    cursor: pointer;
+}
+.result_search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    background-color: #EDF2F7;
+    border-radius: 10px;
+    width: 80%;
+    height: 45px;
+}
+.rendonded_result{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: none;
+    background-color: #1ACBF3;
+    margin-left: 10px;
+    text-align: center;
+}
+.name_result{
+    width: 80%;
+    border: none;
+}
+.result_search>ion-icon{
+    margin-top: 1px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.cancel_search{
+    margin-top: 7%;
+    margin-bottom: 1%;
+    position: relative;
+    left: 47%;
+    transform: translate(-50%, -50%); 
+    color: #144D97;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -11,15 +11,15 @@ export const generateGeneralReport= async (verificarExpiracionToken,navigate,tuT
         }
       });
       if (response.ok) {
-        const data = await response.text();
-        alert(data);
+        const userData = await response.text();
+        return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
       console.log(error)
+      return {success: false, error}
     }
 };
 
@@ -37,14 +37,15 @@ export const generateCustomReport= async (verificarExpiracionToken,navigate,tuTo
         }
       });
       if (response.ok) {
-        const data = await response.text();
-        alert(data);
+        const userData = await response.text();
+        return {success: true, userData}
       }else{
-        const errorData = await response.text();
-        alert(errorData);
+        const dataError = await response.text();
+        return {success: false, dataError}
       } 
     } catch (error) {
-      alert('Error de red:', error);
+      console.log(error)
+      return {success: false, error}
     }
 }; 
 

@@ -8,8 +8,9 @@
   
   .form-register {
     width: 400px;
-    background: #1567AA;
+    background: white;
     padding: 30px;
+    border: 2px solid #1567AA;
     margin: auto;
     margin-top: 100px;
     border-radius: 4px;
@@ -21,25 +22,41 @@
     top: 3%;
   }
   
-  .form-register> h4 {
+  .header-form-assingment{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .header-form-assingment> h4 {
     font-size: 29px;
     margin-bottom: 20px;
     text-align: center;
     font-family: "Public Sans", sans-serif;
+    color: #1567AA;
   }
-  
+  .header-form-assingment>ion-icon{
+      margin-top: 5px;
+      color: #1567AA;
+      cursor: pointer;
+      position: relative;
+      left: 20%;
+  }
   .controls {
     width: 100%;
-    background: #2292d2;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 16px;
-    border: 1px solid #2292d2;
+    border: 2px solid #1567AA;
     font-family: 'calibri';
     font-size: 18px;
-    color: white;
   }
-  
+  .controlsbuttom{
+    background-color: white;
+    text-align: left;
+    color: #111111be;
+  }
+
+
   .form-register p {
     height: 40px;
     text-align: center;
@@ -59,7 +76,7 @@
   
   .form-register .botons {
     width: 100%;
-    background: #1ACBF3;
+    background: #1567AA;
     border: none;
     padding: 12px;
     color: white;

@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 .formProjects{
     width: 35%;
+    max-height: 75vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +11,7 @@
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     position: absolute;
-    top: 68%; 
+    top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
@@ -27,17 +29,36 @@
     align-items: center;
 }
 .principalForm>input{
-    width: 280px !important;
+    width: 62% !important;
     font-family: "Public Sans", sans-serif;
     border: 2px solid  rgb(26,203,243);
     border-radius: 5px;
+}
+.principalForm>input:focus{
+    outline: none;
+    border-color: none;
 }
 .principalForm>textarea{
     font-family: "Public Sans", sans-serif;
-    width: 280px;
+    width: 62%;
     border-radius: 5px;
     border: 2px solid  rgb(26,203,243);
 }
+.principalForm>textarea:focus{
+    outline: none;
+    border-color: none;
+}
+.principalForm>select{
+    color: #656D7A;
+    border-radius: 5px;
+    border: 2px solid  rgb(26,203,243);
+    width: 62%;
+}
+.principalForm>select:focus{
+    outline: none;
+    border-color: none;
+}
+
 .findTeacher{
     display: flex;
     flex-direction: row;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Nav from '../Components/Nav'
-import Cards from '../Components/Cards'
+import Analitycs from '../Components/Analitics'
 import '../styles/Card.css';
 import { charguedProject } from "../controller/ProjectController.js";
 
@@ -13,7 +13,9 @@ function PrincipalView() {
   return (
     <div>
         <Nav/>
-        <Cards optionCard={charguedProject} page={"newPage"}/>
+        <section className='moveAnalitycs'>
+          <Analitycs/>
+        </section>
     </div>
   )
 }
