@@ -11,7 +11,7 @@ function Projects() {
       return dataNavTeacher
     }
   }
-  var option=getProfile();
+  let option=getProfile();
   return (
     <div>
         <Nav/>

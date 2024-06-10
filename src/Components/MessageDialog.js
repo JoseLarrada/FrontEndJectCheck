@@ -10,7 +10,7 @@ function MessageDialog({onClose,message,title}) {
         setIsVisible(false);
         onClose();
     };
-    var color='';
+    let color='';
     const personIcon = () =>{
         if(title==='¡Felicidades!'){
             color='rgb(98, 182, 250)'
@@ -20,7 +20,7 @@ function MessageDialog({onClose,message,title}) {
             return multiplicar;
         }
     }
-    var image=personIcon();
+    let image=personIcon();
     return (
         <>
             {isVisible && (

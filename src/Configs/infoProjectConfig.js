@@ -18,7 +18,7 @@ export const recievedMembers=(item)=>{
 }
 
 const customResponse= async (functionTeacher,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)=>{
-    var result = await functionTeacher(verificarExpiracionToken,navigate,tuToken);
+    const result = await functionTeacher(verificarExpiracionToken,navigate,tuToken);
     customMessage(result,setTitle,setMessage,setMostrarDialogo);
 }
 

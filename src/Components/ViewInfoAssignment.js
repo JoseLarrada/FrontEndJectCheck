@@ -22,7 +22,7 @@ function ViewInfoAdvances({closeForm}) {
   const [refreshView, setRefreshView] = useState(false);
   const navigate=useNavigate();
   const tuToken=localStorage.getItem('token')
-  var option;
+  let option;
    useEffect(() => {
     const fetchData = async () => {
       const data = await getInfoAssignment(verificarExpiracionToken, navigate, tuToken, setDatos);

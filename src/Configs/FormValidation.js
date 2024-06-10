@@ -1,6 +1,6 @@
 export const validateText = (event,field1,field2) => {
-    var nombreUsuario = document.getElementById(field1).value;
-    var contraseña = document.getElementById(field2).value;
+    const nombreUsuario = document.getElementById(field1).value;
+    const contraseña = document.getElementById(field2).value;
     if (nombreUsuario.trim() === '' || contraseña.trim() === '') {
       event.preventDefault();
       return true;

@@ -7,7 +7,7 @@ import {rendercard} from '../Configs/cardsOptionConfig.js'
 function Cards({optionCard,page,handleClick,renderComponent}) {
   const tuToken = localStorage.getItem("token");
   const navigate = useNavigate();
-  var state;
+  let state;
   const [datos, setDatos] = useState([]);
   const [viewInfo,setViewInfo] = useState(false)
   const [viewCard,setViewCar] = useState(true)

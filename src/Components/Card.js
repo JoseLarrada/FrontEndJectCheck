@@ -9,7 +9,7 @@ import '../styles/Card.css';
 function Card({Title,teacher,owner}) {
 
     const randomImage= ()=>{
-        var list=[Carddimage,Pastel1,Pastel2,Pastel3,Pastel4]
+        const list=[Carddimage,Pastel1,Pastel2,Pastel3,Pastel4]
         const randomItem = Math.floor(Math.random() * list.length);
         return list[randomItem]
     }
