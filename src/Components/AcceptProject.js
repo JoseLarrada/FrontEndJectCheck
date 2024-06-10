@@ -3,11 +3,11 @@ import '../styles/acep.css'
 
 function AcceptProject() {
   return (
-    <section class="tarjet">
-      <div class="conteen">
-        <section class="entrada">
-          <div class="titulo">
-            <h2 class="titulog">Información del proyecto</h2>
+    <section className="tarjet">
+      <div className="conteen">
+        <section className="entrada">
+          <div className="titulo">
+            <h2 className="titulog">Información del proyecto</h2>
             <label htmlFor="titulop">Título del proyecto</label>
             <input
               type="text"

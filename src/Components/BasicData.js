@@ -83,7 +83,7 @@ function BasicData() {
               disabled
             />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <label for="correo" className="form-label">
               Correo
             </label>
