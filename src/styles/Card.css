@@ -9,7 +9,6 @@
     transform: translate(0, -129%);
     z-index: 1;
     position: relative;
-    overflow-y: auto; 
 }
 .card{
     width: 90%;
