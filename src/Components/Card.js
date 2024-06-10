@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React} from 'react'
 import Carddimage from '../resources/Carddimage.jpg'
 import Pastel1 from '../resources/Pastel1.jpg'
 import Pastel2 from '../resources/pastel2.jpg'

@@ -32,34 +32,34 @@ function Analitics() {
   return (
     <>
          {/**Main Content*/}
-        <div class="content">
+        <div className="content">
         <main>
-            <div class="header_Anal">
-                <div class="left">
+            <div className="header_Anal">
+                <div className="left">
                     <h1>Dashboard</h1>
                 </div>
             </div>
             {/**Insights*/}
-            <ul class="insights">
+            <ul className="insights">
                 <li>
-                    <i class='bx bx-calendar-check'><ion-icon name="create-outline"></ion-icon></i>
-                    <span class="info">
+                    <i className='bx bx-calendar-check'><ion-icon name="create-outline"></ion-icon></i>
+                    <span className="info">
                         <h3>
                             {datos.numberProjects}
                         </h3>
                         <p>Proyectos</p>
                     </span>
                 </li>
-                <li><i class='bx bx-show-alt'><ion-icon name="filter-outline"></ion-icon></i>
-                    <span class="info">
+                <li><i className='bx bx-show-alt'><ion-icon name="filter-outline"></ion-icon></i>
+                    <span className="info">
                         <h3>
                             {datos.numberAdvances}
                         </h3>
                         <p>Avances</p>
                     </span>
                 </li>
-                <li><i class='bx bx-line-chart'><ion-icon name="share-outline"></ion-icon></i>
-                    <span class="info">
+                <li><i className='bx bx-line-chart'><ion-icon name="share-outline"></ion-icon></i>
+                    <span className="info">
                         <h3>
                            {datos.numberAssignments}
                         </h3>
@@ -68,13 +68,13 @@ function Analitics() {
                 </li>
             </ul>
             {/**End of Insights*/}
-            <div class="bottom-data">
-                <div class="orders">
-                    <div class="header_Anal">
-                        <i class='bx bx-receipt'><ion-icon name="reader-outline"></ion-icon></i>
+            <div className="bottom-data">
+                <div className="orders">
+                    <div className="header_Anal">
+                        <i className='bx bx-receipt'><ion-icon name="reader-outline"></ion-icon></i>
                         <h3>Estado de avances</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-search'></i>
+                        <i className='bx bx-filter'></i>
+                        <i className='bx bx-search'></i>
                     </div>
                     <table>
                         <thead>
@@ -91,27 +91,27 @@ function Analitics() {
                                         <p>{item.titulo}</p>
                                     </td>
                                     <td>{formatDate(item.fecha_creacion)}</td>
-                                    <td><span class="status completed">{getnamestate(item.idEstado)}</span></td>
+                                    <td><span className="status completed">{getnamestate(item.idEstado)}</span></td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
                 {/**Reminders*/}
-                <div class="reminders">
-                    <div class="header_Anal">
-                        <i class='bx bx-note'><ion-icon name="library-outline"></ion-icon></i>
+                <div className="reminders">
+                    <div className="header_Anal">
+                        <i className='bx bx-note'><ion-icon name="library-outline"></ion-icon></i>
                         <h3>Areas con mas proyectos</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-plus'></i>
+                        <i className='bx bx-filter'></i>
+                        <i className='bx bx-plus'></i>
                     </div>
-                    <ul class="task-list">
+                    <ul className="task-list">
                         {datosAreas.map((item,index)=>(
-                             <li class="completed" key={index}>
-                                <div class="task-title">
+                             <li className="completed" key={index}>
+                                <div className="task-title">
                                     <p>{item.initial}</p>
                                 </div>
-                                <i class='bx bx-dots-vertical-rounded'></i>
+                                <i className='bx bx-dots-vertical-rounded'></i>
                             </li>
                         ))}
                     </ul>

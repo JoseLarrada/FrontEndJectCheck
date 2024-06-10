@@ -7,7 +7,7 @@ import { chargeUserDate } from "../controller/ProfileController.js";
 
 function BasicData() {
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
-  const [datos, setDatos] = useState([]);
+  const [setDatos] = useState([]);
   //Variables de las cajas de texto
   const names = useRef();
   const id = useRef();
@@ -52,71 +52,71 @@ function BasicData() {
   }, []);
   return (
     <div>
-      <label class="user-label">Perfil</label>
+      <label className="user-label">Perfil</label>
       <div className="Userlogo">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <label class="name-label">Justine Skye</label>
+        <label className="name-label">Justine Skye</label>
       </div>
-      <section class="custom-row">
-        <div class="custom-column">
-          <div class="mb-3">
-            <label for="nombres" class="form-label">
+      <section className="custom-row">
+        <div className="custom-column">
+          <div className="mb-3">
+            <label for="nombres" className="form-label">
               Nombres
             </label>
             <input
               type="text"
               id="nombres"
-              class="form-control lineborde"
+              className="form-control lineborde"
               ref={names}
               disabled
             />
           </div>
-          <div class="mb-3">
-            <label for="cedula" class="form-label">
+          <div className="mb-3">
+            <label for="cedula" className="form-label">
               Cedula o T.I
             </label>
             <input
               type="text"
               id="cedula"
-              class="form-control lineborde"
+              className="form-control lineborde"
               ref={id}
               disabled
             />
           </div>
           <div class="mb-3">
-            <label for="correo" class="form-label">
+            <label for="correo" className="form-label">
               Correo
             </label>
             <input
               type="text"
               id="correo"
-              class="form-control lineborde"
+              className="form-control lineborde"
               ref={email}
               disabled
             />
           </div>
         </div>
-        <div class="custom-column2">
-          <div class="mb-3">
-            <label for="departamento" class="form-label">
+        <div className="custom-column2">
+          <div className="mb-3">
+            <label for="departamento" className="form-label">
               Apellido
             </label>
             <input
               type="text"
               id="departamento"
-              class="form-control lineborde"
+              className="form-control lineborde"
               ref={lastname}
               disabled
             />
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <label for="ciudad" class="form-label">
               Ciudad
             </label>
             <input
               type="text"
               id="ciudad"
-              class="form-control lineborde"
+              className="form-control lineborde"
               ref={city}
               disabled
             />
