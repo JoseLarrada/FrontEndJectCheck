@@ -1,6 +1,5 @@
 import Card from '../Components/Card.js'
 import { Link } from 'react-router-dom';
-import ViewInfoProject from '../Components/ViewInfoProject'
 
 
 export function getnamestate(idestado) {

@@ -1,7 +1,7 @@
 import FormAvances from '../Components/FormAvances'
 import ShowComponent from '../Components/ShowComponent'
 import FormProject from '../Components/FormProject'
-import ViewInfoProject from '../Components/ViewInfoProject'
+import ViewInfoProject from '../Components/viewInfoProject'
 export const handleOption = (option,setAvanceOption,avanceOption,setCancelOption,cancelOption,onOptionClick) => {
     switch(option){
         case 'Crear Avance':
