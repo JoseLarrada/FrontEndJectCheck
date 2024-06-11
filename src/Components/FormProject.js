@@ -2,7 +2,7 @@ import {React, useState,useRef,useEffect} from 'react'
 import '../styles/FormProject.css'
 import {useNavigate} from 'react-router-dom';
 import verificarExpiracionToken from '../Configs/verificarExpiracionToken .js'
-import {validateTextProjects,validateTextfield} from '../Configs/FormValidation'
+import {validateTextProjects,handleChange,cleanTextBox} from '../Configs/FormValidation'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog'
 import {addProject,updateProject} from '../controller/ProjectController'
@@ -54,6 +54,7 @@ function FormProject({titleForm,textBotom,datosProject,closeForm}) {
         customMessage(result, setTitle, setMessage, setMostrarDialogo);
       }
   }
+
   const handleClickSave = (event)=>{
     if(validateTextProjects(event,titulo.current.value,descripcion.current.value,docente.current.value)){
       setMessage('Rellene todos los campos');
@@ -83,12 +84,24 @@ function FormProject({titleForm,textBotom,datosProject,closeForm}) {
     setViewSearch(!viewSearch);
   };
 
+  const closedMessage = () => {
+    if(titleForm==='Crear Proyecto'){
+        setImportTittle(''); setImportDescripcion('');setText('');setTextStudent('');setTextStudent2('')
+        setSelectedFacultly('Facultad...')
+        setselectedAreas('Areas...')
+    }else{
+      closeForm()
+    }
+  };
+
   const handleTituloChange = (event) => {
     setImportTittle(event.target.value);
+    handleChange(titulo,25,setMessage,setTitle,setMostrarDialogo)
   };
 
   const handleDescripcionChange = (event) => {
     setImportDescripcion(event.target.value);
+    handleChange(descripcion,255,setMessage,setTitle,setMostrarDialogo)
   };
 
   useEffect(() => {
@@ -146,7 +159,7 @@ function FormProject({titleForm,textBotom,datosProject,closeForm}) {
             )}
           </section>
           <button type="button" class="btn btn-outline-secondary" onClick={(event)=>{handleClickSave(event)}}>{textBotom}</button>
-          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo,closeForm)}} title={title} message={message}/>}
+          {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo,closedMessage)}} title={title} message={message}/>}
       </div>}
       {viewSearch&&renderToogle(toggleFind,viewSearch,token,verificarExpiracionToken,navigate,setText,setTextStudent,setTextStudent2,role)}
     </>

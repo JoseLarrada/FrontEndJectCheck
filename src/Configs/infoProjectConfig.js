@@ -23,13 +23,13 @@ const customResponse= async (functionTeacher,verificarExpiracionToken,navigate,t
 }
 
 
-export const renderOption = (text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo) =>{
+export const renderOption = (text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo,setRefreshView) =>{
     if(text==='Aceptar'){
        return <ConfirmLog texto={'¿Está Seguro de que desea aceptar el proyecto?'} 
-       onConfirm={()=>{customResponse(acceptProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}} onCancel={()=>{}}/>
+       onConfirm={()=>{customResponse(acceptProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo);setRefreshView(prev => !prev);}} onCancel={()=>{}}/>
     }else{
         return <ConfirmLog texto={'¿Está Seguro de que desea rechazar el proyecto?'} 
-       onConfirm={()=>{customResponse(rejectProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}} onCancel={()=>{}}/>
+       onConfirm={()=>{customResponse(rejectProject,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo);setRefreshView(prev => !prev);}} onCancel={()=>{}}/>
     }
 }
 const toogleButton=(option,setOpenConfirmLog,openConfirmLog,setText)=>{

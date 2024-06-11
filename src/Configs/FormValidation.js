@@ -45,3 +45,40 @@ export const validateTextfield = (event,field1) =>{
     return true;
   }
 }
+
+export const cleanTextBox =(field1,field2,field3,field4)=>{
+    field1.current.value='';
+    field2.current.value='';
+    field3.current.value='';
+    field4.current.value='';
+}
+export const handleChange = (text,maxLength,setMessage,setTitle,setMostrarDialogo) => {
+        const newValue = text.current.value;
+        if (newValue.length > maxLength) {
+            setMessage('Esta a punto de exceder el valor minimo');
+            setTitle('¡Fallo!');
+            setMostrarDialogo(true);
+            text.current.value = newValue.slice(0, maxLength);
+        }
+};
+
+export const handleTextInputChange = (text,setMessage,setTitle,setMostrarDialogo) => {
+        const value = text.current.value;
+        const lettersRegex = /^[A-Za-z]*$/;
+        if (!lettersRegex.test(value)) {
+            setMessage('No se permiten valores numericos');
+            setTitle('¡Fallo!');
+            setMostrarDialogo(true);
+            text.current.value=''
+        }
+};
+export const handleNumberInputChange = (text,setMessage,setTitle,setMostrarDialogo) => {
+        const value = text.current.value;
+        const numbersRegex = /^[0-9]*$/;
+        if (!numbersRegex.test(value)) {
+            setMessage('No se permiten caracteres');
+            setTitle('¡Fallo!');
+            setMostrarDialogo(true);
+            text.current.value=''
+        }
+};

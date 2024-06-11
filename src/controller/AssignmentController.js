@@ -127,7 +127,6 @@ export const getInfoAssignment = async (
       setDatos(userData);
     } else {
       const dataError = await response.text();
-      alert(dataError)
     }
   } catch (error) {
     return {success: false, error}

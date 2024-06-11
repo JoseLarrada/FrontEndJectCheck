@@ -33,14 +33,14 @@ export const handleFormAvances = (option,avanceOption,handleConfirmarEliminarAva
         localStorage.removeItem('id_avance')
         return (
           <div>
-            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"} advancesData={[]} closeForm={()=>{}}/>}
+            {avanceOption && <FormAvances tittle={"Crear Avance"} action={"Guardar Avance"} advancesData={[]} closeForm={()=>{handleOptionClick('Crear Avance')}}/>}
           </div>
         );
-        case 'Eliminar Avance': return (
+        case 'Eliminar Proyecto': return (
           <div>
-            {avanceOption && <ShowComponent titleComponent={'Eliminar Avance'} 
-            descripcion={'Esto eliminará el Avance y cualquier dato asociado a ello. Por favor ingresa el titulo del avance para confirmar.'}
-            action={'Ingrese titulo del avance'} cancel={()=>{handleOptionClick('Eliminar Avance')}} accept={handleConfirmarEliminarAvance}/>}
+            {avanceOption && <ShowComponent titleComponent={'Eliminar Proyecto'} 
+            descripcion={'Esto eliminará el Proyecto y cualquier dato asociado a ello. Por favor ingresa el titulo del avance para confirmar.'}
+            action={'Ingrese titulo del Proyecto'} cancel={()=>{handleOptionClick('Eliminar Proyecto')}} accept={handleConfirmarEliminarProyecto}/>}
           </div>
         );
         case 'Ver Proyecto': return (

@@ -1,10 +1,10 @@
 .back-c{
-    background: #66c5da;
-    width: 79%;
+    background: hsl(0, 0%, 90%);
+    width: 70%;
     height: 400px;
     max-height: 400px;
     overflow-y: auto;
-    left: 18%;
+    left: 24%;
     border-radius: 15px;
     transform: translate(0, -129%);
     z-index: 1;

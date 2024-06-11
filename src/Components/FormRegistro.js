@@ -6,6 +6,7 @@ import {validateTextAutentication} from '../Configs/FormValidation'
 import {receivedepartment,receiveCities,register} from '../controller/RegisterController'
 import {customMessage,onClose} from '../Configs/MessageViews'
 import MessageDialog from '../Components/MessageDialog'
+import {handleChange,handleTextInputChange,handleNumberInputChange} from '../Configs/FormValidation'
 
 function FormRegistro() {
    //Declaracion de variables
@@ -65,6 +66,7 @@ function FormRegistro() {
             class="form-control direccion"
             id="validationDefault01"
             ref={names}
+            onChange={()=>{handleChange(names,25,setMessage,setTitle,setMostrarDialogo);handleTextInputChange(names,setMessage,setTitle,setMostrarDialogo)}}
             placeholder="Nombres"
             required
           />
@@ -73,6 +75,7 @@ function FormRegistro() {
             class="form-control direccion"
             id="validationDefault02"
             ref={lastname}
+            onChange={()=>{handleChange(lastname,25,setMessage,setTitle,setMostrarDialogo);handleTextInputChange(names,setMessage,setTitle,setMostrarDialogo)}}
             placeholder="Apellido"
             required
           />
@@ -81,6 +84,7 @@ function FormRegistro() {
             class="form-control direccion"
             id="validationDefault03"
             ref={id}
+            onChange={()=>{handleChange(id,10,setMessage,setTitle,setMostrarDialogo);handleNumberInputChange(id,setMessage,setTitle,setMostrarDialogo)}}
             placeholder="Cedula o T.I"
             required
           />
@@ -119,6 +123,7 @@ function FormRegistro() {
             class="form-control direccion correo"
             id="validationDefault04"
             ref={email}
+            onChange={()=>{handleChange(email,40,setMessage,setTitle,setMostrarDialogo)}}
             required
           />
           <button

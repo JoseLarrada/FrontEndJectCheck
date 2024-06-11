@@ -1,10 +1,10 @@
 import React, { useRef, useState }  from 'react'
 import '../styles/formreset.css'
 import resetPassword from '../controller/ResetPasswordController'
-import {validateTextAutentication} from '../Configs/FormValidation'
+import {validateTextAutentication,cleanTextBox} from '../Configs/FormValidation'
 import MessageDialog from '../Components/MessageDialog'
-import {customMessage, onClose} from '../Configs/MessageViews'
-
+import {customMessage, onCloseWithOutNavigate} from '../Configs/MessageViews'
+import {handleChange,handleNumberInputChange} from '../Configs/FormValidation'
 
 function FormReset() {
     const email=useRef();
@@ -19,7 +19,9 @@ function FormReset() {
         const result = await resetPassword(email.current.value,password.current.value,confirmpassword.current.value,id.current.value);
         customMessage(result,setTitle,setMessage,setMostrarDialogo);
     }
-
+    const clean = () =>{
+        cleanTextBox(email,password,confirmpassword,id)
+    }
     const handleClick = (event)=>{
         if(validateTextAutentication(event, email.current.value, password.current.value, 
             confirmpassword.current.value, id.current.value)){
@@ -40,15 +42,21 @@ function FormReset() {
                         <h5 className='subtitulo'>Ingrese los siguientes datos para <br/>
                         restablecer su contraseña.</h5>
                     </div>
-                    <input type="email" class="form-control reset espaciado" id="exampleFormControlInput1" placeholder="Ingrese el correo electronico" ref={email}/>
-                    <input className="form-control reset espaciado" type="text" placeholder="Ingrese su nueva contraseña" aria-label="default input example" ref={password}/>
-                    <input className="form-control reset espaciado" type="text" placeholder=" Confirme la contraseña" aria-label="default input example" ref={confirmpassword}/>
-                    <input className="form-control reset espaciado" type="text" placeholder="Ingrese su cedula" aria-label="default input example" ref={id}/>
+                    <input  type="email" class="form-control reset espaciado" id="exampleFormControlInput1" placeholder="Ingrese el correo electronico" 
+                    ref={email} onChange={()=>{handleChange(email,40,setMessage,setTitle,setMostrarDialogo)}}/>
+                    <input className="form-control reset espaciado" type="text" placeholder="Ingrese su nueva contraseña" aria-label="default input example" 
+                    ref={password} onChange={()=>{handleChange(password,70,setMessage,setTitle,setMostrarDialogo)}}/>
+                    <input className="form-control reset espaciado" type="text" placeholder=" Confirme la contraseña" aria-label="default input example" 
+                    ref={confirmpassword} onChange={()=>{handleChange(confirmpassword,70,setMessage,setTitle,setMostrarDialogo)}}/>
+                    <input className="form-control reset espaciado" type="text" placeholder="Ingrese su cedula" aria-label="default input example" 
+                    ref={id} onChange={()=>{handleChange(id,10,setMessage,setTitle,setMostrarDialogo);handleNumberInputChange(id,setMessage,setTitle,setMostrarDialogo)}}/>
                 </div>
                 <button type="button" className="btn btn-primary btnhandler" 
                 onClick={(event)=> {handleClick(event)}}>Restablecer</button>
             </section>
-            {mostrarDialogo && <MessageDialog onClose={()=>{onClose(title,setMostrarDialogo)}} title={title} message={message}/>}
+            {mostrarDialogo && <MessageDialog onClose={()=>{
+                onCloseWithOutNavigate(title,setMostrarDialogo,clean)}} 
+                title={title} message={message}/>}
         </div>
   )
 }

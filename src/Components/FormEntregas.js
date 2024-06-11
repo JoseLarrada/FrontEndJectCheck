@@ -7,6 +7,8 @@ import FilesComponents from '../Components/FilesComponents.js'
 import MessageDialog from '../Components/MessageDialog.js'
 import {customMessage,onCloseWithOutNavigate} from '../Configs/MessageViews'
 import {handleCommentChange} from '../Configs/assingmentConfig.js'
+import {handleChange} from '../Configs/FormValidation'
+
 function FormEntregas({tittle,action,onOptionClick,assinngmentData}) {
   const comment=useRef();
   const navigate=useNavigate();
@@ -20,19 +22,37 @@ function FormEntregas({tittle,action,onOptionClick,assinngmentData}) {
   const [message, setMessage] = useState('');
   const [mostrarDialogo,setMostrarDialogo] = useState(false)
   
-  const toogleOptionUser= async ()=>{
-    if(tittle==='Añadir Entrega'){
-        const result= await saveAssignment(verificarExpiracionToken,navigate,tuToken,files,comment.current.value)
-        customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+  const toogleOptionUser= async (event)=>{
+    if(viewNullBox(event)){
+          setMessage('El campo descripcion esta vacio');
+          setTitleDialog('¡Fallo!');
+          setMostrarDialogo(true);
     }else{
-        const result= await UpdateAssignment(verificarExpiracionToken,navigate,tuToken,files,comment.current.value)
-        customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+      if(tittle==='Añadir Entrega'){
+          const result= await saveAssignment(verificarExpiracionToken,navigate,tuToken,files,comment.current.value)
+          customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+      }else{
+          const result= await UpdateAssignment(verificarExpiracionToken,navigate,tuToken,files,comment.current.value)
+          customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+      }
+    }
+  }
+
+  const viewNullBox=(event)=>{
+    if(comment.current.value===''){
+      event.preventDefault();
+      return true;
     }
   }
 
   const clidkFormAddFile = async () =>{
     await getFiles(verificarExpiracionToken,navigate,tuToken,setListFilesId)
     setViewFormUpload(!viewFormUpload)
+  }
+
+  const changue=(event)=>{
+    handleCommentChange(event,setImportComment)
+    handleChange(comment,255,setMessage,setTitleDialog,setMostrarDialogo)
   }
 
   return (
@@ -44,7 +64,7 @@ function FormEntregas({tittle,action,onOptionClick,assinngmentData}) {
           </span>
           <button class="controls controlsbuttom" onClick={clidkFormAddFile}>Añadir Entrega</button>
           <textarea name="description" id="" class="controls" type="text" ref={comment} 
-          placeholder="Ingrese la descripcion" value={importComment} onChange={(event)=>{handleCommentChange(event,setImportComment)}}></textarea>
+          placeholder="Ingrese la descripcion" value={importComment} onChange={changue}></textarea>
           <button type="submit" class="botons" onClick={toogleOptionUser}>
             {action}
           </button>

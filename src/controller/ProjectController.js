@@ -56,7 +56,6 @@ export const findStudent = async (
     if (response.ok) {
       const userData = await response.json();
       setDatos(userData);
-      alert(userData)
     } else {
       const dataError = await response.text();
       alert(dataError)

@@ -16,11 +16,12 @@ function ViewInfoProject({closeForm}) {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [mostrarDialogo, setMostrarDialogo] = useState(false)
+    const [refreshView, setRefreshView] = useState(false);
     const navigate=useNavigate();
     const tuToken=localStorage.getItem('token');
     useEffect(() => {
         getProjectById(verificarExpiracionToken,navigate,tuToken,SetResponse)
-    }, [navigate,tuToken]);
+    }, [navigate,tuToken,refreshView]);
     
   return (
     <>
@@ -60,9 +61,9 @@ function ViewInfoProject({closeForm}) {
                 </section>
             </div>
             {renderButtons(setOpenConfirmLog,openConfirmLog,setText,closeForm,response.state)}
-            {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo)}} title={title} message={message}/>}
+            {mostrarDialogo && <MessageDialog onClose={()=>{onCloseWithOutNavigate(title,setMostrarDialogo,setRefreshView(prev => !prev))}} title={title} message={message}/>}
         </div>}
-        {openConfirmLog && renderOption(text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo)}
+        {openConfirmLog && renderOption(text,verificarExpiracionToken,navigate,tuToken,setTitle,setMessage,setMostrarDialogo,setRefreshView)}
     </>
   )
 }

@@ -24,23 +24,36 @@ function FormAvances({ tittle, action, advancesData, closeForm}) {
   const [importDescripcion, setImportDescripcion] = useState(advancesData.descripcion);
   const [mostrarDialogo,setMostrarDialogo] = useState(false)
   
-  const toogleOptionUser= async ()=>{
-    console.log(rubrics)
-    if(action==='Guardar Avance'){
+  const toogleOptionUser= async (event)=>{
+    if(viewNullBoxAssignment(event)){
+      setMessage('Hay campos sin rellenar, rellenelos');
+      setTitleDialog('¡Fallo!');
+      setMostrarDialogo(true);
+    }else{
+      if(action==='Guardar Avance'){
         const result= await saveAdvance(verificarExpiracionToken,navigate,tuToken,title.current.value,descripcion.current.value,rubrics)
         customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
-    }else{
-        const result= await updateadvance(verificarExpiracionToken,navigate,tuToken,title.current.value,descripcion.current.value,rubrics)
-        console.log(rubrics)
-        customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+      }else{
+          const result= await updateadvance(verificarExpiracionToken,navigate,tuToken,title.current.value,descripcion.current.value,rubrics)
+          console.log(rubrics)
+          customMessage(result,setTitleDialog,setMessage,setMostrarDialogo)
+      }
+    }
+  }
+  const viewNullBoxAssignment=(event)=>{
+    if(title.current.value==='' || descripcion.current.value===''){
+      event.preventDefault();
+      return true;
     }
   }
   const handleTituloChange = (event) => {
     setImportTittle(event.target.value);
+    handleChange(title,30,setMessage,setTitleDialog,setMostrarDialogo)
   };
 
   const handleDescripcionChange = (event) => {
     setImportDescripcion(event.target.value);
+    handleChange(descripcion,255,setMessage,setTitleDialog,setMostrarDialogo)
   };
 
   const clidkFormAddRubric = async () =>{
@@ -53,7 +66,7 @@ function FormAvances({ tittle, action, advancesData, closeForm}) {
       {viewFormAvances && <section class="form-register">
           <span className='header-form-assingment'>
             <h4>{tittle}</h4>
-            <ion-icon name="close-circle-outline"></ion-icon>
+            <ion-icon name="close-circle-outline" onClick={closeForm}></ion-icon>
           </span>
           <input class="controls" type="text" ref={title} placeholder="Ingrese el titulo" value={importTittle} onChange={handleTituloChange}/>
           <textarea name="description" id="" class="controls" type="text" ref={descripcion} 
