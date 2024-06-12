@@ -60,7 +60,7 @@ function BasicData() {
       <section className="custom-row">
         <div className="custom-column">
           <div className="mb-3">
-            <label for="nombres" className="form-label">
+            <label className="form-label">
               Nombres
             </label>
             <input
@@ -72,7 +72,7 @@ function BasicData() {
             />
           </div>
           <div className="mb-3">
-            <label for="cedula" className="form-label">
+            <label className="form-label">
               Cedula o T.I
             </label>
             <input
@@ -84,7 +84,7 @@ function BasicData() {
             />
           </div>
           <div className="mb-3">
-            <label for="correo" className="form-label">
+            <label className="form-label">
               Correo
             </label>
             <input
@@ -98,7 +98,7 @@ function BasicData() {
         </div>
         <div className="custom-column2">
           <div className="mb-3">
-            <label for="departamento" className="form-label">
+            <label className="form-label">
               Apellido
             </label>
             <input
@@ -110,7 +110,7 @@ function BasicData() {
             />
           </div>
           <div className="mb-3">
-            <label for="ciudad" class="form-label">
+            <label class="form-label">
               Ciudad
             </label>
             <input

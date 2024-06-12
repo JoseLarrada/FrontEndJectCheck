@@ -20,7 +20,7 @@ function RateAssignme({onClose,action,rateData}) {
     handleChange(commentRate,255,setMessage,setTitle,setMostrarDialogo)
   }
   const viewNullRateAssignment=(event)=>{
-    if(valueRate.current.value==='' || valueRate.current.value===''){
+    if(valueRate.current.value==='' || commentRate.current.value===''){
       event.preventDefault();
       return true;
     }
